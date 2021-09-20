@@ -1,9 +1,6 @@
 # perdUPN
 Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
 
-# Qu'est ce que c'est ? 
-Vous avez perdu vos clés ? Ne perdez pas votre temps ! Connectez vous à notre site et déposer une annonce. Un membre de la communauté l'a peut être trouvé ! 
-Vous avez trouvé un objet ? N'hésitez pas à le signaler sur la plateforme. 
 
 <img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end">
 <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic">
