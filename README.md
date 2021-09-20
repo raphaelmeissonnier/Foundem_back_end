@@ -20,12 +20,6 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   npm install 
   npm start
   ```
-  
-#Architecture 
-![Alt text](C:\Users\abali_9gy7mkc\Downloads\schemacloud.png)
-
-![alt text](file:///Users/macbookpro/Desktop/schemacloud.png)
-
 
 #Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
