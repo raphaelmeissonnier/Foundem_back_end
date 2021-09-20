@@ -1,12 +1,7 @@
+<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"><img alt="GitHub" src="https://img.shields.io/travis/com/raphaelmeissonnier/perdUPN_back_end?style=plastic"> <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
+
 # perdUPN
 Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
-
-
-<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end">
-<img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic">
-<img alt="GitHub" src="https://img.shields.io/travis/com/raphaelmeissonnier/perdUPN_back_end?style=plastic">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> 
-<img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
 
 
 #Comment lancer l'application ? 
@@ -25,6 +20,9 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   npm install 
   npm start
   ```
+  
+#Architecture 
+
 
 #Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
