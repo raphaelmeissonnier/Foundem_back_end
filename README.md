@@ -22,7 +22,7 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   ```
   
 #Architecture 
-
+![Alt text](C:\Users\abali_9gy7mkc\Downloads\schemacloud.png)
 
 #Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
