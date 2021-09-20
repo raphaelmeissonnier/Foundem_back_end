@@ -1,31 +1,22 @@
-<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"><img alt="GitHub" src="https://img.shields.io/travis/com/raphaelmeissonnier/perdUPN_back_end?style=plastic"> <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
-
 # perdUPN
 Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
 
+# Qu'est ce que c'est ? 
+Vous avez perdu vos clés ? Ne perdez pas votre temps ! Connectez vous à notre site et déposer une annonce. Un membre de la communauté l'a peut être trouvé ! 
+Vous avez trouvé un objet ? N'hésitez pas à le signaler sur la plateforme. 
 
-#Comment lancer l'application ? 
-* Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_back_end.git
-* Ouvrer le dossier et lancer les commandes suivantes :
-    ```
-    cd perdupn_back_end
-    npm install 
-    DEBUG=myapp:* npm start
-    ```
+<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end">
+AJOUTER BADGE VERSION
+AJOUTER BADGE TRAVIS CI 
+AJOUTER BADGE DE BUILD 
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> 
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/w/raphaelmeissonnier/perdUPN_back_end"> 
+<img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/raphaelmeissonnier/perdUPN_back_end"> 
+<img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/raphaelmeissonnier/perdUPN_back_end/main"> 
+<img alt="GitHub pull request check contexts" src="https://img.shields.io/github/status/contexts/pulls/raphaelmeissonnier/perdUPN_back_end/3"> 
+<img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
 
-* Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_front_end.git
-* Ouvrer le dossier et lancer les commandes suivantes :
-   ```
-  cd front-end
-  npm install 
-  npm start
-  ```
-  
-#Architecture 
-![Alt text](C:\Users\abali_9gy7mkc\Downloads\schemacloud.png)
 
-#Auteurs 
-* Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
-* Imane KADI - [GitHub](https://github.com/ImnKadi)
-* Raphaël MEISSONNIER - [GitHub](https://github.com/fatilbss)
-* Fatimata SOUMARÉ - [GitHub](https://github.com/meissonnierraphael)
+## V0
+* Verifier si node_modules est installer sinon lancer la commande 'npm install'
+* Commande à executer pour lancer le BackEnd sur le port 3001 'PORT=3001 DEBUG=myapp:* npm start'
