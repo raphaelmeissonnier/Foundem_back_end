@@ -26,7 +26,7 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   npm start
   ```
 
-![alt text] file:///Users/macbookpro/Desktop/schemacloud.png
+![alt text](file:///Users/macbookpro/Desktop/schemacloud.png)
 
 
 #Auteurs 
