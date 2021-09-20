@@ -4,7 +4,7 @@
 Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
 
 
-#Comment lancer l'application ? 
+# Comment lancer l'application ? 
 * Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_back_end.git
 * Ouvrer le dossier et lancer les commandes suivantes :
     ```
@@ -21,7 +21,7 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   npm start
   ```
 
-#Auteurs 
+# Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
 * Imane KADI - [GitHub](https://github.com/ImnKadi)
 * Raphaël MEISSONNIER - [GitHub](https://github.com/fatilbss)
