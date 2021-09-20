@@ -21,6 +21,9 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
   npm start
   ```
 
+# Architecture 
+![alt text](https://github.com/raphaelmeissonnier/perdUPN_back_end/blob/dev/schemacloud.png?raw=true)
+
 # Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
 * Imane KADI - [GitHub](https://github.com/ImnKadi)
