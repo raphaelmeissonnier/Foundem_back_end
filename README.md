@@ -6,7 +6,7 @@ Vous avez perdu vos clés ? Ne perdez pas votre temps ! Connectez vous à notre 
 Vous avez trouvé un objet ? N'hésitez pas à le signaler sur la plateforme. 
 
 <img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end">
-AJOUTER BADGE VERSION
+<img alt="GitHub Version" src="https://img.shields.io/github/package-json/v/raphaelmeissonnier/perdUPN_back_end">
 AJOUTER BADGE TRAVIS CI 
 AJOUTER BADGE DE BUILD 
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> 
