@@ -10,7 +10,7 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
     ```
     cd perdupn_back_end
     npm install 
-    DEBUG=myapp:* npm start
+    DEBUG=perdupn_back_end:* npm start
     ```
 
 * Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_front_end.git
