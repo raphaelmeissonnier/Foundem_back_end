@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Application
+interface Objet
+{
+    +getLocalisation() : Localisation
+}
+class ObjetTrouve
+{
+    -Localisation l
+    +ObjetTrouve(in : Localisation) : void
+}
+class ObjetPerdu
+{
+    -Localisation l
+    +ObjetTrouve(in : Localisation) : void
+}
+interface Localisation
+{
+    +setLongtitde(in : double): void
+    +setLatitude(in : double): void
+    +getLongtitde(): double
+    +getLatitude(): double
+}
+class LocalisationPrecise
+{
+    -double longitude
+    -double latitude
+    +LocalisationPrecise(in: double, double): void
+}
+class LocalisationFloue
+{
+    -double longitude
+    -double latitude
+    +LocalisationFloue(in: double, double): void
+}
+
+
+ObjetTrouve "1...*" <-- "1" Application
+ObjetPerdu "1...*" <-- "1" Application
+Objet <|.. ObjetPerdu
+Objet <|.. ObjetTrouve
+Localisation <|.. LocalisationPrecise
+Localisation <|.. LocalisationFloue
+LocalisationPrecise "1" <.. ObjetTrouve
+LocalisationFloue "1" <.. ObjetPerdu
+
+
+
+@enduml
