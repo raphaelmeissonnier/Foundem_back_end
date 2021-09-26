@@ -1,4 +1,4 @@
-class ObjetPerdu implements Objet
+class ObjetTrouve implements Objet
 {
     constructor(string name, Localisation localisation)
     {
@@ -17,4 +17,4 @@ class ObjetPerdu implements Objet
 
 }
 
-export = ObjetPerdu;
+export = ObjetTrouve;
