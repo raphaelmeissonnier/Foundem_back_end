@@ -18,4 +18,4 @@ class ObjetTrouve extends Objet
     }
 }
 
-export = ObjetTrouve;
+module.exports = ObjetTrouve;

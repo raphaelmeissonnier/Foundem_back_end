@@ -19,4 +19,4 @@ class ObjetPerdu extends Objet
 
 }
 
-export = ObjetPerdu;
+module.exports = ObjetPerdu;

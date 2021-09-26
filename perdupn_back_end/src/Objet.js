@@ -28,4 +28,4 @@ class Objet
 
 }
 
-export Objet;
+module.exports = Objet;
