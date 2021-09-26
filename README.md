@@ -5,12 +5,16 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
 
 
 # Comment lancer l'application ? 
+
+### Prérequis
+Avant de lancer l'application, il faut avoir [Node.js](https://nodejs.org/en/) d'installé. 
+
 * Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_back_end.git
 * Ouvrer le dossier et lancer les commandes suivantes :
     ```
     cd perdupn_back_end
     npm install 
-    DEBUG=myapp:* npm start
+    DEBUG=perdupn_back_end:* npm start
     ```
 
 * Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_front_end.git
