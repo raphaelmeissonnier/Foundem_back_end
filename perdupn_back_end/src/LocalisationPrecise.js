@@ -16,6 +16,4 @@ class LocalisationPrecise extends Localisation {
     }
 }
 
-var loc =new LocalisationPrecise(15,'mmm')
-
 module.exports = LocalisationPrecise
