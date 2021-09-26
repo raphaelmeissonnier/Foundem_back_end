@@ -27,5 +27,5 @@ Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
 # Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
 * Imane KADI - [GitHub](https://github.com/ImnKadi)
-* Raphaël MEISSONNIER - [GitHub](https://github.com/fatilbss)
-* Fatimata SOUMARÉ - [GitHub](https://github.com/meissonnierraphael)
+* Raphaël MEISSONNIER - [GitHub](https://github.com/meissonnierraphael)
+* Fatimata SOUMARÉ - [GitHub](https://github.com/fatilbss)
