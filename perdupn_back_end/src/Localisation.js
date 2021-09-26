@@ -1,15 +1,33 @@
+const { error } = require("console");
+
 class Localisation{
     constructor(longitude, latitude){
-        this.longitude=longitude;
-        this.latitude=latitude;
+        if((typeof(longitude)==='number') && (typeof(latitude)==='number')){
+            this.longitude=longitude;
+            this.latitude=latitude;
+        }
+        else{
+            throw 'LES PARAMETRES FOURNIT NE SONT PAS BONS !'
+        }
+        
     }
 
     setLongitude(parLongitude){
-        this.longitude=parLongitude;
+        if(typeof(parLongitude)==='number'){
+            this.longitude=parLongitude;
+        }   
+        else{
+            throw 'LE PARAMETRE FOURNIT N\'EST PAS BON !'
+        }
     }
 
     setLatitude(parLatitude){
-        this.latitude=parLatitude;
+        if(typeof(parLatitude)==='number'){
+            this.latitude=parLatitude;
+        }   
+        else{
+            throw 'LE PARAMETRE FOURNIT N\'EST PAS BON !'
+        }
     }
 
     getLongitude(){
