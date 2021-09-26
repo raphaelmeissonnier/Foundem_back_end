@@ -8,7 +8,14 @@ git:
 before_script:
   - cd perdupn_back_end
 
+script:
+  - npm run test:coveralls
+
 # safelist
 branches:
   only:
     - main
+
+#Notifications
+
+
