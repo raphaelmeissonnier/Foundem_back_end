@@ -2,7 +2,7 @@ const Objet = require("./Objet");
 
 class ObjetTrouve extends Objet
 {
-    constructor(string name, Localisation localisation)
+    constructor(name, localisation)
     {
         super(name, localisation);
     }

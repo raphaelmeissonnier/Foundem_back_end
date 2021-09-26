@@ -1,6 +1,6 @@
 class Objet
 {
-    constructor(string name, Localisation localisation)
+    constructor(name, localisation)
     {
         this.name = name;
         this.localisation = localisation;
@@ -11,7 +11,7 @@ class Objet
         return this.name;
     }
 
-    setName(string name)
+    setName(name)
     {
         this.name = name;
     }
@@ -21,7 +21,7 @@ class Objet
         return this.localisation;
     }
 
-    setLocalisation(Localisation localisation)
+    setLocalisation(localisation)
     {
         this.localisation = localisation;
     }
