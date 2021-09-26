@@ -1,7 +1,0 @@
-= Cahier des spécifications
-
-== Partie 1 : Synthèse
-
-== Partie 2 : Aspects techniques
-
-== Partie 3 : Modélisation
