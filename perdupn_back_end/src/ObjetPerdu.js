@@ -1,18 +1,20 @@
-class ObjetPerdu implements Objet
+const Objet = require("./Objet");
+
+class ObjetPerdu extends Objet
 {
     constructor(string name, Localisation localisation)
     {
         super(name, localisation);
     }
 
-    getName() : string
+    getName()
     {
-        return $`this.name`;
+        return `${super.getName()}`;
     }
 
-    getLocalisation() : Localisation
+    getLocalisation()
     {
-        return $`this.localisation`;
+        return `${super.getLocalisation()}`;
     }
 
 }
