@@ -17,6 +17,9 @@ Métier/persistance ?
 plateforme opérationnelle (gestion de versions, build, qualité de code, CI, déploiement)
 
 
+Nous allons utiliser plusieurs API distantes telles que openlayers pour la MAP.
+
+
 
 
 == Partie 3 : Modélisation

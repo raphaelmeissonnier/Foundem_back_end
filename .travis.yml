@@ -1,3 +1,14 @@
 language: node_js
 node_js:
   - "14.16.0"
+
+git:
+  depth: 1
+
+before_script:
+  - cd perdupn_back_end
+
+# safelist
+branches:
+  only:
+    - main
