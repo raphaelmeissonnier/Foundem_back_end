@@ -4,4 +4,19 @@
 
 == Partie 2 : Aspects techniques
 
+PerdUPN est une application web développée en JavaScript avec React JS pour le front-end et Express JS pour le back-end. 
+Les tests du Back-end se feront avec Jest, les tests du Front-end se feront avec Mocha.
+
+
+
+Lien métier/API ?
+
+Métier/persistance ?
+
+
+plateforme opérationnelle (gestion de versions, build, qualité de code, CI, déploiement)
+
+
+
+
 == Partie 3 : Modélisation
