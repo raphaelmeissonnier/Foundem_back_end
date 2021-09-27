@@ -4,7 +4,10 @@
 
 === Le projet
 
-Nous vous présentons notre projet, (titre du projet, logo, abréviation)
+Nous vous présentons notre projet qui est une application nommée Found'em.
+
+image::logo.png[]
+
 
 === Membres de l'équipe
 
@@ -19,9 +22,9 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 
 === Personas et fonctionnalités de leur point de vue
 
-  1) Premier persona ( Utilisateur Perdu ) :
+  1) Utilisateur :
   - Il peut créer son espace personnel et s'y connecter.
-  - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a perdu.
+  - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a perdu ou qu'il a trouvé.
   - Il peut faire une recherche via le moteur de recherche.
   - Il peut trier et filtrer ses recherches par caractéristiques, catégories, date d'ajout.
   - Il peut consulter la liste correspondante à sa recherche.
@@ -32,22 +35,23 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
   - S'il pense avoir trouvé son objet, il peut remplir un formulaire de test d'auhentification de propriétaire.
   - S'il réussi ce test, il peut fixer un rendez-vous dans son agenda via son espace.
   - Il peut supprimer son annnonce via son espace personnel.
+  - Son solde de points de fidelité sera augmenté à chaque fois qu'un de ses objets qu'il a trouvé est restitué au propriétaire.
 
-  2) Deuxième persona ( Utilisateur Trouveur ) :
-  - Il peut créer son espace personnel et s'y connecter.
-  - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a trouvé.
-  - Il peut recevoir des notifications lorsqu'il reçoit un message via sa messagerie.
-  - Il peut via cette messagerie discuter avec des potentiels propriétaires d'objets trouvés.
-  - Si ce potentiel propriétaire répond correctement au test d'auhentification de propriétaire, alors l'utilisateur peut fixer un rendez-vous dans son agenda via son espace.
-  - Il peut aussi mettre en place un alerte correspondant à ce rendez-vous.
-  (- Son solde de points de fidelité sera augmenté à chaque fois qu'un de ses objets qu'il a trouvé est restitué au propriétaire.)
+  2) Administrateur Web :
+  - Signaler un utilisateur
+  - Bannir de l'application un utlisateur
+  - Supprimer une annonce
+  - Consulter KPI (nombres d'objets perdus, retrouvés, pourcentage objets restitués, ...)
+  - Attribuer des points de fidélité
+  - Contacter un utilisateur via la messagerie
+  - Ajouter des blocs de messages
+  - Consulter les avis des utilisateurs
 
-  3) Troisième persona ( Administarteur Web ) :
 
-
-=== prévisions marketing (comment prévoyez vous de pousser votre projet auprès des utilisateurs, réseaux sociaux, enquêtes, flyers, site Web, etc)
+=== Prévisions marketing
 //Vision trop large ??
-La cible de notre produit est principalement les utilisateurs des transports en commun. Pour cela, nous mettrons des affiches dans les transports en commun, les gares, sur la façades des bus avec des QRcodes pour diriger plus facilement les utilisateurs de toute tranche d'âge vers notre plateforme. De plus, nous avons décidé de lancer une campagne publicitaire sur les réseaux sociaux. Pour cela, nous opterons pour des placements de produits via Instagram, Facebook mais aussi en créant une page sur chacune de ces plateformes et ce pour meiux cibler la tranche des 16-35 ans. Nous comptons aussi sur les bonnes vieilles méthodes telles que le bouche à oreilles.
+
+La cible de notre produit est principalement les utilisateurs des réseaux. Pour cela, nous lancerons une campagne publicitaire sur les réseaux sociaux. Nous comptons aussi sur la bonne vieille méthode du bouche à oreille.
 
 
 == Partie 2 : Aspects techniques
@@ -56,7 +60,7 @@ Found'EM est une application Web.
 
 === Schéma d'architecture
 
-    insert ici
+image::architecture.png[]
 
 
 === Plateforme technologique
@@ -88,7 +92,7 @@ La base de données sera en MySql.
 Nous allons utiliser plusieurs API distantes telles que OpenLayers pour la cartographie (map).
 
 Concernant l'IA, nous pourrons comparer et mettre en relation des déclarations de pertes et déclarations d'objets perdus similaires.
-Nous pourrons la personne dans la base de données grâce à certains objets (carte bancaire, CNI etc...).
+Nous pourrons retrouver la personne dans la base de données grâce à certains objets (carte bancaire, CNI etc...).
 Nous pourrons également identifier les objets perdus grâce aux photos.
 
 
@@ -97,11 +101,23 @@ Nous pourrons également identifier les objets perdus grâce aux photos.
 
 === Maquette du front
 
+image::maquette_front.png[]
+
 === Diagramme de classe
 
 image::diagramme_classe.png[]
 
 === Description de l'API
 
+|===
+|Définition |Description
+
+|GET
+/objets
+|La réponse retourne un tableau d'objets.
+
+|===
 
 === Diagramme de séquence
+
+image::diagramme_sequence.png[]

@@ -25,9 +25,6 @@ Avant de lancer l'application, il faut avoir installé [Node.js](https://nodejs.
   npm start
   ```
 
-# Architecture 
-![alt text](https://github.com/raphaelmeissonnier/perdUPN_back_end/blob/dev/schemacloud.png?raw=true)
-
 # Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
 * Imane KADI - [GitHub](https://github.com/ImnKadi)
