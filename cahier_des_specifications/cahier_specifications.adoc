@@ -52,9 +52,15 @@ La cible de notre produit est principalement les utilisateurs des transports en 
 
 == Partie 2 : Aspects techniques
 
-PerdUPN est une application web développée en JavaScript avec React JS pour le front-end et Express JS pour le back-end.
-Les tests du back-end se feront avec Jest, les tests du front-end se feront avec Mocha.
 
+PerdUPN est une application web développée en :
+    - JavaScript avec React JS pour le front-end
+    - Express JS pour le back-end. 
+
+Les tests se feront avec : 
+
+    - Jest pour le back-end
+    - Mocha pour le front-end 
 
 
 Lien métier/API ?
