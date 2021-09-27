@@ -37,6 +37,7 @@ class Localisation{
     getLatitude(){
         return this.latitude;
     }
+
 }
 
 
