@@ -18,8 +18,6 @@ class ObjetPerdu
 }
 interface Localisation
 {
-    +setLongtitde(in : double): void
-    +setLatitude(in : double): void
     +getLongtitde(): double
     +getLatitude(): double
 }
