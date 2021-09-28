@@ -5,8 +5,7 @@ node_js:
 git:
   depth: 1
 
-before_script:
-  - cd perdupn_back_end
+
 
 install:
   - npm install
