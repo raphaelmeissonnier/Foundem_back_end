@@ -7,14 +7,20 @@ git:
 
 before_script:
   - cd perdupn_back_end
+  - npm i -g npm@version-number
 
 script:
-  - npm run test:coveralls
+  - npm test
+  - npm run coveralls
 
-# safelist
+# safelist and blocklist
 branches:
   only:
     - main
+  except:
+    - dev
+    - carte_localisations_objets
+
 
 #Notifications
 
