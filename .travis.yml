@@ -7,7 +7,6 @@ git:
 
 before_script:
   - cd perdupn_back_end
-  - npm i -g npm@version-number
 
 script:
   - npm test
