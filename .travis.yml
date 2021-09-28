@@ -8,6 +8,9 @@ git:
 before_script:
   - cd perdupn_back_end
 
+install:
+  - npm install
+
 script:
   - npm test
   - npm run coveralls
