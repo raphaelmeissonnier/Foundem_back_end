@@ -7,6 +7,7 @@ git:
 
 before_script:
   - cd perdupn_back_end
+  - npm install coveralls --save-dev
 
 script:
   - npm test
