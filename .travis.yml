@@ -5,11 +5,8 @@ node_js:
 git:
   depth: 1
 
-before_script:
-  - cd perdupn_back_end
-
 before_install:
-  - cd myapp
+  - cd perdupn_back_end
   - npm update
 
 install:
