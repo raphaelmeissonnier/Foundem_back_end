@@ -5,6 +5,10 @@ node_js:
 git:
   depth: 1
 
+cache:
+  directories:
+    - node_modules
+
 before_install:
   - cd perdupn_back_end
   - npm update
