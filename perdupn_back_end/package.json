@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "jest",
-    "coverage": "jest --coverage",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
-    "lint": "eslint src test --ignore-pattern tests/coverage*"
+    "coveralls": "jest --coverage --passWithNoTests && cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -19,19 +17,7 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.2",
-    "@types/express": "^4.17.13",
-    "@types/http-errors": "^1.8.1",
-    "@types/morgan": "^1.9.3",
-    "@types/node": "^16.10.1",
     "coveralls": "^3.1.1",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.3",
-    "eslint": "^4.13.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.1",
-    "jest": "^22.4.3"
+    "jest": "^27.2.4"
   }
 }

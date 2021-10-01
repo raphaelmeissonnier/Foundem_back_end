@@ -8,6 +8,10 @@ git:
 before_script:
   - cd perdupn_back_end
 
+before_install:
+  - cd myapp
+  - npm update
+
 install:
   - npm install
 
@@ -23,7 +27,5 @@ branches:
     - dev
     - carte_localisations_objets
 
-
 #Notifications
-
 
