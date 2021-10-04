@@ -1,13 +1,36 @@
 
-class User {
-    constructor(locUser){
-        if(typeof locUser === 'object'){ //On verifie que la localisation fournit est bien de type Localisation
+class User{
+    constructor(props){
+        this.state = {
+            latitude: null,
+            longitude: null
+        };
+
+        this.getLocalisation = this.getLocalisation.bind(this)
+        this.getCoordinates = this.getCoordinates.bind(this)
+        /*if(typeof locUser === 'object'){ //On verifie que la localisation fournit est bien de type Localisation
             this.locUser=locUser
-        }        
+        }*/        
     }
 
+    
+
     getLocalisation(){ // Retourne la localisation de l'user
-        return this.locUser;
+        var geoPos;
+        if(global.navigator.geolocation){
+            geoPos=global.navigator.geolocation.getCurrentPosition(this.getCoordinates)
+        }
+        else{
+            alert("Proble pour la loc")
+        }
+        return geoPos;
+    }
+
+    getCoordinates(position){
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
     }
 
     distanceObjetUser(locObjet){ // Calcul la distance entre la localisation de l'user et la localisation d'un objet
@@ -40,3 +63,5 @@ class User {
         }
     }
 }
+
+module.exports = User

@@ -2,6 +2,15 @@ const LocalisationPrecise = require("./LocalisationPrecise");
 const LocalisationFloue = require("./LocalisationFloue");
 const ObjetPerdu = require("./ObjetPerdu");
 const ObjetTrouve = require("./ObjetTrouve");
+const User =require("./User");
+
+
+function creationLoc(longitude,latitude){
+    let loc=new LocalisationPrecise(longitude,latitude);
+    //console.log("Loc User", user.getLocalisation());
+    return JSON.stringify(loc)
+}
+
 
 function creationTableauObjet()
 {
@@ -32,4 +41,4 @@ function creationTableauObjet()
     return JSON.stringify(objet)
 }
 
-module.exports = {creationTableauObjet};
+module.exports = {creationTableauObjet, creationLoc};
