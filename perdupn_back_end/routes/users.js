@@ -1,8 +1,10 @@
 
 const LocalisationPrecise = require('../src/LocalisationPrecise');
+const User = require('../src/User');
 var express = require('express');
 var router = express.Router();
 var localisation = new LocalisationPrecise(5454,6565);
+var user = new User(localisation);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
