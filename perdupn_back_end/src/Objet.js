@@ -1,10 +1,10 @@
 class Objet
 {
-    constructor(name, localisation)
+    constructor(categorie, localisation)
     {
-        if(typeof name === 'string' && typeof localisation === 'object')
+        if(typeof categorie === 'string' && typeof localisation === 'object')
         {
-            this.name = name;
+            this.categorie = categorie;
             this.localisation = localisation;
         }
         else
@@ -13,38 +13,14 @@ class Objet
         }
     }
 
-    getName()
+    getCategorie()
     {
-        return this.name;
-    }
-
-    setName(name)
-    {
-        if(typeof name === 'string')
-        {
-            this.name = name;
-        }
-        else
-        {
-            throw 'LE PARAMETRE FOURNI NE SONT PAS BONS !'
-        }
+        return this.categorie;
     }
 
     getLocalisation()
     {
         return this.localisation;
-    }
-
-    setLocalisation(localisation)
-    {
-        if(typeof localisation === 'object')
-        {
-            this.localisation = localisation;
-        }
-        else
-        {
-            throw 'LE PARAMETRE FOURNI NE SONT PAS BONS !'
-        }
     }
 }
 

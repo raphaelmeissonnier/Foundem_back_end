@@ -1,20 +1,30 @@
 const Objet = require("./Objet");
+const Calculateur = require('./Calculateur');
+
 
 class ObjetTrouve extends Objet
 {
-    constructor(name, localisation)
+    constructor(categorie, localisation)
     {
-        super(name, localisation);
+        super(categorie, localisation);
+        this.calculateur = new Calculateur();
+
     }
 
-    getName()
+    getCategorie()
     {
-        return `${super.getName()}`;
+        return `${super.getCategorie()}`;
     }
 
     getLocalisation()
     {
         return `${super.getLocalisation()}`;
+    }
+
+    getDistance(localisationUser)
+    {
+        calculateur.setDistance(calculateur.getDistanceLocaFloue(localisationUser, this.localisation));
+        return calculateur;
     }
 }
 

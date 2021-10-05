@@ -1,15 +1,16 @@
 const Objet = require("./Objet");
+const Calculateur = require("./Calculateur");
 
 class ObjetPerdu extends Objet
 {
-    constructor(name, localisation)
+    constructor(categorie, localisation)
     {
-        super(name, localisation);
+        super(categorie, localisation);
     }
 
-    getName()
+    getCategorie()
     {
-        return `${super.getName()}`;
+        return `${super.getCategorie()}`;
     }
 
     getLocalisation()
@@ -17,6 +18,12 @@ class ObjetPerdu extends Objet
         return `${super.getLocalisation()}`;
     }
 
+    //PB AU NIVEAU DU RETOUR
+    getDistance(localisationUser)
+    {
+        calculateur = new Calculateur();
+        return calculateur.getDistanceFloue(localisationUser, this.position);
+    }
 }
 
 module.exports = ObjetPerdu;

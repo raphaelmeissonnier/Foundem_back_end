@@ -2,59 +2,83 @@
 'https://plantuml.com/class-diagram
 
 class Application
-interface Objet
+enum Categorie
+{
+    HIGH-TECH
+    CLES
+    VETEMENTS
+}
+class Calculateur
+{
+    +getDistanceLocalisationFloue(in locUser : LocalisationPrecise, loc : LocalisationFloue) : void
+    +getDistanceLocalisationPrecise(in locUser : LocalisationPrecise, loc : LocalisationPrecise) : void
+}
+interface Item
 {
     +getLocalisation() : Localisation
+    +getCategorie() : Categorie
 }
 class ObjetTrouve
 {
     -Localisation l
-    +ObjetTrouve(in : Localisation) : void
+    -Categorie c
+    +ObjetTrouve(in l : Localisation, c : Categorie) : void
+    +getCategorie() : Categorie
+    +getLocalisation() : Localisation
+    +getDistance(in l : LocalisationPrecise) : Calculateur
 }
 class ObjetPerdu
 {
     -Localisation l
-    +ObjetTrouve(in : Localisation) : void
+    -Categorie c
+    +ObjetPerdu(in l : Localisation, c : Categorie) : void
+    +getCategorie() : Categorie
+    +getLocalisation() : Localisation
+    +getDistance(in l : LocalisationPrecise) : Calculateur
+}
+class Position
+{
+    - double longitude
+    - double latitude
+    + Position(in longitude : double, latitude : double)
+    + getLongitude() : double
+    + getLatitude() : double
 }
 interface Localisation
 {
-    +getLongtitde(): double
-    +getLatitude(): double
+    +Localisation(in p : Position): void
+    +getPosition(): Position
 }
 class LocalisationPrecise
 {
-    -double longitude
-    -double latitude
-    +LocalisationPrecise(in: double, double): void
+    +LocalisationPrecise(in p : Position): void
+    +getPosition(): Position
 }
 class LocalisationFloue
 {
-    -double longitude
-    -double latitude
-    +LocalisationFloue(in: double, double): void
-}
-
-class User
-{
-    -LocalisationPrecise l
-    +User(in : LocalisationPrecise) : void
-    +getLocalisation() : LocalisationPrecise
-    +distanceObjetUser(in: Localisation) : double
+    +Localisation(in p : Position, r : double): void
+    +getPosition(): Position
+    +getRayon(): double
 }
 
 
-ObjetTrouve "1...*" <-- "1" Application
-ObjetPerdu "1...*" <-- "1" Application
-Objet <|.. ObjetPerdu
-Objet <|.. ObjetTrouve
+ObjetTrouve "1...*" --* Application
+ObjetPerdu "1...*" --* Application
+
+Categorie <.. ObjetTrouve
+Categorie <.. ObjetPerdu
+
+Item <|.. ObjetPerdu
+Item <|.. ObjetTrouve
+
+
 Localisation <|.. LocalisationPrecise
 Localisation <|.. LocalisationFloue
+
 LocalisationPrecise "1" <.. ObjetTrouve
 LocalisationFloue "1" <.. ObjetPerdu
-LocalisationPrecise "1" <.. User
-ObjetTrouve "1...*" <.. User
-ObjetPerdu "1...*" <.. User
-User "1...*" <-- "1" Application
+
+Position "1" <-- Localisation
 
 
 @enduml
