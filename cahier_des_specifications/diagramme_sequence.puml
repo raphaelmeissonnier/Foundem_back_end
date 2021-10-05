@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Front -> Back: fetch(/users)
+Back --> Front: return JSON
+
+
+@enduml

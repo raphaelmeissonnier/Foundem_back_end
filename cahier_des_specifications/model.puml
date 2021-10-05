@@ -18,8 +18,6 @@ class ObjetPerdu
 }
 interface Localisation
 {
-    +setLongtitde(in : double): void
-    +setLatitude(in : double): void
     +getLongtitde(): double
     +getLatitude(): double
 }
@@ -36,6 +34,14 @@ class LocalisationFloue
     +LocalisationFloue(in: double, double): void
 }
 
+class User
+{
+    -LocalisationPrecise l
+    +User(in : LocalisationPrecise) : void
+    +getLocalisation() : LocalisationPrecise
+    +distanceObjetUser(in: Localisation) : double
+}
+
 
 ObjetTrouve "1...*" <-- "1" Application
 ObjetPerdu "1...*" <-- "1" Application
@@ -45,7 +51,10 @@ Localisation <|.. LocalisationPrecise
 Localisation <|.. LocalisationFloue
 LocalisationPrecise "1" <.. ObjetTrouve
 LocalisationFloue "1" <.. ObjetPerdu
-
+LocalisationPrecise "1" <.. User
+ObjetTrouve "1...*" <.. User
+ObjetPerdu "1...*" <.. User
+User "1...*" <-- "1" Application
 
 
 @enduml
