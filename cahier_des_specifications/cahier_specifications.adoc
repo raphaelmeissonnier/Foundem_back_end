@@ -121,3 +121,6 @@ image::diagramme_classe.png[]
 === Diagramme de séquence
 
 image::diagramme_sequence.png[]
+
+
+

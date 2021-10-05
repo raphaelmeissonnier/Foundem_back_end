@@ -12,4 +12,10 @@ router.get('/objets', function(req, res, next) {
   res.send(main.creationTableauObjet());
 });
 
+router.post('/localisation', function(req, res, next) {
+  res.send(main.creationLoc(req.body.longitude,req.body.latitude));
+  console.log(main.creationLoc(req.body.longitude,req.body.latitude));
+
+});
+
 module.exports = router;
