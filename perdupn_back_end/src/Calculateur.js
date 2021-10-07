@@ -1,9 +1,11 @@
+const Localisation = require('./Localisation');
+
+
 class Calculateur
 {
-    //RECUPERER LE CODE DE RAPHAEL
     getDistanceLocalisationPrecise(localisationUser, localisationObjet)
     {
-            if(typeof(locObjet) === 'object' && typeof(localisationUser) === 'object')
+            if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
             {
                 function toRad(x){
                     return x * Math.PI/180;
@@ -11,6 +13,7 @@ class Calculateur
 
                 //On récupère la position et les coordonnées du user
                 let positionUser = localisationUser.getPosition();
+                console.log('Class Calculateur, positionUser', positionUser);
                 let longitudeUser = positionUser.getLongitude();
                 let latitudeUser = positionUser.getLatitude();
 
@@ -18,7 +21,6 @@ class Calculateur
                 let positionObjet = localisationObjet.getPosition();
                 let longitudeObjet = positionObjet.getLongitude();
                 let latitudeObjet = positionObjet.getLatitude();
-
 
                 var rayon= 10; //en Km
 
@@ -40,24 +42,27 @@ class Calculateur
 
     getDistanceLocalisationFloue(localisationUser, localisationObjet)
     {
-        //On récupère la position et les coordonnées du user
-        let positionUser = localisationUser.getPosition();
-        let longitudeUser =  positionUser.getLongitude();
-        let latitudeUser =  positionUser.getLatitude();
-
-        //On récupère la position, les coordonnées et le rayon de l'objet
-        let positionObjet = localisationObjet.getPosition();
-        let longitudeObjet =  positionObjet.getLongitude();
-        let latitudeObjet =  positionObjet.getLatitude();
-        let rayon = localisationObjet.getRayon();
-
-        //On calcule la distance avec la formule
-        let distance = Math.sqrt((Math.pow(longitudeUser - longitudeObjet)) + (Math.pow(latitudeUser - latitudeObjet))) - rayon;
-        if(distance < 0)
+        if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
         {
-            distance = distance * (-1);
+            //On récupère la position et les coordonnées du user
+            let positionUser = localisationUser.getPosition();
+            let longitudeUser =  positionUser.getLongitude();
+            let latitudeUser =  positionUser.getLatitude();
+
+            //On récupère la position, les coordonnées et le rayon de l'objet
+            let positionObjet = localisationObjet.getPosition();
+            let longitudeObjet =  positionObjet.getLongitude();
+            let latitudeObjet =  positionObjet.getLatitude();
+            let rayon = localisationObjet.getRayon();
+
+            //On calcule la distance avec la formule |sqrt((x1 - h)² + (y1 - k)²) - r|
+            let distance = Math.sqrt((Math.pow((longitudeUser - longitudeObjet), 2)) + (Math.pow((latitudeUser - latitudeObjet), 2))) - rayon;
+            if(distance < 0)
+            {
+                distance = distance * (-1);
+            }
+            return distance;
         }
-        return distance;
     }
 
     setDistance(distance)

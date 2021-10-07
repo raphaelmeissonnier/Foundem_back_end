@@ -12,11 +12,11 @@ class LocalisationFloue extends Localisation {
     }
 
     getPosition(){
-        return `${super.getPosition()}`;
+        return super.getPosition();
     }
 
     getRayon(){
-        return `${super.getRayon()}`;
+        return this.rayon;
     }
 }
 

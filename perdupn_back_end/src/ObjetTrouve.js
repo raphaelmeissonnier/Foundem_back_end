@@ -13,18 +13,19 @@ class ObjetTrouve extends Objet
 
     getCategorie()
     {
-        return `${super.getCategorie()}`;
+        return super.getCategorie();
     }
 
     getLocalisation()
     {
-        return `${super.getLocalisation()}`;
+        return super.getLocalisation();
     }
 
     getDistance(localisationUser)
     {
-        calculateur.setDistance(calculateur.getDistanceLocaFloue(localisationUser, this.localisation));
-        return calculateur;
+        //this.calculateur.setDistance(this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation));
+        //return this.calculateur;
+        return this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation);
     }
 }
 

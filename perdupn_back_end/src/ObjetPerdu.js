@@ -6,23 +6,25 @@ class ObjetPerdu extends Objet
     constructor(categorie, localisation)
     {
         super(categorie, localisation);
+        this.calculateur = new Calculateur();
     }
 
     getCategorie()
     {
-        return `${super.getCategorie()}`;
+        return super.getCategorie();
     }
 
     getLocalisation()
     {
-        return `${super.getLocalisation()}`;
+        return super.getLocalisation();
     }
 
     //PB AU NIVEAU DU RETOUR
     getDistance(localisationUser)
     {
-        calculateur = new Calculateur();
-        return calculateur.getDistanceFloue(localisationUser, this.position);
+        //calculateur = new Calculateur();
+        //return calculateur.getDistanceFloue(localisationUser, this.position);
+        return this.calculateur.getDistanceLocalisationFloue(localisationUser, this.localisation);
     }
 }
 

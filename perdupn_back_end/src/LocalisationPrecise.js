@@ -8,7 +8,7 @@ class LocalisationPrecise extends Localisation {
     }
 
     getPosition(){
-        return `${super.getPosition()}`;
+        return super.getPosition();
     }
 }
 
