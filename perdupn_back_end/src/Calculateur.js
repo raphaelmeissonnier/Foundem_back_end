@@ -3,6 +3,10 @@ const Localisation = require('./Localisation');
 
 class Calculateur
 {
+    constructor(){
+       this.foo="bar" 
+    }
+
     getDistanceLocalisationPrecise(localisationUser, localisationObjet)
     {
             if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)

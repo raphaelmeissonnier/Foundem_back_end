@@ -22,7 +22,7 @@ let localisationUser = new LocalisationPrecise(positionUser);
 
 
 //Création d'une collection d'objet trouvés
-let positionObjet1 = new Position(2.05, 48.9333); //Poissy
+let positionObjet1 = new Position(12, 25); //Poissy
 let positionObjet2 = new Position(2.3488, 48.8534); //Paris
 let positionObjet3 = new Position(2.2, 48.9); //Nanterre
 let localisationObjet1 = new LocalisationPrecise(positionObjet1);
