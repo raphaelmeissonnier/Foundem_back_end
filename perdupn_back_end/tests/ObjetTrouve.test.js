@@ -1,31 +1,26 @@
 const ObjetTrouve = require("../src/ObjetTrouve")
-const Objet = require("../src/Objet")
 const LocalisationPrecise = require("../src/LocalisationPrecise")
 const Position = require("../src/Position")
 const Localisation = require("../src/Localisation")
-//const Calculateur = require("../src/Calculateur")
+const Calculateur = require("../src/Calculateur")
 
-/*const ObjetTrouve = jest.createMockFromModule("../src/ObjetTrouve")*/
-const Calculateur = jest.createMockFromModule("../src/Calculateur")
-
-//const constructorSpy = jest.spyOn(Objet,'constructor')
+jest.mock('../src/Calculateur')
 
 beforeEach(()=> {
     Calculateur.mockClear()
 })
 
 
-/*describe('../src/ObjetTrouve', () => {
+describe('../src/ObjetTrouve', () => {
     it('On verifie si le constructeur de calculateur est appelé', () => {
         const position = new Position(12,25)
         const localisation = new LocalisationPrecise(position);
         const objetTrouve = new ObjetTrouve("toto",localisation);
-        //expect(Calculateur).toHaveBeenCalledTimes(1);
-        expect(Calculateur.).toHaveBeenCalledTimes(1);
+        expect(Calculateur).toHaveBeenCalledTimes(1);
     });
-});*/
+});
 
-
+/*
 describe('../src/ObjetTrouve', () => {
     it('On verifie que l\'objet appelle la methode getDistance de l\'instance de Calculateur', () => {
         //expect(Calculateur).not.toHaveBeenCalled()
@@ -47,7 +42,7 @@ describe('../src/ObjetTrouve', () => {
         //expect(Calculateur).toHaveBeenCalledTimes(1);
     
     });
-});
+});*/
 
 
 
