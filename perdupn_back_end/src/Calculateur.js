@@ -7,13 +7,13 @@ class Calculateur
     {
             if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
             {
+                //A MOCKER ?
                 function toRad(x){
                     return x * Math.PI/180;
                 }
 
                 //On récupère la position et les coordonnées du user
                 let positionUser = localisationUser.getPosition();
-                console.log('Class Calculateur, positionUser', positionUser);
                 let longitudeUser = positionUser.getLongitude();
                 let latitudeUser = positionUser.getLatitude();
 
@@ -64,12 +64,6 @@ class Calculateur
             return distance;
         }
     }
-
-    setDistance(distance)
-    {
-        this.distance = distance;
-    }
-
 }
 
 module.exports = Calculateur;
