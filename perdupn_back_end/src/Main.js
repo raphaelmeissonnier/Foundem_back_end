@@ -136,9 +136,9 @@ function affichageObjetProche(longitudeUser,latitudeUser){
     }
 
     const mapSort2 = new Map([...mapObjetsDistance.entries()].sort((a, b) => a[1] - b[1]));
-    console.log(mapSort2);
+    console.log(JSON.stringify([...mapSort2]));
 
-    return JSON.stringify(mapSort2.entries());
+    return JSON.stringify([...mapSort2]);
 }
 
 module.exports = {createPositionUser,affichageObjetProche}
