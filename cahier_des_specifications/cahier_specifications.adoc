@@ -85,7 +85,7 @@ La base de données sera en MySql.
 
     Gestion de versions = Git
     Le build = npm
-    Laualité de code = sonarQube
+    La qualité de code = sonarCloud
     CI = Travis CI
 
 
@@ -101,7 +101,17 @@ Nous pourrons également identifier les objets perdus grâce aux photos.
 
 === Maquette du front
 
-image::maquette_front.png[]
+image::Wireframe1.PNG[]
+Je clique sur le bouton "J'ai trouvé un objet".
+Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+
+image::Wireframe2.PNG[]
+Je remplis le formulaire détaillé.
+Je valide.
+Je suis redirigé vers la page d'accueil.
+
+image::Wireframe3.PNG[]
+Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
 === Diagramme de classe
 
@@ -115,12 +125,29 @@ image::diagramme_classe.png[]
 |GET
 /objets
 |La réponse retourne un tableau d'objets.
+|POST
+/localisation
+|La requête envoie la localisation de l'utilisateur
+|GET
+/objets/:longitude/:latitude
+|La réponse retourne un tableau d'objets trié selon leur distance par rapport à l'utilisateur
 
 |===
 
 === Diagramme de séquence
 
-image::diagramme_sequence.png[]
+Feature "Localiser l'utilisateur"
+
+image::DS_localisation_user.png[]
+
+Feature "Afficher les objets les plus proches"
+
+image::DS_objets_plus_proches.png[]
+
+Feature "Voir les points fusionnés"
+
+image::DS_points_collapses.png[]
+
 
 
 

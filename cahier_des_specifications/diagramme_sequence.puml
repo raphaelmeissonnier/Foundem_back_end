@@ -3,8 +3,9 @@
 
 autonumber
 
-Front -> Back: fetch(/users)
-Back --> Front: return JSON
+actor User
+User --> Front : Dézoome la carte
+Front --> Front : Fusion des points sur la carte
 
 
 @enduml

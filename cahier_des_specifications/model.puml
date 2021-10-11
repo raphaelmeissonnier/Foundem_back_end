@@ -80,5 +80,7 @@ LocalisationFloue "1" <.. ObjetPerdu
 
 Position "1" <-- Localisation
 
+Calculateur "1" <-- ObjetTrouve
+Calculateur "1" <-- ObjetPerdu
 
 @enduml

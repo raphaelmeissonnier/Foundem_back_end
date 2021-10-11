@@ -1,4 +1,3 @@
-
 //Importation des classes
 var Position = require('./Position');
 var LocalisationPrecise = require('./LocalisationPrecise');
@@ -82,4 +81,5 @@ function affichageObjetProche(longitudeUser,latitudeUser){
 }
 
 module.exports = {createPositionUser,affichageObjetProche}
+
 
