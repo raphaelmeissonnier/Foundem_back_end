@@ -11,6 +11,7 @@ class Localisation
     {
         return this.position;
     }
+
 }
 
 module.exports = Localisation
