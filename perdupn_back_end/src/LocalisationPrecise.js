@@ -3,16 +3,12 @@ const Localisation = require("./Localisation");
 
 class LocalisationPrecise extends Localisation {
 
-    constructor(parLongitude, parLatitude){
-        super(parLongitude,parLatitude);
+    constructor(position){
+        super(position);
     }
 
-    getLongitude(){
-        return `${super.getLongitude()}`;
-    }
-
-    getLatitude(){
-        return `${super.getLatitude()}`;
+    getPosition(){
+        return super.getPosition();
     }
 }
 

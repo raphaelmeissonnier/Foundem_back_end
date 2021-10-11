@@ -3,16 +3,20 @@ const Localisation = require("./Localisation");
 
 class LocalisationFloue extends Localisation {
 
-    constructor(parLongitude, parLatitude){
-        super(parLongitude,parLatitude);
+    constructor(position, rayon){
+        if(typeof(rayon) === 'number')
+        {
+            super(position);
+            this.rayon = rayon;
+        }
     }
 
-    getLongitude(){
-        return `${super.getLongitude()}`;
+    getPosition(){
+        return super.getPosition();
     }
 
-    getLatitude(){
-        return `${super.getLatitude()}`;
+    getRayon(){
+        return this.rayon;
     }
 }
 
