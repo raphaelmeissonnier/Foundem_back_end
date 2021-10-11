@@ -85,7 +85,7 @@ La base de données sera en MySql.
 
     Gestion de versions = Git
     Le build = npm
-    Laualité de code = sonarQube
+    La qualité de code = sonarCloud
     CI = Travis CI
 
 
@@ -147,6 +147,7 @@ image::DS_objets_plus_proches.png[]
 Feature "Voir les points fusionnés"
 
 image::DS_points_collapses.png[]
+
 
 
 
