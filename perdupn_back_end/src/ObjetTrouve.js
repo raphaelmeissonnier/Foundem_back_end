@@ -1,5 +1,5 @@
 const Objet = require("./Objet");
-const Calculateur = require('./Calculateur');
+const CalculateurPrecis = require("./CalculateurPrecis");
 
 
 class ObjetTrouve extends Objet
@@ -7,7 +7,7 @@ class ObjetTrouve extends Objet
     constructor(categorie, localisation)
     {
         super(categorie, localisation);
-        this.calculateur = new Calculateur();
+        this.calculateur = new CalculateurPrecis();
 
     }
 
