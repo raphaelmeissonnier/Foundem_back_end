@@ -5,6 +5,7 @@ var Position = require("./Position");
 var LocalisationPrecise = require("./LocalisationPrecise");
 
 
+function AjoutObjetTrouve(){
 
 //Variable globale
 var scanf = require('scanf');
@@ -21,11 +22,19 @@ var intitule = scanf('%f');
 console.log("Veuillez entrer la description");
 var description = scanf('%f');
 console.log("Veuillez entrer la catégorie");
-var categorie = scanf('%f');
+var categorie = scanf('%s');
 
 
 //Création d'un user et de sa localisation
 let positionUser = new Position(longitude, latitude);
 let localisationUser = new LocalisationPrecise(positionUser);
-//console.log("Localisation user: ", localisationUser);
 
+// Création d'un nouvel objet
+
+let objet = new ObjetTrouve(categorie, localisationUser);
+console.log("L'objet trouvé : ", objet);
+
+return JSON.stringify(objet);
+}
+
+module.exports = {AjoutObjetTrouve};
