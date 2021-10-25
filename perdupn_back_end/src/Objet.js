@@ -2,12 +2,15 @@ const Localisation = require('./Localisation');
 
 class Objet
 {
-    constructor(categorie, localisation)
+    constructor(categorie, localisation, description, intitule, date)
     {
         if(typeof categorie === 'string' && localisation instanceof Localisation)
         {
             this.categorie = categorie;
             this.localisation = localisation;
+            this.description = description;
+            this.intitule = intitule;
+            this.date = date;
         }
         else
         {
