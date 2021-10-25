@@ -21,12 +21,6 @@ router.post('/localisation', function(req, res, next) {
 
 });
 
-router.post('/localisation', function(req, res, next) {
-  res.send(main.creationLoc(req.body.longitude,req.body.latitude));
-  console.log(main.creationLoc(req.body.longitude,req.body.latitude));
-
-});
-
 router.get('/AjoutObjetTrouve', function(req, res, next) {
   res.send(AjoutObjetTrouve.AjoutObjetTrouve());
 });

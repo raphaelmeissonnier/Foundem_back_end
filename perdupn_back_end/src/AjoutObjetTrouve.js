@@ -31,7 +31,7 @@ let localisationUser = new LocalisationPrecise(positionUser);
 
 // Création d'un nouvel objet
 
-let objet = new ObjetTrouve(categorie, localisationUser);
+let objet = new ObjetTrouve(categorie, localisationUser,description,intitule,Date.now());
 console.log("L'objet trouvé : ", objet);
 
 return JSON.stringify(objet);
