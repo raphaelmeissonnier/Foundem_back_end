@@ -39,17 +39,17 @@ function creationObjet(){
     var localisationObjetTrouve4 = new LocalisationPrecise(positionObjetTrouve4);
     var localisationObjetTrouve5 = new LocalisationPrecise(positionObjetTrouve5);
 
-    var ObjetPerdu1 = new ObjetPerdu("clés", localisationObjetPerdu1);
-    var ObjetPerdu2 = new ObjetPerdu("téléphone", localisationObjetPerdu2);
-    var ObjetPerdu3 = new ObjetPerdu("écouteurs", localisationObjetPerdu3);
-    var ObjetPerdu4 = new ObjetPerdu("peluche", localisationObjetPerdu4);
-    var ObjetPerdu5 = new ObjetPerdu("bonnet", localisationObjetPerdu5);
+    var ObjetPerdu1 = new ObjetPerdu("clés", localisationObjetPerdu1,"Clé de maison perdu pres de Dreux", "Mes Clés", Date.now());
+    var ObjetPerdu2 = new ObjetPerdu("téléphone", localisationObjetPerdu2,"Iphone X perdu a Nanterre", "Iphone X", Date.now());
+    var ObjetPerdu3 = new ObjetPerdu("écouteurs", localisationObjetPerdu3,"AirPods perdu près de Porte de la Chapelle", "AirPods", Date.now());
+    var ObjetPerdu4 = new ObjetPerdu("peluche", localisationObjetPerdu4,"Mon Enfant a perdu sa peluche a DisneyLand, sa peluche ressemble a Mickey", "Peluche Mickey", Date.now());
+    var ObjetPerdu5 = new ObjetPerdu("bonnet", localisationObjetPerdu5,"Bonnet Lacoste", "Bonnet Lacoste", Date.now());
 
-    var ObjetTrouve1 = new ObjetTrouve("clés", localisationObjetTrouve1);
-    var ObjetTrouve2 = new ObjetTrouve("téléphone", localisationObjetTrouve2);
-    var ObjetTrouve3 = new ObjetTrouve("écouteurs", localisationObjetTrouve3);
-    var ObjetTrouve4 = new ObjetTrouve("peluche", localisationObjetTrouve4);
-    var ObjetTrouve5 = new ObjetTrouve("bonnet", localisationObjetTrouve5);
+    var ObjetTrouve1 = new ObjetTrouve("clés", localisationObjetTrouve1, "Trousseau de clés trouvés à la sortie d'un magasin.", "3 clés avec un badge", Date.now());
+    var ObjetTrouve2 = new ObjetTrouve("téléphone", localisationObjetTrouve2, "Iphone 7 avec une coque bleue trouvé sur un banc d'arrêt de bus", "Iphone 7",Date.now() );
+    var ObjetTrouve3 = new ObjetTrouve("écouteurs", localisationObjetTrouve3, "AirPods de couleur blanc trouvé avec leur étui", "AirPods blanc", Date.now());
+    var ObjetTrouve4 = new ObjetTrouve("peluche", localisationObjetTrouve4, "Peluche en forme de lapin de couleur marron", "Peluche marron", Date.now());
+    var ObjetTrouve5 = new ObjetTrouve("bonnet", localisationObjetTrouve5, "Bonnet noir de marque Lacoste", "Bonnet noir", Date.now());
 
     var tableauObjets = [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 
