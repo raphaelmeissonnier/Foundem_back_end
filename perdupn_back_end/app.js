@@ -27,6 +27,14 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.get('/add', (req, res) => {
+  res.render('Add');
+})
+
+app.post('/add-to-diary', (req, res) => {
+  res.send("add")
+})
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var AjoutObjetTrouve = require('../src/AjoutObjetTrouve');
 
 var main = require("../src/Main");
 
@@ -20,10 +21,8 @@ router.post('/localisation', function(req, res, next) {
 
 });
 
-router.post('/localisation', function(req, res, next) {
-  res.send(main.creationLoc(req.body.longitude,req.body.latitude));
-  console.log(main.creationLoc(req.body.longitude,req.body.latitude));
-
+router.get('/AjoutObjetTrouve', function(req, res, next) {
+  res.send(AjoutObjetTrouve.AjoutObjetTrouve());
 });
 
 module.exports = router;
