@@ -27,14 +27,14 @@ class ObjetTrouve
 {
     -Localisation l
     -Categorie c
-    +ObjetTrouve(in l : Localisation, c : Categorie) : void
+    +ObjetTrouve(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
     +getDistance(in l : LocalisationPrecise) : Calculateur
 }
 class ObjetPerdu
 {
     -Localisation l
     -Categorie c
-    +ObjetPerdu(in l : Localisation, c : Categorie) : void
+    +ObjetPerdu(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
     +getDistance(in l : LocalisationPrecise) : Calculateur
 }
 class Position

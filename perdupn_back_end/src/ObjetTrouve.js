@@ -4,9 +4,9 @@ const CalculateurPrecis = require("./CalculateurPrecis");
 
 class ObjetTrouve extends Objet
 {
-    constructor(categorie, localisation)
+    constructor(categorie, localisation, description, intitule, date)
     {
-        super(categorie, localisation);
+        super(categorie, localisation, description, intitule, date);
         this.calculateur = new CalculateurPrecis();
 
     }

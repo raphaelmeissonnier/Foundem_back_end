@@ -3,9 +3,9 @@ const CalculateurFloue = require("./CalculateurFloue");
 
 class ObjetPerdu extends Objet
 {
-    constructor(categorie, localisation)
+    constructor(categorie, localisation, description, intitule, date)
     {
-        super(categorie, localisation);
+        super(categorie, localisation, description, intitule, date);
         this.calculateur = new CalculateurFloue(); //Singleton in Calculateur constructor
     }
 
