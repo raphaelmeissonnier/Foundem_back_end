@@ -113,6 +113,15 @@ Je suis redirigé vers la page d'accueil.
 image::Wireframe3.PNG[]
 Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
+image::Wireframe4.PNG[]
+J'ai trouvé un objet perdu.
+Je signale cet objet sur l'application web Found'Em.
+Je suis sur la page d'accueil Home de Found'em.
+Je clique sur le bouton "J'ai trouvé un objet".
+Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+Je remplis le formulaire détaillé.
+Je valide.
+
 === Diagramme de classe
 
 image::diagramme_classe.png[]
