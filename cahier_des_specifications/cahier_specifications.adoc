@@ -163,6 +163,14 @@ Feature "Voir les points fusionnés"
 
 image::DS_points_collapses.png[]
 
+Feature "Voir Informations d'un Item"
+
+image::DS_informations_item.PNG[]
+
+Feature "Declarer un Objet Trouvé"
+
+image::DS_ajout_objet_trouve.PNG[]
+
 
 
 
