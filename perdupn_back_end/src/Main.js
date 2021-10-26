@@ -87,6 +87,6 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
     var objetTrouve = new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
     return objetTrouve;
 }
-module.exports = {createPositionUser,affichageObjetProche}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve}
 
 
