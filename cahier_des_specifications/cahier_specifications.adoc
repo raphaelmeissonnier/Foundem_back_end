@@ -122,6 +122,12 @@ Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
 Je remplis le formulaire détaillé.
 Je valide.
 
+image::Wireframe5.PNG[]
+L'utilisateur pourra distinguer les points sur la carte.
+Chaque point sur la carte correspondra à un objet perdu.
+L'utilisateur pourra avoir des informations sur l'objet perdu en question.
+L'utilisateur pourra centrer la map.
+
 === Diagramme de classe
 
 image::diagramme_classe.png[]
