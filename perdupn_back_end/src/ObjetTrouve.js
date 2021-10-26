@@ -8,7 +8,6 @@ class ObjetTrouve extends Objet
     {
         super(categorie, localisation, description, intitule, date, adresseMail);
         this.calculateur = new Calculateur();
-
     }
 
     getCategorie()
