@@ -4,9 +4,9 @@ const Calculateur = require('./Calculateur');
 
 class ObjetTrouve extends Objet
 {
-    constructor(categorie, localisation, description, intitule, date)
+    constructor(categorie, localisation, description, intitule, date, adresseMail)
     {
-        super(categorie, localisation, description, intitule, date);
+        super(categorie, localisation, description, intitule, date, adresseMail);
         this.calculateur = new Calculateur();
 
     }
