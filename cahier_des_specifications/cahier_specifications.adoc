@@ -113,6 +113,21 @@ Je suis redirigé vers la page d'accueil.
 image::Wireframe3.PNG[]
 Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
+image::Wireframe4.PNG[]
+J'ai trouvé un objet perdu.
+Je signale cet objet sur l'application web Found'Em.
+Je suis sur la page d'accueil Home de Found'em.
+Je clique sur le bouton "J'ai trouvé un objet".
+Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+Je remplis le formulaire détaillé.
+Je valide.
+
+image::Wireframe5.PNG[]
+L'utilisateur pourra distinguer les points sur la carte.
+Chaque point sur la carte correspondra à un objet perdu.
+L'utilisateur pourra avoir des informations sur l'objet perdu en question.
+L'utilisateur pourra centrer la map.
+
 === Diagramme de classe
 
 image::diagramme_classe.png[]
@@ -147,6 +162,14 @@ image::DS_objets_plus_proches.png[]
 Feature "Voir les points fusionnés"
 
 image::DS_points_collapses.png[]
+
+Feature "Voir Informations d'un Item"
+
+image::DS_informations_item.PNG[]
+
+Feature "Declarer un Objet Trouvé"
+
+image::DS_ajout_objet_trouve.PNG[]
 
 
 

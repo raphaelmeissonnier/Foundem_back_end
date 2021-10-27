@@ -8,32 +8,33 @@ enum Categorie
     CLES
     VETEMENTS
 }
-class Calculateur
+interface Calculateur
 {
-    +getDistanceLocalisationFloue(in locUser : LocalisationPrecise, loc : LocalisationFloue) : void
-    +getDistanceLocalisationPrecise(in locUser : LocalisationPrecise, loc : LocalisationPrecise) : void
+    getDistance(in locUser : LocalisationPrecise, loc : Localisation) : void
+}
+class CalculateurFloue
+{
+    +getDistance(in locUser : LocalisationPrecise, loc : LocalisationFloue) : void
+}
+class CalculateurPrecis
+{
+    +getDistance(in locUser : LocalisationPrecise, loc : LocalisationPrecise) : void
 }
 interface Item
 {
-    +getLocalisation() : Localisation
-    +getCategorie() : Categorie
 }
 class ObjetTrouve
 {
     -Localisation l
     -Categorie c
-    +ObjetTrouve(in l : Localisation, c : Categorie) : void
-    +getCategorie() : Categorie
-    +getLocalisation() : Localisation
+    +ObjetTrouve(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
     +getDistance(in l : LocalisationPrecise) : Calculateur
 }
 class ObjetPerdu
 {
     -Localisation l
     -Categorie c
-    +ObjetPerdu(in l : Localisation, c : Categorie) : void
-    +getCategorie() : Categorie
-    +getLocalisation() : Localisation
+    +ObjetPerdu(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
     +getDistance(in l : LocalisationPrecise) : Calculateur
 }
 class Position
@@ -41,24 +42,18 @@ class Position
     - double longitude
     - double latitude
     + Position(in longitude : double, latitude : double)
-    + getLongitude() : double
-    + getLatitude() : double
 }
 interface Localisation
 {
     +Localisation(in p : Position): void
-    +getPosition(): Position
 }
 class LocalisationPrecise
 {
     +LocalisationPrecise(in p : Position): void
-    +getPosition(): Position
 }
 class LocalisationFloue
 {
-    +Localisation(in p : Position, r : double): void
-    +getPosition(): Position
-    +getRayon(): double
+    +LocalisationFloue(in p : Position, r : double): void
 }
 
 
@@ -71,7 +66,6 @@ Categorie <.. ObjetPerdu
 Item <|.. ObjetPerdu
 Item <|.. ObjetTrouve
 
-
 Localisation <|.. LocalisationPrecise
 Localisation <|.. LocalisationFloue
 
@@ -82,5 +76,8 @@ Position "1" <-- Localisation
 
 Calculateur "1" <-- ObjetTrouve
 Calculateur "1" <-- ObjetPerdu
+
+Calculateur <|.. CalculateurFloue
+Calculateur <|.. CalculateurPrecis
 
 @enduml
