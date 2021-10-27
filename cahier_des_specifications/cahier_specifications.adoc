@@ -131,7 +131,9 @@ image::diagramme_classe.png[]
 |GET
 /objets/:longitude/:latitude
 |La réponse retourne un tableau d'objets trié selon leur distance par rapport à l'utilisateur
-
+|POST
+/ajoutObjetTrouve
+|La requête envoie les informations d'un objet trouvé
 |===
 
 === Diagramme de séquence
