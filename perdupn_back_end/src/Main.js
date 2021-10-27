@@ -80,6 +80,13 @@ function affichageObjetProche(longitudeUser,latitudeUser){
     return JSON.stringify([...mapSort2]);
 }
 
-module.exports = {createPositionUser,affichageObjetProche}
+function ajoutObjetTrouve(intitule, description, categorie, date, longitude, latitude, adresseMail)
+{
+    var position = new Position(longitude, latitude);
+    var localisation = new LocalisationPrecise(position);
+    var objetTrouve = new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
+    return objetTrouve;
+}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve}
 
 
