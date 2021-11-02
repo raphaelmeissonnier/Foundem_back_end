@@ -39,11 +39,11 @@ function creationObjet(){
     var localisationObjetTrouve4 = new LocalisationPrecise(positionObjetTrouve4);
     var localisationObjetTrouve5 = new LocalisationPrecise(positionObjetTrouve5);
 
-    var ObjetPerdu1 = new ObjetPerdu("clés", localisationObjetPerdu1,"Clé de maison perdu pres de Dreux", "Mes Clés", Date.now());
-    var ObjetPerdu2 = new ObjetPerdu("téléphone", localisationObjetPerdu2,"Iphone X perdu a Nanterre", "Iphone X", Date.now());
-    var ObjetPerdu3 = new ObjetPerdu("écouteurs", localisationObjetPerdu3,"AirPods perdu près de Porte de la Chapelle", "AirPods", Date.now());
-    var ObjetPerdu4 = new ObjetPerdu("peluche", localisationObjetPerdu4,"Mon Enfant a perdu sa peluche a DisneyLand, sa peluche ressemble a Mickey", "Peluche Mickey", Date.now());
-    var ObjetPerdu5 = new ObjetPerdu("bonnet", localisationObjetPerdu5,"Bonnet Lacoste", "Bonnet Lacoste", Date.now());
+    var ObjetPerdu1 = new ObjetPerdu("hightech", localisationObjetPerdu1,"Clé de maison perdu pres de Dreux", "Mes Clés", Date.now());
+    var ObjetPerdu2 = new ObjetPerdu("hightech", localisationObjetPerdu2,"Iphone X perdu a Nanterre", "Iphone X", Date.now());
+    var ObjetPerdu3 = new ObjetPerdu("hightech", localisationObjetPerdu3,"AirPods perdu près de Porte de la Chapelle", "AirPods", Date.now());
+    var ObjetPerdu4 = new ObjetPerdu("autres", localisationObjetPerdu4,"Mon Enfant a perdu sa peluche a DisneyLand, sa peluche ressemble a Mickey", "Peluche Mickey", Date.now());
+    var ObjetPerdu5 = new ObjetPerdu("garde_robe", localisationObjetPerdu5,"Bonnet Lacoste", "Bonnet Lacoste", Date.now());
 
     var ObjetTrouve1 = new ObjetTrouve("clés", localisationObjetTrouve1, "Trousseau de clés trouvés à la sortie d'un magasin.", "3 clés avec un badge", Date.now());
     var ObjetTrouve2 = new ObjetTrouve("téléphone", localisationObjetTrouve2, "Iphone 7 avec une coque bleue trouvé sur un banc d'arrêt de bus", "Iphone 7",Date.now() );
@@ -87,6 +87,25 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
     var objetTrouve = new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
     return objetTrouve;
 }
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve}
+
+function chercherObjetPerdu(intitule, categorie, date){
+    var mapObjets=creationObjet();
+    var mapReturn= new Map();
+    console.log("Dans Chercher Objet Perdu Back")
+    for(var i=0; i<mapObjets.length; i++)
+    {
+        if(mapObjets[i] instanceof ObjetPerdu)
+        {
+            mapReturn.set(mapObjets[i]);
+        }
+        else{
+            break;
+        }    
+    }
+
+    console.log("MapReturn",mapReturn)
+    return JSON.stringify([...mapReturn]);
+}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu}
 
 
