@@ -26,9 +26,14 @@ router.post('/ajoutObjetTrouve', function(req, res, next) {
   console.log(main.ajoutObjetTrouve(req.body.intitule, req.body.description, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude, req.body.adresseMail));
 });
 
-router.get('/chercherObjetPerdu/:intitule/:categorie/:date', function(req, res, next) {
-  res.send(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date));
-  console.log(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date));
+router.get('/chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude', function(req, res, next) {
+  res.send(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date, req.params.longitude, req.params.latitude));
+  console.log(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date,req.params.longitude,req.params.latitude));
+});
+
+router.get('/toto', function(req, res, next) {
+  res.send(main.test());
+  //console.log(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date,req.params.longitude,req.params.latitude));
 });
 
 module.exports = router;

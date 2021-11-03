@@ -88,24 +88,49 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
     return objetTrouve;
 }
 
-function chercherObjetPerdu(intitule, categorie, date){
+function test()
+{
+    var str1 = "iphone"
+    var str2 = "Iphone X"
+    var str = new RegExp(str1,"gmi")
+    var res= str2.match(str);
+    console.log(res)
+    
+}
+
+function chercherObjetPerdu(intitule, categorie, date, longitude,latitude){
     var mapObjets=creationObjet();
-    var mapReturn= new Map();
+    var mapObjetsTrouve= new Map();
+    var intitule_reg=new RegExp(intitule,"gmi")
+    var cptVal=0;
     console.log("Dans Chercher Objet Perdu Back")
     for(var i=0; i<mapObjets.length; i++)
     {
-        if(mapObjets[i] instanceof ObjetPerdu)
+        if(mapObjets[i] instanceof ObjetTrouve)
         {
-            mapReturn.set(mapObjets[i]);
+            if(mapObjets[i].categorie==categorie){
+                cptVal+=4;
+            }
+            if(mapObjets[i].intitule.match(intitule_reg)){
+                cptVal+=2;
+            }
+            var d1=mapObjets[i].getLocalisation();
+            var d2= d1.getPosition();
+            var rayon=10;
+            let distance = Math.sqrt((Math.pow(( d2.getLongitude() - longitude), 2)) + (Math.pow((d2.getLatitude() - latitude), 2))) - rayon;
+            if(distance < 0)
+            {
+                cptVal+=3;
+            }
         }
         else{
             break;
         }    
     }
 
-    console.log("MapReturn",mapReturn)
-    return JSON.stringify([...mapReturn]);
+    console.log("MapReturn",mapObjetsTrouve)
+    return JSON.stringify([...mapObjetsTrouve]);
 }
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, test}
 
 
