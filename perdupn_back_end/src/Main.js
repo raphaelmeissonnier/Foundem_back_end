@@ -4,6 +4,8 @@ var LocalisationPrecise = require('./LocalisationPrecise');
 var LocalisationFloue = require('./LocalisationFloue');
 var ObjetTrouve = require('./ObjetTrouve');
 var ObjetPerdu = require('./ObjetPerdu');
+var haversine = require("haversine-distance");
+
 
 function createPositionUser(longitudeUser,latitudeUser){
     var positionUser = new Position(longitudeUser,latitudeUser);
@@ -98,17 +100,27 @@ function differenceDate(date1,date2)
     
 }
 
-function chercherObjetPerdu(intitule, categorie, date, longitude,latitude){
+/* Cette fonction permet de faire matcher un objet perdu avec une collection d'objets trouvés.
+   Elle renvoie un tableau d'objets trouvés.
+*/
+function chercherObjetPerdu(intitule, categorie, date, longitude, latitude){
+    //Longitude et latitude récupérées sont des string
+    pointObjetPerdu = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
+
+    //On récupère la collection d'objets
     var mapObjets=creationObjet();
+
     var mapObjetsTrouve= new Map();
     var intitule_reg=new RegExp(intitule,"gmi")
     var cptVal=0;
-    console.log("Dans Chercher Objet Perdu Back")
-    console.log(date)
+
+    //La date récupérée est un string
     var tDate = new Date(date);
+
+    //On parcourt la collection des objets ....
     for(var i=0; i<mapObjets.length; i++)
     {
-        console.log("Type de Mapobjet",mapObjets[i] instanceof ObjetTrouve);
+        // ... si un objet dans cette collection est un objet trouvé alors on procède au matching
         if(mapObjets[i] instanceof ObjetTrouve)
         {
             if(mapObjets[i].getCategorie()==categorie){
@@ -117,30 +129,36 @@ function chercherObjetPerdu(intitule, categorie, date, longitude,latitude){
             if(mapObjets[i].getIntitule().match(intitule_reg)){
                 cptVal+=2;
             }
+            //On récupère la position de l'objet trouvé
             var d1=mapObjets[i].getLocalisation();
             var d2= d1.getPosition();
             var rayon=10; //en KM
-            let distance = Math.sqrt((Math.pow(( d2.getLongitude() - longitude), 2)) + (Math.pow((d2.getLatitude() - latitude), 2))) - rayon;
-            console.log("DISTANCE #####", distance)
-            if(distance < 0)
+            var pointObjetTrouve = { lat: d2.getLatitude(), lng: d2.getLongitude() }
+
+            //Cette formule permet de calculer la distance entre l'objet perdu et le ième objet trouvé
+            var distance = (haversine(pointObjetPerdu, pointObjetTrouve))/1000; //Results in meters (default)
+
+            if(distance < rayon)
             {
                 cptVal+=3;
             }
+
             if(differenceDate(tDate,mapObjets[i].getDate())<15){
                 cptVal+=1
             }
 
+            /*Si l'évaluation des critères dépasse la note de 6 points alors
+            l'objet trouvé est suceptible d'être celui recherché par l'utilisateur
+            */
             if(cptVal>=6){
                 mapObjetsTrouve.set(mapObjets[i]);
             }
             cptVal=0;          
         } 
     }
-    console.log(" ")
-    console.log(" Map Objets Trouve ")
-    //console.log("MapObjetsTrouve",mapObjetsTrouve)
     return JSON.stringify([...mapObjetsTrouve]);
 }
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, differenceDate}
+
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu}
 
 
