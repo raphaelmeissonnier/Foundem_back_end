@@ -39,17 +39,17 @@ function creationObjet(){
     var localisationObjetTrouve4 = new LocalisationPrecise(positionObjetTrouve4);
     var localisationObjetTrouve5 = new LocalisationPrecise(positionObjetTrouve5);
 
-    var ObjetPerdu1 = new ObjetPerdu("hightech", localisationObjetPerdu1,"Clé de maison perdu pres de Dreux", "Mes Clés", Date.now());
-    var ObjetPerdu2 = new ObjetPerdu("hightech", localisationObjetPerdu2,"Iphone X perdu a Nanterre", "Iphone X", Date.now());
-    var ObjetPerdu3 = new ObjetPerdu("hightech", localisationObjetPerdu3,"AirPods perdu près de Porte de la Chapelle", "AirPods", Date.now());
-    var ObjetPerdu4 = new ObjetPerdu("autres", localisationObjetPerdu4,"Mon Enfant a perdu sa peluche a DisneyLand, sa peluche ressemble a Mickey", "Peluche Mickey", Date.now());
-    var ObjetPerdu5 = new ObjetPerdu("garde_robe", localisationObjetPerdu5,"Bonnet Lacoste", "Bonnet Lacoste", Date.now());
+    var ObjetPerdu1 = new ObjetPerdu("High-Tech", localisationObjetPerdu1,"Clé de maison perdu pres de Dreux", "Mes Clés", new Date('2021-11-02'));
+    var ObjetPerdu2 = new ObjetPerdu("High-Tech", localisationObjetPerdu2,"Iphone X perdu a Nanterre", "Iphone X", new Date('2021-04-02'));
+    var ObjetPerdu3 = new ObjetPerdu("High-Tech", localisationObjetPerdu3,"AirPods perdu près de Porte de la Chapelle", "AirPods", new Date('2021-10-02'));
+    var ObjetPerdu4 = new ObjetPerdu("Autres", localisationObjetPerdu4,"Mon Enfant a perdu sa peluche a DisneyLand, sa peluche ressemble a Mickey", "Peluche Mickey", new Date('2021-10-25'));
+    var ObjetPerdu5 = new ObjetPerdu("Garde-Robe", localisationObjetPerdu5,"Bonnet Lacoste", "Bonnet Lacoste", new Date('2021-09-02'));
 
-    var ObjetTrouve1 = new ObjetTrouve("clés", localisationObjetTrouve1, "Trousseau de clés trouvés à la sortie d'un magasin.", "3 clés avec un badge", Date.now());
-    var ObjetTrouve2 = new ObjetTrouve("téléphone", localisationObjetTrouve2, "Iphone 7 avec une coque bleue trouvé sur un banc d'arrêt de bus", "Iphone 7",Date.now() );
-    var ObjetTrouve3 = new ObjetTrouve("écouteurs", localisationObjetTrouve3, "AirPods de couleur blanc trouvé avec leur étui", "AirPods blanc", Date.now());
-    var ObjetTrouve4 = new ObjetTrouve("peluche", localisationObjetTrouve4, "Peluche en forme de lapin de couleur marron", "Peluche marron", Date.now());
-    var ObjetTrouve5 = new ObjetTrouve("bonnet", localisationObjetTrouve5, "Bonnet noir de marque Lacoste", "Bonnet noir", Date.now());
+    var ObjetTrouve1 = new ObjetTrouve("Autres", localisationObjetTrouve1, "Trousseau de clés trouvés à la sortie d'un magasin.", "3 clés avec un badge", new Date('2021-11-01'));
+    var ObjetTrouve2 = new ObjetTrouve("High-Tech", localisationObjetTrouve2, "Iphone 7 avec une coque bleue trouvé sur un banc d'arrêt de bus", "Iphone 7",new Date('2021-07-02') );
+    var ObjetTrouve3 = new ObjetTrouve("High-Tech", localisationObjetTrouve3, "AirPods de couleur blanc trouvé avec leur étui", "AirPods blanc", new Date('2021-02-15'));
+    var ObjetTrouve4 = new ObjetTrouve("Autres", localisationObjetTrouve4, "Peluche en forme de lapin de couleur marron", "Peluche marron", new Date('2021-03-30'));
+    var ObjetTrouve5 = new ObjetTrouve("Garde-Robe", localisationObjetTrouve5, "Bonnet noir de marque Lacoste", "Bonnet noir", new Date('2021-10-02'));
 
     var tableauObjets = [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 
@@ -88,13 +88,13 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
     return objetTrouve;
 }
 
-function test()
+function differenceDate(date1,date2)
 {
-    var str1 = "iphone"
-    var str2 = "Iphone X"
-    var str = new RegExp(str1,"gmi")
-    var res= str2.match(str);
-    console.log(res)
+    //const today = new Date(new Date().toISOString().slice(0,10));
+    //const x = new Date('2021-11-02');
+    const diffTime = Math.abs(date1-date2);
+    const diffDate = Math.ceil(diffTime/(1000*60*60*24));
+    console.log("Diff Date",diffDate)
     
 }
 
@@ -104,33 +104,43 @@ function chercherObjetPerdu(intitule, categorie, date, longitude,latitude){
     var intitule_reg=new RegExp(intitule,"gmi")
     var cptVal=0;
     console.log("Dans Chercher Objet Perdu Back")
+    console.log(date)
+    var tDate = new Date(date);
     for(var i=0; i<mapObjets.length; i++)
     {
+        console.log("Type de Mapobjet",mapObjets[i] instanceof ObjetTrouve);
         if(mapObjets[i] instanceof ObjetTrouve)
         {
-            if(mapObjets[i].categorie==categorie){
+            if(mapObjets[i].getCategorie()==categorie){
                 cptVal+=4;
             }
-            if(mapObjets[i].intitule.match(intitule_reg)){
+            if(mapObjets[i].getIntitule().match(intitule_reg)){
                 cptVal+=2;
             }
             var d1=mapObjets[i].getLocalisation();
             var d2= d1.getPosition();
-            var rayon=10;
+            var rayon=10; //en KM
             let distance = Math.sqrt((Math.pow(( d2.getLongitude() - longitude), 2)) + (Math.pow((d2.getLatitude() - latitude), 2))) - rayon;
+            console.log("DISTANCE #####", distance)
             if(distance < 0)
             {
                 cptVal+=3;
             }
-        }
-        else{
-            break;
-        }    
-    }
+            if(differenceDate(tDate,mapObjets[i].getDate())<15){
+                cptVal+=1
+            }
 
-    console.log("MapReturn",mapObjetsTrouve)
+            if(cptVal>=6){
+                mapObjetsTrouve.set(mapObjets[i]);
+            }
+            cptVal=0;          
+        } 
+    }
+    console.log(" ")
+    console.log(" Map Objets Trouve ")
+    //console.log("MapObjetsTrouve",mapObjetsTrouve)
     return JSON.stringify([...mapObjetsTrouve]);
 }
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, test}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, differenceDate}
 
 

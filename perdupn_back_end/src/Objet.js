@@ -28,6 +28,14 @@ class Objet
     {
         return this.localisation;
     }
+
+    getIntitule(){
+        return this.intitule;
+    }
+
+    getDate(){
+        return this.date;
+    }
 }
 
 module.exports = Objet;

@@ -32,7 +32,7 @@ router.get('/chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude'
 });
 
 router.get('/toto', function(req, res, next) {
-  res.send(main.test());
+  res.send(main.differenceDate());
   //console.log(main.chercherObjetPerdu(req.params.intitule, req.params.categorie, req.params.date,req.params.longitude,req.params.latitude));
 });
 

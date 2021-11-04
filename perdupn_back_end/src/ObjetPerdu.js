@@ -19,6 +19,14 @@ class ObjetPerdu extends Objet
         return super.getLocalisation();
     }
 
+    getDate(){
+        return super.getDate();
+    }
+
+    getIntitule(){
+        return super.getIntitule();
+    }
+
     //PB AU NIVEAU DU RETOUR
     getDistance(localisationUser)
     {
