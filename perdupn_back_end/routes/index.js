@@ -26,4 +26,10 @@ router.post('/ajoutObjetTrouve', function(req, res, next)
   console.log(main.ajoutObjetTrouve(req.body.intitule, req.body.description, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude, req.body.adresseMail));
 });
 
+router.post('/ajoutObjetPerdu', function(req, res, next) {
+  res.send(main.ajoutObjetPerdu(req.body.intitule, req.body.description, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude, req.body.adresseMail, req.body.rayon));
+  console.log(main.ajoutObjetPerdu(req.body.intitule, req.body.description, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude, req.body.adresseMail, req.body.rayon));
+});
+
+
 module.exports = router;
