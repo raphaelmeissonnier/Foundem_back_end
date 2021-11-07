@@ -20,6 +20,14 @@ class ObjetTrouve extends Objet
         return super.getLocalisation();
     }
 
+    getDate(){
+        return super.getDate();
+    }
+
+    getIntitule(){
+        return super.getIntitule();
+    }
+
     getDistance(localisationUser)
     {
         return this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation);

@@ -4,7 +4,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=security_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 
 # Found'Em
-Avec Found'EM, tous vos objets perdus sont e-retrouvés !
+_Avec Found'EM, tous vos objets perdus sont e-retrouvés !_
 
 
 # Comment lancer l'application ? 
