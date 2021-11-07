@@ -18,7 +18,7 @@ router.get('/objets/:longitude/:latitude', function(req, res, next) {
 
 router.post('/localisation', function(req, res, next) {
   res.send(main.createPositionUser(req.body.longitude,req.body.latitude));
-  console.log(main.createPositionUser(req.body.longitude,req.body.latiztude));
+  console.log(main.createPositionUser(req.body.longitude,req.body.latitude));
 
 });
 
