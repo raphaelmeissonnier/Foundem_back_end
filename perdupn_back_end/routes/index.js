@@ -3,7 +3,7 @@ var router = express.Router();
 var AjoutObjetTrouve = require('../src/AjoutObjetTrouve');
 var main = require("../src/Main");
 
-import sanitizeHtml from "sanitize-html";
+const sanitizeHtml = require('sanitize-html');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,13 +18,13 @@ router.get('/objets/:longitude/:latitude', function(req, res, next) {
 
 router.post('/localisation', function(req, res, next) {
   res.send(main.createPositionUser(req.body.longitude,req.body.latitude));
-  console.log(main.createPositionUser(req.body.longitude,req.body.latitude));
+  console.log(main.createPositionUser(req.body.longitude,req.body.latiztude));
 
 });
 
 router.post('/ajoutObjetTrouve', function(req, res, next)
 {
-  res.send(main.ajoutObjetTrouve(sanitizeHtml(req.body.intitule), sanitizeHtml(req.body.description), sanitizeHtml(req.body.categorie), sanitizeHtml(req.body.date), sanitizeHtml(req.body.longitude), sanitizeHtml(req.body.latitude), sanitizeHtml(req.body.adresseMail)));
+  res.send(main.ajoutObjetTrouve(sanitizeHtml(req.body.intitule), sanitizeHtml(req.body.description), sanitizeHtml(req.body.categorie), sanitizeHtml(req.body.date), req.body.longitude, req.body.latitude, sanitizeHtml(req.body.adresseMail)));
   console.log(main.ajoutObjetTrouve(req.body.intitule, req.body.description, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude, req.body.adresseMail));
 });
 
