@@ -22,8 +22,6 @@ class ObjetTrouve extends Objet
 
     getDistance(localisationUser)
     {
-        //this.calculateur.setDistance(this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation));
-        //return this.calculateur;
         return this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation);
     }
 }
