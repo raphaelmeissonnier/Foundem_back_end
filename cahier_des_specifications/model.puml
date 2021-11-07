@@ -7,53 +7,66 @@ enum Categorie
     HIGH-TECH
     CLES
     VETEMENTS
+    GARDE-ROBE
 }
+
+class Matcher
+{
+    + this(evaluation: integer): Matcher
+    + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation): Matcher
+}
+
 interface Calculateur
 {
-    getDistance(in locUser : LocalisationPrecise, loc : Localisation) : void
+    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: Localisation): Calculateur
 }
-class CalculateurFloue
+
+class CalculateurFlou
 {
-    +getDistance(in locUser : LocalisationPrecise, loc : LocalisationFloue) : void
+    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): CalculateurFlou
 }
+
 class CalculateurPrecis
 {
-    +getDistance(in locUser : LocalisationPrecise, loc : LocalisationPrecise) : void
+    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationPrecise): CalculateurPrecis
 }
+
 interface Item
 {
+    +getDistance(localisationUser: Localisation, localisationObjet: Localisation) : Calculateur
 }
+
 class ObjetTrouve
 {
-    -Localisation l
-    -Categorie c
-    +ObjetTrouve(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
-    +getDistance(in l : LocalisationPrecise) : Calculateur
+    +this(localisation: LocalisationPrecise, calculateur: CalculateurPrecis, matcher: Matcher, categorie: Categorie, description: string, intitule: string, date: Date, adresseMail: string): ObjetTrouve
+    +getDistance(localisationUser: Localisation, localisationObjet: LocalisationPrecise) : CalculateurPrecis
 }
+
 class ObjetPerdu
 {
-    -Localisation l
-    -Categorie c
-    +ObjetPerdu(in l : Localisation, c : Categorie, description : String, intitule : String, date : Date) : void
-    +getDistance(in l : LocalisationPrecise) : Calculateur
+    +this(localisation: LocalisationFloue, calculateur: CalculateurFlou, matcher: Matcher, categorie: Categorie, description: string, intitule: string, date: Date, adresseMail: string): ObjetPerdu
+    +getDistance(localisationUser: Localisation, localisationObjet: LocalisationFloue) : CalculateurFlou
 }
+
 class Position
 {
     - double longitude
     - double latitude
-    + Position(in longitude : double, latitude : double)
+    + this(longitude : double, latitude : double): Position
 }
+
 interface Localisation
 {
-    +Localisation(in p : Position): void
 }
+
 class LocalisationPrecise
 {
-    +LocalisationPrecise(in p : Position): void
+    +this(position : Position): LocalisationPrecise
 }
+
 class LocalisationFloue
 {
-    +LocalisationFloue(in p : Position, r : double): void
+    +this(position : Position, rayon : double): LocalisationFloue
 }
 
 
@@ -77,7 +90,7 @@ Position "1" <-- Localisation
 Calculateur "1" <-- ObjetTrouve
 Calculateur "1" <-- ObjetPerdu
 
-Calculateur <|.. CalculateurFloue
+Calculateur <|.. CalculateurFlou
 Calculateur <|.. CalculateurPrecis
 
 @enduml
