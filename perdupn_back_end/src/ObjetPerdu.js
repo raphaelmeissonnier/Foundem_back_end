@@ -30,8 +30,6 @@ class ObjetPerdu extends Objet
     //PB AU NIVEAU DU RETOUR
     getDistance(localisationUser)
     {
-        //calculateur = new Calculateur();
-        //return calculateur.getDistanceFloue(localisationUser, this.position);
         return this.calculateur.getDistanceLocalisationFloue(localisationUser, this.localisation);
     }
 }

@@ -12,6 +12,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "haversine-distance": "^1.2.1",
+    "express-validator": "^6.13.0",
     "http-errors": "~1.6.3",
     "jest": "^27.2.5",
     "lab": "^18.0.2",
@@ -19,6 +20,7 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "pug": "2.0.0-beta11",
+    "sanitize-html": "^2.5.3",
     "scanf": "^1.1.2",
     "sequelize": "^3.30.4"
   },

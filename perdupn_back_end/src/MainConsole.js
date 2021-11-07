@@ -18,7 +18,6 @@ var latitude = scanf('%f');
 //Création d'un user et de sa localisation
 let positionUser = new Position(longitude, latitude);
 let localisationUser = new LocalisationPrecise(positionUser);
-//console.log("Localisation user: ", localisationUser);
 
 
 //Création d'une collection d'objet trouvés
@@ -44,7 +43,6 @@ let objet5 = new ObjetPerdu("téléphone", localisationObjet5);
 let objet6 = new ObjetPerdu("bonnet", localisationObjet6);
 
 let tableauObjets = [objet1, objet2, objet3, objet4, objet5, objet6];
-//console.log("Tableau d'objets: ", tableauObjets);
 
 //Tableau d'objets + distance
 var mapObjetsDistance = new Map();
@@ -56,9 +54,11 @@ for(var i=0; i<tableauObjets.length; i++)
     {
         mapObjetsDistance.set(tableauObjets[i], tableauObjets[i].getDistance(localisationUser));
     }
-    break;
+    else
+    {
+        break;
+    }
 }
-//console.log('Distance entre user et objets =', mapObjetsDistance);
 
 //Trier le tableau d'objets + distance
 const mapSort2 = new Map([...mapObjetsDistance.entries()].sort((a, b) => a[1] - b[1]));

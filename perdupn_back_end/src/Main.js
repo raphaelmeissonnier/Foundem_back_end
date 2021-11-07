@@ -9,9 +9,7 @@ var haversine = require("haversine-distance");
 
 function createPositionUser(longitudeUser,latitudeUser){
     var positionUser = new Position(longitudeUser,latitudeUser);
-    var loca = new LocalisationPrecise(positionUser)
-
-    return loca;
+    return new LocalisationPrecise(positionUser);
 }
 
 function creationObjet(){
@@ -53,9 +51,7 @@ function creationObjet(){
     var ObjetTrouve4 = new ObjetTrouve("Autres", localisationObjetTrouve4, "Peluche en forme de lapin de couleur marron", "Peluche marron", new Date('2021-03-30'));
     var ObjetTrouve5 = new ObjetTrouve("Garde-Robe", localisationObjetTrouve5, "Bonnet noir de marque Lacoste", "Bonnet noir", new Date('2021-10-02'));
 
-    var tableauObjets = [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
-
-    return tableauObjets;
+    return [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 }
 
 function affichageObjetProche(longitudeUser,latitudeUser){
@@ -86,8 +82,14 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
 {
     var position = new Position(longitude, latitude);
     var localisation = new LocalisationPrecise(position);
-    var objetTrouve = new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
-    return objetTrouve;
+    return new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
+}
+
+function ajoutObjetPerdu(intitule, description, categorie, date, longitude, latitude, adresseMail, rayon)
+{
+    var position = new Position(longitude, latitude);
+    var localisation = new LocalisationFloue(position, rayon);
+    return new ObjetPerdu(categorie, localisation, description, intitule, date, adresseMail);
 }
 
 function differenceDate(date1,date2)
@@ -160,5 +162,7 @@ function chercherObjetPerdu(intitule, categorie, date, longitude, latitude){
 }
 
 module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu}
+
+
 
 

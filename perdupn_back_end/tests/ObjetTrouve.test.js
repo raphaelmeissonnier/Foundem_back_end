@@ -20,7 +20,6 @@ describe('../src/ObjetTrouve', () => {
         const position = new Position(12,25)
         const localisation = new LocalisationPrecise(position);
         const objetTrouve = new ObjetTrouve("toto",localisation);
-        //expect(Calculateur).toHaveBeenCalledTimes(1);
         expect(Calculateur).toHaveBeenCalledTimes(1);
     });
 });
