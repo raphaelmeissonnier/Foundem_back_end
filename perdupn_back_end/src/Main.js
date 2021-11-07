@@ -7,9 +7,7 @@ var ObjetPerdu = require('./ObjetPerdu');
 
 function createPositionUser(longitudeUser,latitudeUser){
     var positionUser = new Position(longitudeUser,latitudeUser);
-    var loca = new LocalisationPrecise(positionUser)
-
-    return loca;
+    return new LocalisationPrecise(positionUser);
 }
 
 function creationObjet(){
@@ -51,9 +49,7 @@ function creationObjet(){
     var ObjetTrouve4 = new ObjetTrouve("peluche", localisationObjetTrouve4, "Peluche en forme de lapin de couleur marron", "Peluche marron", Date.now());
     var ObjetTrouve5 = new ObjetTrouve("bonnet", localisationObjetTrouve5, "Bonnet noir de marque Lacoste", "Bonnet noir", Date.now());
 
-    var tableauObjets = [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
-
-    return tableauObjets;
+    return [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 }
 
 function affichageObjetProche(longitudeUser,latitudeUser){
@@ -84,8 +80,7 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
 {
     var position = new Position(longitude, latitude);
     var localisation = new LocalisationPrecise(position);
-    var objetTrouve = new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
-    return objetTrouve;
+    return new ObjetTrouve(categorie, localisation, description, intitule, date, adresseMail);
 }
 module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve}
 
