@@ -3,9 +3,11 @@ pipeline {
     stages {
         stage('Trigger')
         {
-            triggers 
-            {
-                githubPush()
+            steps{
+                triggers 
+                {
+                    githubPush()
+                }
             }
         }
         stage('Build') {
