@@ -4,9 +4,9 @@ pipeline {
     {
         githubPush()
     }
-    dir('perdupn_back_end'){}
     stages {
         stage('Build') {
+            dir('perdupn_back_end'){}
             steps {
                 bat 'npm install'
             }
