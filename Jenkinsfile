@@ -20,7 +20,6 @@ pipeline {
                dir('perdupn_back_end')
                {
                    bat 'npm test'
-                   bat 'npm run coveralls'
                }
             }
         }
