@@ -177,23 +177,27 @@ image::diagrammes/classe/diagramme_classe.png[]
 
 Feature "Localiser l'utilisateur"
 
-image::DS_localisation_user.png[]
+image::diagrammes/séquences/DS_localisation_user.png[width=600,height=400]
 
 Feature "Afficher les objets les plus proches"
 
-image::DS_objets_plus_proches.png[]
+image::diagrammes/séquences/DS_objets_plus_proches.png[width=600,height=400]
 
 Feature "Voir les points fusionnés"
 
-image::DS_points_collapses.png[]
+image::diagrammes/séquences/DS_points_collapses.png[]
 
 Feature "Voir Informations d'un Item"
 
-image::DS_informations_item.PNG[]
+image::diagrammes/séquences/DS_informations_item.PNG[width=400,height=300]
 
 Feature "Declarer un Objet Trouvé"
 
-image::DS_ajout_objet_trouve.PNG[]
+image::diagrammes/séquences/DS_ajout_objet_trouve.PNG[]
+
+Feature "Rechercher un Objet Perdu"
+
+image::diagrammes/séquences/DS_recherche_items.PNG[]
 
 
 

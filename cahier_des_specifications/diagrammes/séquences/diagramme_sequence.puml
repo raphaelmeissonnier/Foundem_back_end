@@ -4,10 +4,12 @@
 autonumber
 
 actor User
-User --> Front: clique sur bouton 'J'ai perdu un objet'
-Front --> Front: affiche formulaire
-User --> Front: clique sur le bouton 'Valider'
-Front --> Back: fetch(/ajoutObjetPerdu)
-Back --> Back: new ObjetPerdu(intitule, description, adresse, date, adresseMail)
+User --> Front: clique sur bouton 'Rechercher un objet'
+Front --> Front: affiche formulaire de recherche
+User --> Front: clique sur le bouton 'Rechercher'
+Front --> Back: fetch(/chercheObjetPerdu/:intiutle/:categorie/:date/:longitude/:latitude)
+Back --> Back: chercherObjetPerdu(intitule, categorie, date, longitude, latitude)
+Back --> Front: return Items[]
+Front --> Front: Affichage Items 
 
 @enduml
