@@ -10,7 +10,6 @@ pipeline {
                 dir('perdupn_back_end')
                 {
                     bat 'npm install'
-                    echo 'on est dans sous folder'
                 }
             }
         }
@@ -18,8 +17,11 @@ pipeline {
         {
             steps
             {
-               bat 'npm test'
-               bat 'npm run coveralls'
+               dir('perdupn_back_end')
+               {
+                   bat 'npm test'
+                   bat 'npm run coveralls'
+               }
             }
         }
     }
