@@ -15,6 +15,7 @@ pipeline {
         {
             steps
             {
+               bat 'npm test'
                bat 'npm run coveralls'
             }
         }
