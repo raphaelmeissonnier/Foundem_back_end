@@ -99,6 +99,7 @@ function differenceDate(date1,date2)
     const diffTime = Math.abs(date1-date2);
     const diffDate = Math.ceil(diffTime/(1000*60*60*24));
     console.log("Diff Date",diffDate)
+    return diffDate;
     
 }
 
