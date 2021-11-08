@@ -4,8 +4,10 @@
 autonumber
 
 actor User
-User --> Front : Dézoome la carte
-Front --> Front : Fusion des points sur la carte
-
+User --> Front: clique sur bouton 'J'ai perdu un objet'
+Front --> Front: affiche formulaire
+User --> Front: clique sur le bouton 'Valider'
+Front --> Back: fetch(/ajoutObjetPerdu)
+Back --> Back: new ObjetPerdu(intitule, description, adresse, date, adresseMail)
 
 @enduml

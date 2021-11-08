@@ -146,7 +146,7 @@ Des résultats correspondant aux informations s'affichent.
 
 === Diagramme de classe
 
-image::diagramme_classe.png[]
+image::{diagrammes}/{classe}/diagramme_classe.png[]
 
 === Description de l'API
 
