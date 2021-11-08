@@ -6,8 +6,8 @@ pipeline {
     }
     stages {
         stage('Build') {
-            dir('perdupn_back_end'){}
             steps {
+                dir('perdupn_back_end'){}
                 bat 'npm install'
             }
         }
