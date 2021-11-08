@@ -1,10 +1,10 @@
 pipeline {
     agent any
+    triggers 
+    {
+        githubPush()
+    }
     stages {
-        triggers 
-        {
-            githubPush()
-        }
         stage('Build') {
             steps {
                 bat 'cd perdupn_back_end'
