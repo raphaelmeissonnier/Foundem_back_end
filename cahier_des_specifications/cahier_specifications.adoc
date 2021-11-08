@@ -101,32 +101,48 @@ Nous pourrons également identifier les objets perdus grâce aux photos.
 
 === Maquette du front
 
-image::Wireframe1.PNG[]
+image::{wireframes}/Wireframe1.PNG[]
 Je clique sur le bouton "J'ai trouvé un objet".
 Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
 
-image::Wireframe2.PNG[]
+image::{wireframes}/Wireframe2.PNG[]
 Je remplis le formulaire détaillé.
 Je valide.
 Je suis redirigé vers la page d'accueil.
 
-image::Wireframe3.PNG[]
+image::{wireframes}/Wireframe3.PNG[]
 Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
-image::Wireframe4.PNG[]
+image::{wireframes}/Wireframe4.PNG[]
 J'ai trouvé un objet perdu.
 Je signale cet objet sur l'application web Found'Em.
 Je suis sur la page d'accueil Home de Found'em.
 Je clique sur le bouton "J'ai trouvé un objet".
-Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+Je suis redirigé sur une nouvelle page "J'ai trouvé un objet".
 Je remplis le formulaire détaillé.
 Je valide.
 
-image::Wireframe5.PNG[]
+image::{wireframes}/Wireframe5.PNG[]
 L'utilisateur pourra distinguer les points sur la carte.
 Chaque point sur la carte correspondra à un objet perdu.
 L'utilisateur pourra avoir des informations sur l'objet perdu en question.
 L'utilisateur pourra centrer la map.
+
+image::{wireframes}/Wireframe6.PNG[]
+L'utilisateur accède à la page d'accueil du site
+L'utilisateur clique sur le bouton 'J'ai perdu un objet"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur rempli le formulaire
+L'utilisateur valide les informations saisies en cliquant sur le bouton "Valider"
+
+image::{wireframes}/Wireframe7.PNG[]
+L'utilisateur accède à la page d'accueil du site
+L'utilisateur clique sur le bouton 'J'ai perdu un objet"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur accède au formulaire permettant de chercher un objet perdu.
+Il saisit un intitulé et coche des informations concernant l'objet.
+L'utilisateur valide sa recherche avec le bouton "rechercher".
+Des résultats correspondant aux informations s'affichent.
 
 === Diagramme de classe
 
@@ -145,8 +161,16 @@ image::diagramme_classe.png[]
 |La requête envoie la localisation de l'utilisateur
 |GET
 /objets/:longitude/:latitude
-|La réponse retourne un tableau d'objets trié selon leur distance par rapport à l'utilisateur
-
+|La réponse retourne un tableau d'objets triés selon leur distance par rapport à l'utilisateur
+|POST
+/ajoutObjetTrouve
+|La requête envoie les informations d'un objet trouvé saisies par l'utilisateur
+|POST
+/ajoutObjetPerdu
+|La requête envoie les informations d'un objet perdu saisies par l'utilisateur
+|GET
+/chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude
+|La réponse retourne une collection d'objets trouvés correspondant à des critères
 |===
 
 === Diagramme de séquence
