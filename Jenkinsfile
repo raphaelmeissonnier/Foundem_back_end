@@ -10,6 +10,7 @@ pipeline {
                 dir('perdupn_back_end')
                 {
                     bat 'npm install'
+                    echo 'on est dans sous folder'
                 }
             }
         }
