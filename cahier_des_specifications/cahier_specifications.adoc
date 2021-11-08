@@ -195,6 +195,10 @@ Feature "Declarer un Objet Trouvé"
 
 image::diagrammes/séquences/DS_ajout_objet_trouve.PNG[]
 
+Feature "Declarer un Objet Perdu"
+
+image::diagrammes/séquences/DS_ajout_objet_perdu.png[]
+
 Feature "Rechercher un Objet Perdu"
 
 image::diagrammes/séquences/DS_recherche_items.PNG[]
