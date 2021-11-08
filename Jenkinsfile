@@ -7,8 +7,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('perdupn_back_end'){}
-                bat 'npm install'
+                dir('perdupn_back_end')
+                {
+                    bat 'npm install'
+                }
             }
         }
         stage('Test')
