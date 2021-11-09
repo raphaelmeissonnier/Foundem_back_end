@@ -103,7 +103,7 @@ function differenceDate(date1,date2)
     
 }
 
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, differenceDate, creationObjet}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, differenceDate, creationObjet}
 
 
 
