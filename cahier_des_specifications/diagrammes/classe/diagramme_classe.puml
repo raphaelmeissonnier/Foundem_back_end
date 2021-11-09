@@ -11,13 +11,13 @@ enum Categorie
 }
 interface IMatcher
 {
-    + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation): Matcher
+    + matching(intitule: string, categorie: Categorie, date: Date, latitude: double, latitude: double): Matcher
 }
 
 class Matcher
 {
     + this(evaluation: integer): Matcher
-    + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation): Matcher
+    + matching(intitule: string, categorie: Categorie, date: Date, longitude: double, latitude: double): Matcher
 }
 
 interface Calculateur
