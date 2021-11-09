@@ -9,6 +9,10 @@ enum Categorie
     VETEMENTS
     GARDE-ROBE
 }
+interface IMatcher
+{
+    + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation): Matcher
+}
 
 class Matcher
 {
@@ -89,6 +93,10 @@ Position "1" <-- Localisation
 
 Calculateur "1" <-- ObjetTrouve
 Calculateur "1" <-- ObjetPerdu
+
+IMatcher <|.. Matcher
+IMatcher "1" <-- ObjetTrouve
+IMatcher "1" <-- ObjetPerdu
 
 Calculateur <|.. CalculateurFlou
 Calculateur <|.. CalculateurPrecis
