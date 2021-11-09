@@ -162,7 +162,7 @@ function chercherObjetPerdu(intitule, categorie, date, longitude, latitude){
     return JSON.stringify([...mapObjetsTrouve]);
 }
 
-module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu}
+module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, chercherObjetPerdu, differenceDate}
 
 
 
