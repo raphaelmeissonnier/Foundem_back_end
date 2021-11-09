@@ -11,7 +11,6 @@ class Objet
             this.description = description;
             this.intitule = intitule;
             this.date = date;
-            this.adresseMail = adresseMail;
         }
         else
         {
@@ -27,14 +26,6 @@ class Objet
     getLocalisation()
     {
         return this.localisation;
-    }
-
-    getIntitule(){
-        return this.intitule;
-    }
-
-    getDate(){
-        return this.date;
     }
 }
 
