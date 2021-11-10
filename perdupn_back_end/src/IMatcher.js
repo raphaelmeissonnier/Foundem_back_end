@@ -71,8 +71,5 @@ class IMatcher{
         return JSON.stringify([...mapObjetsTrouve]);
 
     }
-
-
-   
-
 }
+module.exports = IMatcher;
