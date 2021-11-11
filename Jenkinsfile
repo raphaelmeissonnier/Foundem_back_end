@@ -5,7 +5,6 @@ pipeline {
         githubPush()
     }
  
-    tools {NodeJS "node"}
     stages {
         stage('Build') {
             steps {
