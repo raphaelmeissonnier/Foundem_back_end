@@ -10,7 +10,7 @@ pipeline {
             steps {
                 dir('perdupn_back_end')
                 {
-                    nodejs(nodeJSInstallationName: 'node16')
+                    nodejs(nodeJSInstallationName: 'node')
                     {
                         sh 'npm install'
                     }
