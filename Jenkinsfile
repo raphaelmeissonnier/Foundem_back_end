@@ -9,7 +9,7 @@ pipeline {
             steps {
                 dir('perdupn_back_end')
                 {
-                    bat 'npm install'
+                    sh 'npm install'
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
             {
                dir('perdupn_back_end')
                {
-                   bat 'npm test'
+                   sh 'npm test'
                }
             }
         }
