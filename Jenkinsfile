@@ -5,15 +5,13 @@ pipeline {
         githubPush()
     }
  
+    tools {nodejs "node"}
     stages {
         stage('Build') {
             steps {
                 dir('perdupn_back_end')
                 {
-                    nodejs(nodeJSInstallationName: 'node')
-                    {
-                        sh 'npm install'
-                    }
+                    sh 'npm install'
                 }
             }
         }
