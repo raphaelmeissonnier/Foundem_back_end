@@ -4,7 +4,6 @@ pipeline {
     {
         githubPush()
     }
- 
     tools {nodejs "node"}
     stages {
         stage('Build') {
@@ -19,10 +18,10 @@ pipeline {
         {
             steps
             {
-               dir('perdupn_back_end')
-               {
-                   sh 'npm test'
-               }
+                dir('perdupn_back_end')
+                {
+                    sh 'npm test'
+                }
             }
         }
     }
