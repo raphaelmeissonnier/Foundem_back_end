@@ -10,7 +10,6 @@ pipeline {
                 dir('perdupn_back_end')
                 {
                     sh 'npm install'
-                    sh 'npm install jest'
                 }
             }
         }
