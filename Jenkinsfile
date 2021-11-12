@@ -11,7 +11,7 @@ pipeline {
             steps {
                 dir('perdupn_back_end')
                 {
-                    sh 'npm install'
+                    sh 'touch toto.txt'
                 }
             }
         }
