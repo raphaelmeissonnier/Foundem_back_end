@@ -25,7 +25,7 @@
     "sequelize": "^3.30.4"
   },
   "devDependencies": {
-    "codecov": "^3.8.3"
+    "codecov": "^3.8.3",
     "coveralls": "^3.1.1"
   }
 }
