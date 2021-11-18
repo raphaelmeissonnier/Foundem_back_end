@@ -54,18 +54,24 @@ function creationObjet(){
     return [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 }
 
-function affichageObjetProche(longitudeUser,latitudeUser){
+function affichageObjetProche(longitudeUser,latitudeUser, rayon){
     var mapObjets=creationObjet();
     var localisationUser = createPositionUser(longitudeUser,latitudeUser);
     var mapObjetsDistance = new Map();
-
 
     //Calcul de la distance entre le user et l'objet1
     for(var i=0; i<mapObjets.length; i++)
     {
         if(i<10)
         {
+            if(mapObjets[i] instanceof ObjetTrouve)
+            {
+                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser, rayon));
+            }
+            else
+            {
             mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
+            }
         }
         else{
             break;

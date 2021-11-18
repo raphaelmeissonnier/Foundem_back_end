@@ -7,7 +7,7 @@ class Calculateur
        this.foo="bar"
     }
 
-    getDistanceLocalisationPrecise(localisationUser, localisationObjet)
+    getDistanceLocalisationPrecise(localisationUser, localisationObjet, rayon)
     {
             if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
             {
@@ -25,8 +25,6 @@ class Calculateur
                 let positionObjet = localisationObjet.getPosition();
                 let longitudeObjet = positionObjet.getLongitude();
                 let latitudeObjet = positionObjet.getLatitude();
-
-                var rayon= 10; //en Km
 
                 var latitudeDis= latitudeObjet-latitudeUser;
                 var dLat= toRad(latitudeDis);
