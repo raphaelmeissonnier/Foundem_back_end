@@ -65,6 +65,7 @@ function affichageObjetProche(longitudeUser,latitudeUser, rayon){
         if(i<10 && mapObjets[i].getDistance(localisationUser)<=rayon)
         {
            console.log("Distance", mapObjets[i].getDistance(localisationUser))
+           mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
         }
     }
 
@@ -84,19 +85,19 @@ function ajoutObjetTrouve(intitule, description, categorie, date, longitude, lat
 
 function suggestionObjetPerdu(longitude,latitude){
     var mapObjets=creationObjet();
-    var localisationUser = createPositionUser(longitude, latitude);
+    //var localisationUser = createPositionUser(longitude, latitude);
     var mapObjetsSuggestion = new Map();
 
     for(var i=0; i<mapObjets.length; i++)
     {
-        if(i<10  && mapObjets[i] instanceof(ObjetPerdu) && mapObjets[i].getDistance(localisationUser)<20)
+        if(i<10  && mapObjets[i] instanceof(ObjetPerdu))
         {
            mapObjetsSuggestion.set(mapObjets[i]);
         }
     }
 
     const mapSort2 = new Map([...mapObjetsSuggestion.entries()].sort((a, b) => a[1] - b[1]));
-    console.log(JSON.stringify([...mapSort2]));
+    console.log("Tab envoyé dans le back ####",JSON.stringify([...mapSort2]));
 
     return JSON.stringify([...mapSort2]);
 
