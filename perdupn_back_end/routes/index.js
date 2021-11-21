@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.get('/objets/:longitude/:latitude', function(req, res, next) {
   console.log("longitude back",parseFloat(req.params.longitude))
   console.log("latitude back",parseFloat(req.params.latitude))
-  res.send(main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude)));
+  res.send(main.suggestionObjetPerdu(parseFloat(req.params.longitude),parseFloat(req.params.latitude)));
 });
 
 router.post('/localisation', function(req, res, next) {
