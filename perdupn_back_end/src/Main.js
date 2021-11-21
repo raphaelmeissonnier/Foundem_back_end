@@ -64,19 +64,8 @@ function affichageObjetProche(longitudeUser,latitudeUser, rayon){
     {
         if(i<10 && mapObjets[i].getDistance(localisationUser)<=rayon)
         {
-            if(mapObjets[i] instanceof ObjetTrouve)
-            {
-                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
-                console.log("Distance", mapObjets[i].getDistance(localisationUser))
-            }
-            else
-            {
-                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
-            }
+           console.log("Distance", mapObjets[i].getDistance(localisationUser))
         }
-        else{
-            break;
-        }    
     }
 
     const mapSort2 = new Map([...mapObjetsDistance.entries()].sort((a, b) => a[1] - b[1]));
