@@ -1,10 +1,13 @@
-<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"> [![Build Status](https://app.travis-ci.com/raphaelmeissonnier/perdUPN_back_end.svg?branch=main)](https://app.travis-ci.com/raphaelmeissonnier/perdUPN_back_end) [![Coverage Status](https://coveralls.io/repos/github/raphaelmeissonnier/perdUPN_back_end/badge.svg?branch=main)](https://coveralls.io/github/raphaelmeissonnier/perdUPN_back_end?branch=main) <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
+<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"> 
+[![Build Status](http://34.125.62.21:8080/buildStatus/icon?job=perdupn_back_end)](http://34.125.62.21:8080/job/perdupn_back_end/)
+[![codecov](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end/branch/main/graph/badge.svg?token=4ER74TX5HZ)](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end)
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=alert_status)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=security_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 
-# perdUPN
-Avec PerdUPN, tous vos objets perdus sont e-retrouvés !
+# Found'Em
+_Avec Found'EM, tous vos objets perdus sont e-retrouvés !
 
 
 # Comment lancer l'application ? 

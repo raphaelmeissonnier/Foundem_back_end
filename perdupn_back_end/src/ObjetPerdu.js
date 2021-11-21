@@ -1,12 +1,12 @@
 const Objet = require("./Objet");
-const CalculateurFloue = require("./CalculateurFloue");
+const Calculateur = require("./Calculateur");
 
 class ObjetPerdu extends Objet
 {
-    constructor(categorie, localisation, description, intitule, date)
+    constructor(categorie, localisation, description, intitule, date, adresseMail)
     {
-        super(categorie, localisation, description, intitule, date);
-        this.calculateur = new CalculateurFloue(); //Singleton in Calculateur constructor
+        super(categorie, localisation, description, intitule, date, adresseMail);
+        this.calculateur = new Calculateur();
     }
 
     getCategorie()
@@ -19,6 +19,15 @@ class ObjetPerdu extends Objet
         return super.getLocalisation();
     }
 
+    getDate(){
+        return super.getDate();
+    }
+
+    getIntitule(){
+        return super.getIntitule();
+    }
+
+    //PB AU NIVEAU DU RETOUR
     getDistance(localisationUser)
     {
         return this.calculateur.getDistanceLocalisationFloue(localisationUser, this.localisation);

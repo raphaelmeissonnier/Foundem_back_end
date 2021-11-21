@@ -1,14 +1,13 @@
 const Objet = require("./Objet");
-const CalculateurPrecis = require("./CalculateurPrecis");
+const Calculateur = require('./Calculateur');
 
 
 class ObjetTrouve extends Objet
 {
-    constructor(categorie, localisation, description, intitule, date)
+    constructor(categorie, localisation, description, intitule, date, adresseMail)
     {
-        super(categorie, localisation, description, intitule, date);
-        this.calculateur = new CalculateurPrecis();
-
+        super(categorie, localisation, description, intitule, date, adresseMail);
+        this.calculateur = new Calculateur();
     }
 
     getCategorie()
@@ -21,10 +20,16 @@ class ObjetTrouve extends Objet
         return super.getLocalisation();
     }
 
+    getDate(){
+        return super.getDate();
+    }
+
+    getIntitule(){
+        return super.getIntitule();
+    }
+
     getDistance(localisationUser)
     {
-        //this.calculateur.setDistance(this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation));
-        //return this.calculateur;
         return this.calculateur.getDistanceLocalisationPrecise(localisationUser, this.localisation);
     }
 }
