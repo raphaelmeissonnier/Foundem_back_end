@@ -1,4 +1,5 @@
 const Localisation = require('./Localisation');
+var haversine = require("haversine-distance");
 
 
 class Calculateur
@@ -7,9 +8,9 @@ class Calculateur
        this.foo="bar"
     }
 
-    getDistanceLocalisationPrecise(localisationUser, localisationObjet, rayon)
+    getDistanceLocalisationPrecise(localisationUser, localisationObjet)
     {
-            if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
+            /*if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
             {
                 //A MOCKER ?
                 function toRad(x){
@@ -35,11 +36,17 @@ class Calculateur
                     Math.cos(toRad(latitudeUser)) * Math.cos(toRad(latitudeObjet)) *
                     Math.sin(dLong/2) * Math.sin(dLong/2);
 
+                var rayon = 10;//KM
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
                 var d = rayon * c;
 
                 return d;
-            }
+            }*/
+            var positionUser = localisationUser.getPosition();
+            var positionObjet = localisationObjet.getPosition();
+            var user = { lat: positionUser.getLatitude(), lng: positionUser.getLongitude() }    ;
+            var objet = { lat: positionObjet.getLatitude(), lng: positionObjet.getLongitude() }   ;
+            return (haversine(user, objet))/1000;
     }
 
     getDistanceLocalisationFloue(localisationUser, localisationObjet)

@@ -14,11 +14,11 @@ function createPositionUser(longitudeUser,latitudeUser){
 
 function creationObjet(){
     //Creation Objet Perdu
-    var positionObjetPerdu1 = new Position(2.3488, 48.8534);
-    var positionObjetPerdu2 = new Position(2.3488, 50.8534);
-    var positionObjetPerdu3 = new Position(2.75, 49.8534);
-    var positionObjetPerdu4 = new Position(2.2, 48.9);
-    var positionObjetPerdu5 = new Position(2.054, 47.9);
+    var positionObjetPerdu1 = new Position(2.3488, 48.8534);//PARIS
+    var positionObjetPerdu2 = new Position(2.3488, 50.8534);//Bollezeele 59
+    var positionObjetPerdu3 = new Position(2.75, 49.8534);//Herleville 80
+    var positionObjetPerdu4 = new Position(2.2, 48.9);//Nanterre
+    var positionObjetPerdu5 = new Position(2.054, 47.9);//Mardié 45
 
     var localisationObjetPerdu1 = new LocalisationFloue(positionObjetPerdu1,2);
     var localisationObjetPerdu2 = new LocalisationFloue(positionObjetPerdu2,2);
@@ -27,11 +27,11 @@ function creationObjet(){
     var localisationObjetPerdu5 = new LocalisationFloue(positionObjetPerdu5,2);
 
     //Creation Objet Trouve
-    var positionObjetTrouve1 = new Position(2.1, 49);
-    var positionObjetTrouve2 = new Position(2.3488, 51,25);
-    var positionObjetTrouve3 = new Position(2.84, 48.7434);
-    var positionObjetTrouve4 = new Position(2.9, 48.125);
-    var positionObjetTrouve5 = new Position(2.6988, 48.3434);
+    var positionObjetTrouve1 = new Position(2.1, 49); //Conflans
+    var positionObjetTrouve2 = new Position(2.3488, 51,25);//Armbouts-Cappel 59
+    var positionObjetTrouve3 = new Position(2.84, 48.7434);//Les Chapelles-Bourbon 77
+    var positionObjetTrouve4 = new Position(2.9, 48.125);//Dpt 45
+    var positionObjetTrouve5 = new Position(2.6988, 48.3434);//Dpt 77
 
     var localisationObjetTrouve1 = new LocalisationPrecise(positionObjetTrouve1);
     var localisationObjetTrouve2 = new LocalisationPrecise(positionObjetTrouve2);
@@ -56,21 +56,22 @@ function creationObjet(){
 
 function affichageObjetProche(longitudeUser,latitudeUser, rayon){
     var mapObjets=creationObjet();
-    var localisationUser = createPositionUser(longitudeUser,latitudeUser);
+    var localisationUser = createPositionUser(longitudeUser, latitudeUser);
     var mapObjetsDistance = new Map();
 
     //Calcul de la distance entre le user et l'objet1
     for(var i=0; i<mapObjets.length; i++)
     {
-        if(i<10)
+        if(i<10 && mapObjets[i].getDistance(localisationUser)<=rayon)
         {
             if(mapObjets[i] instanceof ObjetTrouve)
             {
-                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser, rayon));
+                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
+                console.log("Distance", mapObjets[i].getDistance(localisationUser))
             }
             else
             {
-            mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
+                mapObjetsDistance.set(mapObjets[i], mapObjets[i].getDistance(localisationUser));
             }
         }
         else{
