@@ -8,6 +8,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/objets/:longitude/:latitude/:rayon', function(req, res, next) {
+  console.log("longitude back",parseFloat(req.params.longitude))
+  console.log("latitude back",parseFloat(req.params.latitude))
+  console.log("rayon back",parseFloat(req.params.rayon))
+  res.send(main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude), parseFloat(req.params.rayon)));
+});
+
 router.get('/objets/:longitude/:latitude', function(req, res, next) {
   console.log("longitude back",parseFloat(req.params.longitude))
   console.log("latitude back",parseFloat(req.params.latitude))
@@ -17,7 +24,6 @@ router.get('/objets/:longitude/:latitude', function(req, res, next) {
 router.post('/localisation', function(req, res, next) {
   res.send(main.createPositionUser(req.body.longitude,req.body.latitude));
   console.log(main.createPositionUser(req.body.longitude,req.body.latitude));
-
 });
 
 router.post('/ajoutObjetTrouve', function(req, res, next)
