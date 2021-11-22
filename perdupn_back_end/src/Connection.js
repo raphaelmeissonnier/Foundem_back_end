@@ -1,17 +1,20 @@
-const express = require("express")
-const mysql = require("mysql");
+const Sequelize = require("sequelize");
 
-const app = express();
+const sequelize = new Sequelize('FoundEm', 'root', 'root',{
 
-app.use(express.json());
+    host: 'localhost',
+    //port: '3000',
+    dialect: 'mysql'
 
-const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "LoginSystem",
-});
+})
 
-app.listen(3000, () => {
-    console.log("running server");
-});
+async function myFunction(){
+    await sequelize.authenticate();
+    console.log("Connection successful");
+
+}
+myFunction();
+
+
+
+console.log("Autre tache");
