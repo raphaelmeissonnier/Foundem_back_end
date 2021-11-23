@@ -22,7 +22,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 
 === Personas et fonctionnalités de leur point de vue
 
-  . +++<u>Utilisateur</u>+++ :
+  Utilisateur :
   - Il peut créer son espace personnel et s'y connecter.
   - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a perdu ou qu'il a trouvé.
   - Il peut faire une recherche via le moteur de recherche.
@@ -37,7 +37,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
   - Il peut supprimer son annnonce via son espace personnel.
   - Son solde de points de fidelité sera augmenté à chaque fois qu'un de ses objets qu'il a trouvé est restitué au propriétaire.
 
-  . +++<u>Administrateur Web</u>+++ :
+  Administrateur Web :
   - Signaler un utilisateur
   - Bannir de l'application un utlisateur
   - Supprimer une annonce
@@ -56,7 +56,7 @@ La cible de notre produit est principalement les utilisateurs des réseaux. Pour
 
 == Partie 2 : Aspects techniques
 
-Found'EM est une application Web.
+Found'em est une application Web.
 
 === Schéma d'architecture
 
@@ -65,7 +65,7 @@ image::architecture.png[]
 
 === Plateforme technologique
 
-Found'Em est développée en :
+Found'em est développée en :
 
     - JavaScript avec React JS pour le front-end.
     - Express JS pour le back-end. 
@@ -75,7 +75,7 @@ Les tests se feront avec :
     - Jest pour le back-end
     - Jest/Enzyme pour le front-end
 
-L'ORM utilisé pour le lien entre la base de données et le code métier est Sequelise.
+L'ORM utilisé pour le lien entre la base de données et le code métier est Sequelize.
 
 ExpressJS fera le lien métier et l'API.
 
@@ -115,7 +115,7 @@ Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
 image::wireframes/Wireframe4.PNG[]
 J'ai trouvé un objet perdu.
-Je signale cet objet sur l'application web Found'Em.
+Je signale cet objet sur l'application web Found'em.
 Je suis sur la page d'accueil Home de Found'em.
 Je clique sur le bouton "J'ai trouvé un objet".
 Je suis redirigé sur une nouvelle page "J'ai trouvé un objet".
