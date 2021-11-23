@@ -144,6 +144,32 @@ Il saisit un intitulé et coche des informations concernant l'objet.
 L'utilisateur valide sa recherche avec le bouton "rechercher".
 Des résultats correspondant aux informations s'affichent.
 
+image::wireframes/Wireframe8.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur choisit un rayon
+L'utilisateur consulte les nouveaux objets affichés sur la carte
+
+image::wireframes/Wireframe9.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur clique sur la rubrique "Me connecter"
+L'utilisateur saisit les champs du formulaire
+L'utilisateur clique sur le bouton "Me connecter"
+L'utilisateur est connecté
+L'utilisateur est redirigé vers une nouvelle page
+
+image::wireframes/Wireframe10.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur clique sur la rubrique "Créer un compte"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur saisit les champs du formulaire
+L'utilisateur clique sur le bouton "Valider"
+Le compte de l'utilisateur est créé
+L'utilisateur est redirigé vers la page d'accueil
+
+image::wireframes/Wireframe11.PNG[]
+L'utilisateur accède à la page d'Accueil
+L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
 === Diagramme de classe
 
 image::diagrammes/classe/diagramme_classe.png[]
@@ -154,14 +180,14 @@ image::diagrammes/classe/diagramme_classe.png[]
 |Définition |Description
 
 |GET
-/objets
-|La réponse retourne un tableau d'objets.
+/objets/:longitude/:latitude/:rayon
+|La réponse retourne un tableau d'objets triés selon leur distance par rapport à l'utilisateur.
 |POST
 /localisation
 |La requête envoie la localisation de l'utilisateur
 |GET
 /objets/:longitude/:latitude
-|La réponse retourne un tableau d'objets triés selon leur distance par rapport à l'utilisateur
+|La réponse retourne un tableau d'objets perdus triés selon leur distance par rapport à l'utilisateur
 |POST
 /ajoutObjetTrouve
 |La requête envoie les informations d'un objet trouvé saisies par l'utilisateur
@@ -171,6 +197,7 @@ image::diagrammes/classe/diagramme_classe.png[]
 |GET
 /chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude
 |La réponse retourne une collection d'objets trouvés correspondant à des critères
+
 |===
 
 === Diagramme de séquence
@@ -203,6 +230,13 @@ Feature "Rechercher un Objet Perdu"
 
 image::diagrammes/séquences/DS_recherche_items.PNG[]
 
+Feature "Choisir le rayon des objets"
+
+image::diagrammes/séquences/DS_choisir_rayon_items.png[]
+
+Feature "Consulter les suggestions d'objets perdus"
+
+image::diagrammes/séquences/DS_suggestion_items_perdus.PNG[]
 
 
 
