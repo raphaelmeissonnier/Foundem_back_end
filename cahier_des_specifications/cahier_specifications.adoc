@@ -162,7 +162,7 @@ image::newWireframes/v0.4_ajouter_objet_trouve_2.png[width=500,height=300]
 image::newWireframes/v0.5_ajout_objet_perdu1.png[width=500,height=300]
 image::newWireframes/v0.5_ajout_objet_perdu2.png[width=500,height=300]
 
-*L'utilisateur accède à la page d'accueil du site
+* L'utilisateur accède à la page d'accueil du site
 * L'utilisateur clique sur le bouton [`J'ai perdu un objet`]
 * L'utilisateur est redirigé vers une nouvelle page
 * L'utilisateur rempli le formulaire
