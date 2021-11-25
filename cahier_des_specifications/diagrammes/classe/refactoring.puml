@@ -66,6 +66,8 @@ class ObjetPerdu{
     +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
 }
 
+/' Director de patron builder '/
+/' Client de patron state '/
 class Utilisateur{
     -nom: string
     -email: string
@@ -89,7 +91,18 @@ class SCalculatorFlou{
     +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
 }
 
-class SRecherche{}
+class SRecherche{
+
+}
+
+/' Context du patron state '/
+class Matcher{}
+
+interface State{}
+
+interface Possible{}
+
+interface Valide{}
 
 BuilderObjet <|.. BuilderObjetPerdu
 BuilderObjet <|.. BuilderObjetTrouve
@@ -110,5 +123,13 @@ Localisation <|.. LocalisationFloue
 
 Position "1" <-- Localisation
 
+Valide ..|> State
+Possible ..|> State
+Utilisateur ..> Valide
+Utilisateur ..> Possible
+Utilisateur --> Matcher
+Matcher o--> State
+Valide --> Matcher
+Possible --> Matcher
 
 @enduml
