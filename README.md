@@ -1,4 +1,3 @@
-## Notre application 
 Il nous est à tous arrivé de perdre un objet, se dire que ce serait génial qu’une personne le trouve et nous contacte pour nous le rendre, ou même de trouver un objet et de vouloir le rendre au propriétaire avec un moyen simple. 
 Nous avons donc mis en place ce projet pour répondre à cette problématique. L’objectif est de créer une plateforme qui va permettre aux utilisateurs de gagner du temps et de l’argent dans leurs démarches à propos d’un objet perdu ou trouvé.
 
