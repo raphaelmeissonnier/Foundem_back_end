@@ -1,6 +1,5 @@
 <img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"> 
-[![Build Status](http://34.125.62.21:8080/buildStatus/icon?job=perdupn_back_end)](http://34.125.62.21:8080/job/perdupn_back_end/)
-[![Build Status](http://34.125.62.21:8080/job/perdupn_back_end/badge/icon)](http://34.125.62.21:8080/job/perdupn_back_end/)
+![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http://34.125.62.21:8080/job/perdupn_back_end%2Fjob%2Fperdupn_back_end%2F&style=plastic)
 [![codecov](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end/branch/main/graph/badge.svg?token=4ER74TX5HZ)](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end)
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=alert_status)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
