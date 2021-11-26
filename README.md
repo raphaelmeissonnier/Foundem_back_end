@@ -7,7 +7,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=security_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 
 # Found'Em
-_Avec Found'EM, tous vos objets perdus sont e-retrouvés !
+Avec Found'EM, tous vos objets perdus sont e-retrouvés !
 
 
 # Comment lancer l'application ? 
@@ -15,15 +15,15 @@ _Avec Found'EM, tous vos objets perdus sont e-retrouvés !
 ### Prérequis
 Avant de lancer l'application, il faut avoir installé [Node.js](https://nodejs.org/en/) au préalable. 
 
-* Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_back_end.git
+* Cloner le répertoire https://github.com/raphaelmeissonnier/Foundem_back_end
 * Ouvrer le dossier et lancer les commandes suivantes :
     ```
     cd perdupn_back_end
     npm install 
-    DEBUG=perdupn_back_end:* npm start
+    npm start
     ```
 
-* Cloner le répertoire https://github.com/raphaelmeissonnier/perdUPN_front_end.git
+* Cloner le répertoire https://github.com/raphaelmeissonnier/Foundem_front_end
 * Ouvrer le dossier et lancer les commandes suivantes :
    ```
   cd front-end
