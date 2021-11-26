@@ -1,11 +1,3 @@
-<img alt="GitHub" src="https://img.shields.io/github/license/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub" src="https://img.shields.io/github/v/tag/raphaelmeissonnier/perdUPN_back_end?style=plastic"> 
-![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http://34.125.62.21:8080/job/perdupn_back_end%2F&style=plastic)
-[![codecov](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end/branch/main/graph/badge.svg?token=4ER74TX5HZ)](https://codecov.io/gh/raphaelmeissonnier/perdUPN_back_end)
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/raphaelmeissonnier/perdUPN_back_end"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/raphaelmeissonnier/perdUPN_back_end">
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=alert_status)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=security_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
-
 # Notre application 
 Il nous est à tous arrivé de perdre un objet, se dire que ce serait génial qu’une personne le trouve et nous contacte pour nous le rendre, ou même de trouver un objet et de vouloir le rendre au propriétaire avec un moyen simple. 
 Nous avons donc mis en place ce projet pour répondre à cette problématique. L’objectif est de créer une plateforme qui va permettre aux utilisateurs de gagner du temps et de l’argent dans leurs démarches à propos d’un objet perdu ou trouvé.
