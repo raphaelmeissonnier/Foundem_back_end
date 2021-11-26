@@ -96,79 +96,116 @@ Nous pourrons retrouver la personne dans la base de données grâce à certains 
 Nous pourrons également identifier les objets perdus grâce aux photos.
 
 
-
 == Partie 3 : Modélisation
 
-=== Maquette du front
+=== Version v0.2
+[.lead]
+*Feature : Localiser l'utilisateur*
 
-image::wireframes/Wireframe1.PNG[]
-Je clique sur le bouton "J'ai trouvé un objet".
-Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+image::newWireframes/v0.2_localiser_utilisateur.PNG[width=500,height=300, align="center"]
 
-image::wireframes/Wireframe2.PNG[]
-Je remplis le formulaire détaillé.
-Je valide.
-Je suis redirigé vers la page d'accueil.
+//OU btn:[Centrer]
+* L'utilisateur clique sur le bouton [`Centrer`]
+* La page se rafraîchit
+* La carte se centre sur la localisation de l'utilisateur
 
-image::wireframes/Wireframe3.PNG[]
-Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
+=== Version v0.3
+[.lead]
+*Feature : Les objets les plus proches*
 
-image::wireframes/Wireframe4.PNG[]
-J'ai trouvé un objet perdu.
-Je signale cet objet sur l'application web Found'em.
-Je suis sur la page d'accueil Home de Found'em.
-Je clique sur le bouton "J'ai trouvé un objet".
-Je suis redirigé sur une nouvelle page "J'ai trouvé un objet".
-Je remplis le formulaire détaillé.
-Je valide.
+image::newWireframes/v0.3_objets_plus_proches.PNG[width=500,height=300, align="center"]
 
-image::wireframes/Wireframe5.PNG[]
-L'utilisateur pourra distinguer les points sur la carte.
-Chaque point sur la carte correspondra à un objet perdu.
-L'utilisateur pourra avoir des informations sur l'objet perdu en question.
-L'utilisateur pourra centrer la map.
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur clique sur le bouton [`Centrer`]
+* La carte se centre alors sur la position de l'utilisateur
+* L'utilisateur peut consulter via la carte les objets les plus proches de sa localisation
 
-image::wireframes/Wireframe6.PNG[]
-L'utilisateur accède à la page d'accueil du site
-L'utilisateur clique sur le bouton 'J'ai perdu un objet"
-L'utilisateur est redirigé vers une nouvelle page
-L'utilisateur rempli le formulaire
-L'utilisateur valide les informations saisies en cliquant sur le bouton "Valider"
+[.lead]
+*Feature : Voir les points fusionnés*
 
-image::wireframes/Wireframe7.PNG[]
-L'utilisateur accède à la page d'accueil du site
-L'utilisateur clique sur le bouton 'J'ai perdu un objet"
-L'utilisateur est redirigé vers une nouvelle page
-L'utilisateur accède au formulaire permettant de chercher un objet perdu.
-Il saisit un intitulé et coche des informations concernant l'objet.
-L'utilisateur valide sa recherche avec le bouton "rechercher".
-Des résultats correspondant aux informations s'affichent.
+image::newWireframes/v0.3_points_fusionnes.PNG[width=500,height=300, align="center"]
 
-image::wireframes/Wireframe8.PNG[]
-L'utilisateur accède à la page d'accueil
-L'utilisateur choisit un rayon
-L'utilisateur consulte les nouveaux objets affichés sur la carte
+* L'utilisateur dézoome la carte
+* Les icônes fusionnent
 
-image::wireframes/Wireframe9.PNG[]
-L'utilisateur accède à la page d'accueil
-L'utilisateur clique sur la rubrique "Me connecter"
-L'utilisateur saisit les champs du formulaire
-L'utilisateur clique sur le bouton "Me connecter"
-L'utilisateur est connecté
-L'utilisateur est redirigé vers une nouvelle page
+=== Version v0.4
+[.lead]
+*Feature : Consulter les informations d'un point sur la carte*
 
-image::wireframes/Wireframe10.PNG[]
-L'utilisateur accède à la page d'accueil
-L'utilisateur clique sur la rubrique "Créer un compte"
-L'utilisateur est redirigé vers une nouvelle page
-L'utilisateur saisit les champs du formulaire
-L'utilisateur clique sur le bouton "Valider"
-Le compte de l'utilisateur est créé
-L'utilisateur est redirigé vers la page d'accueil
+image::newWireframes/v0.4_consulter_informations_objet.png[width=500,height=300, align="center"]
 
-image::wireframes/Wireframe11.PNG[]
-L'utilisateur accède à la page d'Accueil
-L'utilisateur consulte la liste des objets perdus proches de sa localisation
+* L'utilisateur accède à la page d'accueil de l'application
+* L'utilisateur consulte la carte
+* L'utilisateur clique sur un point
+* Les informations concernant ce point s'affichent
+
+[.lead]
+*Feature : Ajouter un objet trouvé*
+
+image::newWireframes/v0.4_ajouter_objet_trouve_1.png[width=500,height=300]
+image::newWireframes/v0.4_ajouter_objet_trouve_2.png[width=500,height=300]
+
+* J'ai trouvé un objet perdu
+* Je signale cet objet sur l'application web Found'Em
+* Je suis sur la page d'accueil Home de Found'em
+* Je clique sur le bouton [`J'ai trouvé un objet`]
+* Je suis redirigé sur une nouvelle page "J'ai trouvé un objet"
+* Je remplis le formulaire détaillé
+* Je clique sur le bouton [`Valider`]
+* Je suis redirigé(e) vers la page d'accueil
+
+=== Version v0.5
+
+[.lead]
+*Feature : Ajouter un objet perdu*
+
+image::newWireframes/v0.5_ajout_objet_perdu1.png[width=500,height=300]
+image::newWireframes/v0.5_ajout_objet_perdu2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil du site
+* L'utilisateur clique sur le bouton [`J'ai perdu un objet`]
+* L'utilisateur est redirigé vers une nouvelle page
+* L'utilisateur rempli le formulaire
+* L'utilisateur valide les informations saisies en cliquant sur le bouton [`Valider`]
+* L'utilisateur est redirigé vers la page d'accueil
+
+[.lead]
+*Feature : Saisir une adresse sur le formulaire*
+
+image::newWireframes/v0.5_saisir_adresse_formulaire.png[width=500,height=300, align="center"]
+
+* L'utilisateur accède au formulaire permettant de déclarer des objets trouvés
+* Il saisit une adresse dans le champs `Adresse`
+* Des résultats s'affichent au fur et à mesure de la saisie
+* L'utilisateur sélectionne une adresse
+* L'adresse s'affiche dans le champs de saisie "Adresse"
+
+[.lead]
+*Feature : Chercher un objet perdu*
+
+image::newWireframes/v0.5_recherche_objet_perdu1.png[width=500,height=300]
+image::newWireframes/v0.5_recherche_objet_perdu2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil du site
+* L'utilisateur clique sur le bouton [`J'ai perdu un objet`]
+* L'utilisateur est redirigé vers une nouvelle page
+* L'utilisateur accède au formulaire permettant de chercher un objet perdu
+* Il saisit un intitulé et coche des informations concernant l'objet
+* L'utilisateur valide sa recherche avec le bouton [`Rechercher un objet`]
+* Des résultats correspondant aux informations s'affichent
+
+=== Version v0.6
+[.lead]
+*Feature : Consulter les suggestions d'objets perdus*
+
+image::newWireframes/v0.6_suggestions_objets_perdus1.png[width=500,height=300]
+image::newWireframes/v0.6_suggestions_objets_perdus2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+=== Version v0.7
+
 
 === Diagramme de classe
 
