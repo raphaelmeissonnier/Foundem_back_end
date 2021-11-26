@@ -6,30 +6,25 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=raphaelmeissonnier_perdUPN_back_end&metric=security_rating)](https://sonarcloud.io/dashboard?id=raphaelmeissonnier_perdUPN_back_end)
 
-# Found'Em
-Avec Found'EM, tous vos objets perdus sont e-retrouvés !
+# Notre application 
+Il nous est à tous arrivé de perdre un objet, se dire que ce serait génial qu’une personne le trouve et nous contacte pour nous le rendre, ou même de trouver un objet et de vouloir le rendre au propriétaire avec un moyen simple. 
+Nous avons donc mis en place ce projet pour répondre à cette problématique. L’objectif est de créer une plateforme qui va permettre aux utilisateurs de gagner du temps et de l’argent dans leurs démarches à propos d’un objet perdu ou trouvé.
 
+Vous pouvez retrouver notre application sur GitHub: le front-end est [ici](https://github.com/raphaelmeissonnier/Foundem_front_end) et le back-end [ici](https://github.com/raphaelmeissonnier/Foundem_back_end).
 
-# Comment lancer l'application ? 
+# Les fonctionnalités qu'on vous propose: 
+Avec l'application Found'em, vous pouvez: 
+- Trouver votre position sur la carte
+- Afficher tous les objets sur la carte
+- Faire fusionner les points lors d'un dézoome
+- Consulter sur la carte les objets les plus proches
+- Déclarer un objet trouvé
+- Consulter les informations relatives à objet de la carte
+- Déclarer un objet perdu
+- Chercher des objets correspondant à la description d'un objet perdu
+- Choisir un rayon pour l'affichage des objets
+- Afficher une suggestion d'objets perdus dans la page d'accueil selon votre localisation 
 
-### Prérequis
-Avant de lancer l'application, il faut avoir installé [Node.js](https://nodejs.org/en/) au préalable. 
-
-* Cloner le répertoire https://github.com/raphaelmeissonnier/Foundem_back_end
-* Ouvrer le dossier et lancer les commandes suivantes :
-    ```
-    cd perdupn_back_end
-    npm install 
-    npm start
-    ```
-
-* Cloner le répertoire https://github.com/raphaelmeissonnier/Foundem_front_end
-* Ouvrer le dossier et lancer les commandes suivantes :
-   ```
-  cd front-end
-  npm install 
-  npm start
-  ```
 
 # Auteurs 
 * Rizlane ABALIL - [GitHub](https://github.com/RizlaneAbalil)
