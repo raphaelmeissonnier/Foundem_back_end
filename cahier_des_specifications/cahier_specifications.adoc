@@ -1,4 +1,7 @@
+:toc:
+
 = Cahier des spécifications
+<<<
 
 == Partie 1 : Synthèse
 
@@ -53,6 +56,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 
 La cible de notre produit est principalement les utilisateurs des réseaux. Pour cela, nous lancerons une campagne publicitaire sur les réseaux sociaux. Nous comptons aussi sur la bonne vieille méthode du bouche à oreille.
 
+<<<
 
 == Partie 2 : Aspects techniques
 
@@ -95,6 +99,7 @@ Concernant l'IA, nous pourrons comparer et mettre en relation des déclarations 
 Nous pourrons retrouver la personne dans la base de données grâce à certains objets (carte bancaire, CNI etc...).
 Nous pourrons également identifier les objets perdus grâce aux photos.
 
+<<<
 
 == Partie 3 : Modélisation
 
@@ -275,5 +280,4 @@ Feature "Consulter les suggestions d'objets perdus"
 
 image::diagrammes/séquences/DS_suggestion_items_perdus.PNG[]
 
-
-
+<<<
