@@ -52,7 +52,7 @@ const updateUser= async (req, res) => {
     try {
         await User.update(req.body, {
             where: {
-                id: req.params.id
+                idUser: req.params.id
             }
         });
         res.json({
@@ -66,9 +66,10 @@ const updateUser= async (req, res) => {
 // Delete objet perdu by id
 const deleteUser = async (req, res) => {
     try {
+        console.log(req.params);
         await User.destroy({
             where: {
-                id: req.params.id
+                idUser: req.params.id
             }
         });
         res.json({
