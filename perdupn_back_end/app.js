@@ -25,7 +25,13 @@ async function connectionDB(){
   }
 }
 
+async function synchroDB_Model(){
+  await db.sync({ force: true });
+  console.log("The table model were just (re)created!");
+}
+
 connectionDB();
+synchroDB_Model();
  
 // use router
 app.use(RouterUser);
