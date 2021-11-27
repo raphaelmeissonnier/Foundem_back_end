@@ -4,7 +4,7 @@ const ObjetPerdu = require("../models/objetperdu.model");
 const getObjetsPerdus = async (req,res) => {
     try {
         const objetsperdus = await ObjetPerdu.findAll();
-        res.send(objetsperdus);
+        res.send(res);
     }catch(err){
         console.log(err);
     }

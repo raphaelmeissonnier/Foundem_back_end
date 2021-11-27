@@ -2,11 +2,11 @@ const express = require("express");
 // Import cors
 const cors = require("cors");
 // Import connection
-const db = require("./app/config/database.js");
+const db = require("./server/config/database.js");
 // Import router
-const RouterObjetPerdu = require("./app/routes/objetsperdu");
-const RouterObjetTrouve = require("./app/routes/objetstrouve");
-const RouterUser = require("./app/routes/user");
+const RouterObjetPerdu = require("./server/routes/objetsperdu");
+const RouterObjetTrouve = require("./server/routes/objetstrouve");
+const RouterUser = require("./server/routes/user");
  
 // Init express
 const app = express();
@@ -39,4 +39,6 @@ app.use(RouterObjetPerdu);
 app.use(RouterObjetTrouve);
  
 // listen on port
-app.listen(3001, () => console.log('Server running at http://localhost:3001'));
+//app.listen(3001, () => console.log('Server running at http://localhost:3001'));
+
+module.exports = app;

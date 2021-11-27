@@ -8,6 +8,7 @@
     "codecov": "jest --ci --coverage && codecov --token=4ed58039-0c83-4ba2-9896-86c5a4e61169"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

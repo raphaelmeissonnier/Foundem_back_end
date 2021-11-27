@@ -1,4 +1,8 @@
 const User = require("../models/user.model");
+const bcrypt = require("bcrypt");
+
+const saltRounds=10
+const salt = bcrypt.genSalt(saltRounds);
 
 // Get all Users
 const getUsers = async (req,res) => {
@@ -27,7 +31,14 @@ const getUserById = async (req, res) => {
 // Create a new objet perdu
 const createUser = async (req, res) => {
     try {
-        await User.create(req.body);
+        await User.create({
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password, 
+            bio: req.body.bio,
+        }
+        );
+        
         res.json({
             "message": "User Created"
         });

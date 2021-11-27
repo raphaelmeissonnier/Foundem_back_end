@@ -2,6 +2,7 @@
 const Sequelize = require("sequelize");
 // import connection 
 const db = require("../config/database.js");
+const User = require("./user.model.js");
  
 // init DataTypes
 const { DataTypes } = Sequelize;
@@ -22,5 +23,7 @@ const ObjetTrouve = db.define('objettrouve', {
   freezeTableName: true
 });
  
+//ObjetTrouve.hasOne(User)
+
 // Export model Product
 module.exports =ObjetTrouve;
