@@ -68,6 +68,7 @@ class ObjetPerdu{
 
 /' Director de patron builder '/
 /' Client de patron state '/
+/' Client créé un matcher ??? '/
 class Utilisateur{
     -nom: string
     -email: string
@@ -96,13 +97,29 @@ class SRecherche{
 }
 
 /' Context du patron state '/
-class Matcher{}
+class Matcher{
+    +setMatcher(matcher: Matcher): void
+}
 
-interface State{}
+/' Interface ou abstract class?? '/
+/' Qu'est ce qu'on fait dans les méthodes on set un boolean ??? '/
+abstract class State{
+    +this(matcher: Matcher): State
+    +possible(valeur: boolean): void
+    +valide(valeur: boolean): void
+}
 
-interface Possible{}
+class Possible{
+    +this(matcher: Matcher): Possible
+    +possible(valeur: boolean): void
+    +valide(valeur: boolean): void
+}
 
-interface Valide{}
+class Valide{
+    +this(matcher: Matcher): Valide
+    +possible(valeur: boolean): void
+    +valide(valeur: boolean): void
+}
 
 BuilderObjet <|.. BuilderObjetPerdu
 BuilderObjet <|.. BuilderObjetTrouve
