@@ -1,12 +1,9 @@
 :toc:
 
 = Cahier des spécifications
-<<<
 
 == Partie 1 : Synthèse
-
 === Le projet
-
 Nous vous présentons notre projet qui est une application nommée Found'em.
 
 image::logo.png[]
