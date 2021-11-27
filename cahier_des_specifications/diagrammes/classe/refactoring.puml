@@ -92,6 +92,7 @@ class SCalculatorFlou{
     +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
 }
 
+/' SINGLETON ??? '/
 class SRecherche{
 
 }
@@ -106,6 +107,7 @@ class Matcher{
 abstract class State{
     +this(matcher: Matcher): State
     +possible(valeur: boolean): void
+    /' La méthode valide() supprime les objets perdus et trouvés concernés par le matching '/
     +valide(valeur: boolean): void
 }
 
