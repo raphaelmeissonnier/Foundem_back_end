@@ -132,6 +132,9 @@ ObjetPerdu <-- BuilderObjetPerdu
 BuilderObjetPerdu ..> Categorie
 BuilderObjetTrouve ..> Categorie
 
+BuilderObjetPerdu ..> Localisation
+BuilderObjetTrouve ..> Localisation
+
 ObjetPerdu --> SCalculatorFlou
 ObjetTrouve --> SCalculatorPrecis
 
