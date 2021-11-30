@@ -51,7 +51,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 Utilisateur perdeur: Jean-Baptiste étudiant
   Contexte: 
     - Jean-Baptiste est un jeune étudiant
-    - Il lui arrive de souvent oublier ses affaires 
+    - Il lui arrive de souvent oublier ses affaires à la fac
     - 
 
   Buts et comportements: 
@@ -68,6 +68,8 @@ Utilisateur trouveur: Léa usager des transports en communs
     - C'est une utilisatrice quotidienne des transports en commun
   
   Buts et comportements:
+     - Dû à son emploi du temps chargé, Léa n'a pas de temps à perdre
+     - Elle a besoin d'un service en ligne qui lui permettra de signaler un pbjet trouvé sans avoir à attendre devant un guichet
 
   Ce que cela implique: 
 
@@ -77,9 +79,13 @@ Utilisateur "chasseur de trésors"
     - Veulent contribuer/servir à la communauté 
 
   Buts et comportements: 
-    - 
+    -
 
-  Ce que cela implique: 
+  Ce que cela implique:
+    - Une carte avec tous les points localisés
+    - De pouvoir signalé précisemment lalcalisation d'un objet trouvé
+
+
 === Prévisions marketing
 //Vision trop large ??
 
