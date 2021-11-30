@@ -22,7 +22,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 
 === Personas et fonctionnalités de leur point de vue
 
-  Utilisateur :
+  /*Utilisateur :
   - Il peut créer son espace personnel et s'y connecter.
   - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a perdu ou qu'il a trouvé.
   - Il peut faire une recherche via le moteur de recherche.
@@ -45,9 +45,41 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
   - Attribuer des points de fidélité
   - Contacter un utilisateur via la messagerie
   - Ajouter des blocs de messages
-  - Consulter les avis des utilisateurs
+  - Consulter les avis des utilisateurs*/
 
 
+Utilisateur perdeur: Jean-Baptiste étudiant
+  Contexte: 
+    - Jean-Baptiste est un jeune étudiant
+    - Il lui arrive de souvent oublier ses affaires 
+    - 
+
+  Buts et comportements: 
+    - Besoin de retrouver le plus rapidement possible son objet
+  
+  Ce que cela implique: 
+    - Signaler son objet perdu
+    - Consulter une liste d'objets trouvés
+    - Géolocalisation des objets trouvés à proximité de l'utilisateur  
+
+Utilisateur trouveur: Léa usager des transports en communs 
+  Contexte: 
+    - Léa est une jeune femme active
+    - C'est une utilisatrice quotidienne des transports en commun
+  
+  Buts et comportements:
+
+  Ce que cela implique: 
+
+Utilisateur "chasseur de trésors"
+  Contexte:
+    - Un couple de retraités 
+    - Veulent contribuer/servir à la communauté 
+
+  Buts et comportements: 
+    - 
+
+  Ce que cela implique: 
 === Prévisions marketing
 //Vision trop large ??
 
