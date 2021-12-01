@@ -20,6 +20,6 @@ router.post('/objetstrouves', createObjetTrouve);
 
 router.put('/objetstrouves/:id',updateObjetTrouve);
 
-router.delete('objetstrouves/:id', deleteObjetTrouve);
+router.delete('/objetstrouves/:id', deleteObjetTrouve);
 
 module.exports = router;

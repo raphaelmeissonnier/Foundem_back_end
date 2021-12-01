@@ -7,9 +7,14 @@ const ObjetTrouve = require("./objettrouve.model.js");
  
 // init DataTypes
 const { DataTypes } = Sequelize;
+
+class User extends Sequelize.Model {
+  getUsername() { return this.username; }
+  getEmail() { return this.email; }
+}
  
 // Define schema
-const User = db.define('user', {
+User.init({
     // Define attributes
     idUser: {
       type:DataTypes.INTEGER,
@@ -20,12 +25,15 @@ const User = db.define('user', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     bio: DataTypes.STRING,
+    localisation: DataTypes.INTEGER
 },{
   // Freeze Table Name
   freezeTableName: true,
   createdAt : false,
   updatedAt: false,
-  timestamps: false
+  timestamps: false,
+  db,
+  modelName: 'User'
 });
 
 //User.hasMany(ObjetPerdu)

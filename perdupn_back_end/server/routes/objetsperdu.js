@@ -20,7 +20,7 @@ router.post('/objetsperdus', createObjetPerdu);
 
 router.put('/objetsperdus/:id',updateObjetPerdu);
 
-router.delete('objetsperdus/:id', deleteObjetPerdu);
+router.delete('/objetsperdus/:id', deleteObjetPerdu);
 
 module.exports= router;
 
