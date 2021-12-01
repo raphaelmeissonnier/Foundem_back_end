@@ -1,18 +1,20 @@
 const ObjetPerduModel = require("../models/objetperdu.model");
+const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
 const ObjetPerdu = require("../services/ObjetPerdu")
+const Position =require("../services/Position")
 
 // Get all Objets Perdus
 const getObjetsPerdus = async (req,res) => {
     try {
-        const mapObjets = [];
-        objetsperdus = await ObjetPerduModel.findAll();
-        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, objet.localisation, objet.description, objet.intitule, objet.date, objet.adresseMail)))
+        const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
+        objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
+        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, new LocalisationFloue(new Position(2.51,45.25),0), objet.description, objet.intitule, objet.date, objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
         console.log("TYPE",typeof(objetsperdus));
         console.log("Objets Perdus",objetsperdus);
-        const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets);
+        const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
-        res.send(res);
+        res.send(monRes);
     }catch(err){
         console.log(err);
     }

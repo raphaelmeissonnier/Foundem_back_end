@@ -14,10 +14,7 @@ const ObjetPerdu = db.define('objetperdu', {
   intitule: DataTypes.STRING,
   description: DataTypes.STRING,
   categorie: DataTypes.STRING,
-  status_trouve: DataTypes.BOOLEAN,
-  latitude: DataTypes.STRING,
-  longitude: DataTypes.STRING,
-  idUser: DataTypes.INTEGER
+  adresseMail: DataTypes.STRING,
 },{
   // Freeze Table Name
   freezeTableName: true,

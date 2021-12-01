@@ -1,4 +1,5 @@
 const Localisation = require('./Localisation');
+var haversine = require("haversine-distance");
 
 
 class Calculateur
