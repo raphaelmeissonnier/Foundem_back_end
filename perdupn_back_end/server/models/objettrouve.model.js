@@ -20,10 +20,13 @@ const ObjetTrouve = db.define('objettrouve', {
   idUser: DataTypes.INTEGER
 },{
   // Freeze Table Name
-  freezeTableName: true
+  freezeTableName: true,
+  createdAt : false,
+  updatedAt: false,
+  timestamps: false,
 });
  
-//ObjetTrouve.hasOne(User)
+ObjetTrouve.hasOne(User)
 
 // Export model Product
 module.exports =ObjetTrouve;

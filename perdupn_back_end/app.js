@@ -26,7 +26,7 @@ async function connectionDB(){
 }
 
 async function synchroDB_Model(){
-  await db.sync({ force: true });
+  await db.sync({ alter: true });
   console.log("The table model were just (re)created!");
 }
 

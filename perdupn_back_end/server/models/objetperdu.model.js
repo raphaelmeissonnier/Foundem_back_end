@@ -20,10 +20,13 @@ const ObjetPerdu = db.define('objetperdu', {
   idUser: DataTypes.INTEGER
 },{
   // Freeze Table Name
-  freezeTableName: true
+  freezeTableName: true,
+  createdAt : false,
+  updatedAt: false,
+  timestamps: false,
 });
  
-//ObjetPerdu.hasOne(User)
+ObjetPerdu.hasOne(User)
 
 // Export model Product
 module.exports= ObjetPerdu;

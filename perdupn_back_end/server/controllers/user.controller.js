@@ -36,8 +36,7 @@ const createUser = async (req, res) => {
             username: req.body.username,
             password: req.body.password, 
             bio: req.body.bio,
-        }
-        );
+        });
         
         res.json({
             "message": "User Created"

@@ -12,7 +12,7 @@ const {
   // Init express router
 const router = express.Router();
 
-router.get('/objetsperdus',getObjetsPerdus);
+router.get('/objetsperdus/:longitude/:latitude/:rayon',getObjetsPerdus);
 
 router.get('/objetsperdus/:id',getObjetPerduById);
 

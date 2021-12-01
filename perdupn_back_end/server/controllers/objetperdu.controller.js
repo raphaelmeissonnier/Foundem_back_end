@@ -1,9 +1,17 @@
-const ObjetPerdu = require("../models/objetperdu.model");
+const ObjetPerduModel = require("../models/objetperdu.model");
+const Main = require("../services/Main");
+const ObjetPerdu = require("../services/ObjetPerdu")
 
 // Get all Objets Perdus
 const getObjetsPerdus = async (req,res) => {
     try {
-        const objetsperdus = await ObjetPerdu.findAll();
+        const mapObjets = [];
+        objetsperdus = await ObjetPerduModel.findAll();
+        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, objet.localisation, objet.description, objet.intitule, objet.date, objet.adresseMail)))
+        console.log("TYPE",typeof(objetsperdus));
+        console.log("Objets Perdus",objetsperdus);
+        const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets);
+        console.log("RES",monRes)
         res.send(res);
     }catch(err){
         console.log(err);
@@ -13,7 +21,7 @@ const getObjetsPerdus = async (req,res) => {
 // Get objet perdu by id
 const getObjetPerduById = async (req, res) => {
     try {
-        const objetperdu = await ObjetPerdu.findAll({
+        const objetperdu = await ObjetPerduModel.findAll({
             where: {
                 id: req.params.id
             }
@@ -27,7 +35,7 @@ const getObjetPerduById = async (req, res) => {
 // Create a new objet perdu
 const createObjetPerdu = async (req, res) => {
     try {
-        await ObjetPerdu.create(req.body);
+        await ObjetPerduModel.create(req.body);
         res.json({
             "message": "Objet Perdu Created"
         });
@@ -39,7 +47,7 @@ const createObjetPerdu = async (req, res) => {
 // Update objet perdu by id
 const updateObjetPerdu= async (req, res) => {
     try {
-        await ObjetPerdu.update(req.body, {
+        await ObjetPerduModel.update(req.body, {
             where: {
                 id: req.params.id
             }
@@ -55,7 +63,7 @@ const updateObjetPerdu= async (req, res) => {
 // Delete objet perdu by id
 const deleteObjetPerdu = async (req, res) => {
     try {
-        await ObjetPerdu.destroy({
+        await ObjetPerduModel.destroy({
             where: {
                 id: req.params.id
             }
