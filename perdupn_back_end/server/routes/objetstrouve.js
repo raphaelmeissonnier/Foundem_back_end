@@ -16,7 +16,7 @@ router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);
 
 router.get('/objetstrouves/:id',getObjetTrouveById);
 
-router.post('/objetstrouves/:longitude/:latitude', createObjetTrouve);
+router.post('/objetstrouves', createObjetTrouve);
 
 router.put('/objetstrouves/:id',updateObjetTrouve);
 

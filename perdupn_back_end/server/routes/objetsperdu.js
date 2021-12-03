@@ -16,7 +16,7 @@ router.get('/objetsperdus/:longitude/:latitude/:rayon',getObjetsPerdus);
 
 router.get('/objetsperdus/:id',getObjetPerduById);
 
-router.post('/objetsperdus/:longitude/:latitude/:rayon', createObjetPerdu);
+router.post('/objetsperdus', createObjetPerdu);
 
 router.put('/objetsperdus/:id',updateObjetPerdu);
 

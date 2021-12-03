@@ -43,8 +43,8 @@ const createObjetTrouve = async (req, res) => {
             categorie: req.body.categorie,
             adresseMail: req.body.adresseMail,
             date: req.body.date,
-            longitude: parseFloat(req.params.longitude),
-            latitude: parseFloat(req.params.latitude)
+            longitude: parseFloat(req.body.longitude),
+            latitude: parseFloat(req.body.latitude)
         });
         res.json({
             "message": "Objet Trouve Created"

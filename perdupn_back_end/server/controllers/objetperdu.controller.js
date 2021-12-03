@@ -43,9 +43,9 @@ const createObjetPerdu = async (req, res) => {
             categorie: req.body.categorie,
             adresseMail: req.body.adresseMail,
             date: req.body.date,
-            longitude: parseFloat(req.params.longitude),
-            latitude: parseFloat(req.params.latitude),
-            rayon: parseInt(req.params.rayon)
+            longitude: parseFloat(req.body.longitude),
+            latitude: parseFloat(req.body.latitude),
+            rayon: parseInt(req.body.rayon)
         });
         res.json({
             "message": "Objet Perdu Created"
