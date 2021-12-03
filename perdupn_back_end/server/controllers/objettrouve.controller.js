@@ -1,10 +1,20 @@
-const ObjetTrouve = require("../models/objettrouve.model");
+const ObjetTrouveModel = require("../models/objettrouve.model");
+const LocalisationPrecise = require("../services/LocalisationPrecise");
+const Main = require("../services/Main");
+const Position = require("../services/Position");
+const ObjetTrouve = require("../services/ObjetTrouve")
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
     try {
-        const objetstrouves = await ObjetTrouve.findAll();
-        res.send(objetstrouves);
+        const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
+        objetstrouves = await ObjetTrouveModel.findAll(); // Requete SQL pour recup tous les objets de la BD
+        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
+        console.log("TYPE",typeof(objetstrouves));
+        console.log("Objets Trouve",objetstrouves);
+        const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
+        console.log("RES",monRes)
+        res.send(monRes);
     }catch(err){
         console.log(err);
     }
@@ -13,7 +23,7 @@ const getObjetsTrouves= async (req,res) => {
 // Get objet trouve by id
 const getObjetTrouveById = async (req, res) => {
     try {
-        const objettrouve = await ObjetTrouve.findAll({
+        const objettrouve = await ObjetTrouveModel.findAll({
             where: {
                 id: req.params.id
             }
@@ -27,7 +37,15 @@ const getObjetTrouveById = async (req, res) => {
 // Create a new objet trouve
 const createObjetTrouve = async (req, res) => {
     try {
-        await ObjetTrouve.create(req.body);
+        await ObjetTrouveModel.create({
+            intitule: req.body.intitule,
+            description: req.body.description,
+            categorie: req.body.categorie,
+            adresseMail: req.body.adresseMail,
+            date: req.body.date,
+            longitude: parseFloat(req.params.longitude),
+            latitude: parseFloat(req.params.latitude)
+        });
         res.json({
             "message": "Objet Trouve Created"
         });
@@ -39,7 +57,7 @@ const createObjetTrouve = async (req, res) => {
 // Update objet trouve by id
 const updateObjetTrouve= async (req, res) => {
     try {
-        await ObjetTrouve.update(req.body, {
+        await ObjetTrouveModel.update(req.body, {
             where: {
                 id: req.params.id
             }
@@ -55,7 +73,7 @@ const updateObjetTrouve= async (req, res) => {
 // Delete objet trouve by id
 const deleteObjetTrouve = async (req, res) => {
     try {
-        await ObjetTrouve.destroy({
+        await ObjetTrouveModel.destroy({
             where: {
                 id: req.params.id
             }

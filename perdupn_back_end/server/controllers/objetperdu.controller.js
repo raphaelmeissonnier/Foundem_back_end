@@ -9,7 +9,7 @@ const getObjetsPerdus = async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
         objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
-        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, new LocalisationFloue(new Position(2.51,45.25),0), objet.description, objet.intitule, objet.date, objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
+        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
         console.log("TYPE",typeof(objetsperdus));
         console.log("Objets Perdus",objetsperdus);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
@@ -37,7 +37,16 @@ const getObjetPerduById = async (req, res) => {
 // Create a new objet perdu
 const createObjetPerdu = async (req, res) => {
     try {
-        await ObjetPerduModel.create(req.body);
+        await ObjetPerduModel.create({
+            intitule: req.body.intitule,
+            description: req.body.description,
+            categorie: req.body.categorie,
+            adresseMail: req.body.adresseMail,
+            date: req.body.date,
+            longitude: parseFloat(req.params.longitude),
+            latitude: parseFloat(req.params.latitude),
+            rayon: parseInt(req.params.rayon)
+        });
         res.json({
             "message": "Objet Perdu Created"
         });

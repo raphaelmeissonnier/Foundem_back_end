@@ -10,14 +10,14 @@ const { DataTypes } = Sequelize;
 // Define schema
 const ObjetTrouve = db.define('objettrouve', {
   // Define attributes
-  idObjet: DataTypes.INTEGER,
+  //idObjet: DataTypes.INTEGER,
   intitule: DataTypes.STRING,
   description: DataTypes.STRING,
   categorie: DataTypes.STRING,
-  status_trouve: DataTypes.BOOLEAN,
-  latitude: DataTypes.STRING,
-  longitude: DataTypes.STRING,
-  idUser: DataTypes.INTEGER
+  adresseMail: DataTypes.STRING,
+  date: DataTypes.DATE,
+  longitude: DataTypes.DOUBLE,
+  latitude: DataTypes.DOUBLE
 },{
   // Freeze Table Name
   freezeTableName: true,

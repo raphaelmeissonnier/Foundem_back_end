@@ -12,11 +12,11 @@ const {
   // Init express router
 const router = express.Router();
 
-router.get('/objetstrouves',getObjetsTrouves);
+router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);
 
 router.get('/objetstrouves/:id',getObjetTrouveById);
 
-router.post('/objetstrouves', createObjetTrouve);
+router.post('/objetstrouves/:longitude/:latitude', createObjetTrouve);
 
 router.put('/objetstrouves/:id',updateObjetTrouve);
 

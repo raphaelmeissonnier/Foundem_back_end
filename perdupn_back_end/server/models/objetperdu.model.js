@@ -10,11 +10,15 @@ const { DataTypes } = Sequelize;
 // Define schema
 const ObjetPerdu = db.define('objetperdu', {
   // Define attributes
-  idObjet: DataTypes.INTEGER,
+  //idObjet: DataTypes.INTEGER,
   intitule: DataTypes.STRING,
   description: DataTypes.STRING,
   categorie: DataTypes.STRING,
   adresseMail: DataTypes.STRING,
+  date: DataTypes.DATE,
+  longitude: DataTypes.DOUBLE,
+  latitude: DataTypes.DOUBLE,
+  rayon: DataTypes.INTEGER
 },{
   // Freeze Table Name
   freezeTableName: true,
