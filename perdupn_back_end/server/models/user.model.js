@@ -9,12 +9,11 @@ const { DataTypes } = Sequelize;
 // Define schema
 const User = db.define('user', {
     // Define attributes
-    idUser: DataTypes.INTEGER,
     email: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    bio: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN
+
+
 },{
   // Freeze Table Name
   freezeTableName: true,
