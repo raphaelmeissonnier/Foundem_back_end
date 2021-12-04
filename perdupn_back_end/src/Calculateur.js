@@ -1,15 +1,16 @@
 const Localisation = require('./Localisation');
+var haversine = require("haversine-distance");
 
 
 class Calculateur
 {
     constructor(){
-       this.foo="bar" 
+       this.foo="bar"
     }
 
     getDistanceLocalisationPrecise(localisationUser, localisationObjet)
     {
-            if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
+            /*if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
             {
                 //A MOCKER ?
                 function toRad(x){
@@ -26,8 +27,6 @@ class Calculateur
                 let longitudeObjet = positionObjet.getLongitude();
                 let latitudeObjet = positionObjet.getLatitude();
 
-                var rayon= 10; //en Km
-
                 var latitudeDis= latitudeObjet-latitudeUser;
                 var dLat= toRad(latitudeDis);
                 var longitudeDis= longitudeObjet-longitudeUser;
@@ -37,15 +36,25 @@ class Calculateur
                     Math.cos(toRad(latitudeUser)) * Math.cos(toRad(latitudeObjet)) *
                     Math.sin(dLong/2) * Math.sin(dLong/2);
 
+                var rayon = 10;//KM
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
                 var d = rayon * c;
 
                 return d;
+            }*/
+            if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
+            {
+                var positionUser = localisationUser.getPosition();
+                var positionObjet = localisationObjet.getPosition();
+                var user = { lat: positionUser.getLatitude(), lng: positionUser.getLongitude() }    ;
+                var objet = { lat: positionObjet.getLatitude(), lng: positionObjet.getLongitude() }   ;
+                return (haversine(user, objet))/1000;
             }
     }
 
     getDistanceLocalisationFloue(localisationUser, localisationObjet)
     {
+        /*
         if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
         {
             //On récupère la position et les coordonnées du user
@@ -61,6 +70,27 @@ class Calculateur
 
             //On calcule la distance avec la formule |sqrt((x1 - h)² + (y1 - k)²) - r|
             let distance = Math.sqrt((Math.pow((longitudeUser - longitudeObjet), 2)) + (Math.pow((latitudeUser - latitudeObjet), 2))) - rayon;
+            if(distance < 0)
+            {
+                distance = distance * (-1);
+            }
+            return distance;
+        }*/
+        if(localisationObjet instanceof Localisation && localisationUser instanceof Localisation)
+        {
+            //On récupère le rayon de l'objet
+            let rayon = localisationObjet.getRayon();
+
+            //On récupère la longitude et latitude du user
+            var positionUser = localisationUser.getPosition();
+            var positionObjet = localisationObjet.getPosition();
+            var user = { lat: positionUser.getLatitude(), lng: positionUser.getLongitude() };
+
+            //On récupère la longitude et latitude de l'objet
+            var objet = { lat: positionObjet.getLatitude(), lng: positionObjet.getLongitude() };
+
+            //On calcule la distance entre l'objet et l'user
+            var distance = ((haversine(user, objet))/1000)-rayon;
             if(distance < 0)
             {
                 distance = distance * (-1);

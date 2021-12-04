@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 var Main = require ("./Main")
+=======
+var Main = require ("../src/Main")
+>>>>>>> Stashed changes
+const IMatcher = require('./IMatcher');
+
 
 class Matcher extends IMatcher{
 
@@ -10,6 +16,6 @@ class Matcher extends IMatcher{
     matching(intitule, categorie, date, longitude, latitude){
         super.matching(intitule, categorie, date, longitude, latitude)
     }
-
-
 }
+
+module.exports = Matcher;

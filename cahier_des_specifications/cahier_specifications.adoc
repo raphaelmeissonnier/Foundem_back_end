@@ -22,7 +22,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
 
 === Personas et fonctionnalités de leur point de vue
 
-  . +++<u>Utilisateur</u>+++ :
+  Utilisateur :
   - Il peut créer son espace personnel et s'y connecter.
   - Il peut aussi remplir un formulaire via son espace personnel pour déclarer un objet qu'il a perdu ou qu'il a trouvé.
   - Il peut faire une recherche via le moteur de recherche.
@@ -37,7 +37,7 @@ Bien que ce problème touche tout le monde, il existe peu de solutions efficaces
   - Il peut supprimer son annnonce via son espace personnel.
   - Son solde de points de fidelité sera augmenté à chaque fois qu'un de ses objets qu'il a trouvé est restitué au propriétaire.
 
-  . +++<u>Administrateur Web</u>+++ :
+  Administrateur Web :
   - Signaler un utilisateur
   - Bannir de l'application un utlisateur
   - Supprimer une annonce
@@ -56,7 +56,7 @@ La cible de notre produit est principalement les utilisateurs des réseaux. Pour
 
 == Partie 2 : Aspects techniques
 
-Found'EM est une application Web.
+Found'em est une application Web.
 
 === Schéma d'architecture
 
@@ -65,7 +65,7 @@ image::architecture.png[]
 
 === Plateforme technologique
 
-Found'Em est développée en :
+Found'em est développée en :
 
     - JavaScript avec React JS pour le front-end.
     - Express JS pour le back-end. 
@@ -73,9 +73,9 @@ Found'Em est développée en :
 Les tests se feront avec : 
 
     - Jest pour le back-end
-    - Jest/Enzyme pour le front-end 
-    
-L'ORM utilisé pour le lien entre la base de données et le code métier est Sequelise.
+    - Jest/Enzyme pour le front-end
+
+L'ORM utilisé pour le lien entre la base de données et le code métier est Sequelize.
 
 ExpressJS fera le lien métier et l'API.
 
@@ -86,7 +86,7 @@ La base de données sera en MySql.
 -> Gestion de versions :: Git
 -> Le build :: npm
 -> La qualité de code :: sonarCloud
--> CI :: Travis CI
+-> CI :: Jenkins
 
 
 Nous allons utiliser plusieurs API distantes telles que OpenLayers pour la cartographie (map) ou encore MapBox pour le Geocoding.
@@ -101,36 +101,78 @@ Nous pourrons également identifier les objets perdus grâce aux photos.
 
 === Maquette du front
 
-image::Wireframe1.PNG[]
+image::wireframes/Wireframe1.PNG[]
 Je clique sur le bouton "J'ai trouvé un objet".
 Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
 
-image::Wireframe2.PNG[]
+image::wireframes/Wireframe2.PNG[]
 Je remplis le formulaire détaillé.
 Je valide.
 Je suis redirigé vers la page d'accueil.
 
-image::Wireframe3.PNG[]
+image::wireframes/Wireframe3.PNG[]
 Lorsque l'utilisateur dézoome la carte, les icônes fusionnent.
 
-image::Wireframe4.PNG[]
+image::wireframes/Wireframe4.PNG[]
 J'ai trouvé un objet perdu.
-Je signale cet objet sur l'application web Found'Em.
+Je signale cet objet sur l'application web Found'em.
 Je suis sur la page d'accueil Home de Found'em.
 Je clique sur le bouton "J'ai trouvé un objet".
-Je suis redirigé sur une nouvelle page "Un objet retrouvé ?".
+Je suis redirigé sur une nouvelle page "J'ai trouvé un objet".
 Je remplis le formulaire détaillé.
 Je valide.
 
-image::Wireframe5.PNG[]
+image::wireframes/Wireframe5.PNG[]
 L'utilisateur pourra distinguer les points sur la carte.
 Chaque point sur la carte correspondra à un objet perdu.
 L'utilisateur pourra avoir des informations sur l'objet perdu en question.
 L'utilisateur pourra centrer la map.
 
+image::wireframes/Wireframe6.PNG[]
+L'utilisateur accède à la page d'accueil du site
+L'utilisateur clique sur le bouton 'J'ai perdu un objet"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur rempli le formulaire
+L'utilisateur valide les informations saisies en cliquant sur le bouton "Valider"
+
+image::wireframes/Wireframe7.PNG[]
+L'utilisateur accède à la page d'accueil du site
+L'utilisateur clique sur le bouton 'J'ai perdu un objet"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur accède au formulaire permettant de chercher un objet perdu.
+Il saisit un intitulé et coche des informations concernant l'objet.
+L'utilisateur valide sa recherche avec le bouton "rechercher".
+Des résultats correspondant aux informations s'affichent.
+
+image::wireframes/Wireframe8.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur choisit un rayon
+L'utilisateur consulte les nouveaux objets affichés sur la carte
+
+image::wireframes/Wireframe9.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur clique sur la rubrique "Me connecter"
+L'utilisateur saisit les champs du formulaire
+L'utilisateur clique sur le bouton "Me connecter"
+L'utilisateur est connecté
+L'utilisateur est redirigé vers une nouvelle page
+
+image::wireframes/Wireframe10.PNG[]
+L'utilisateur accède à la page d'accueil
+L'utilisateur clique sur la rubrique "Créer un compte"
+L'utilisateur est redirigé vers une nouvelle page
+L'utilisateur saisit les champs du formulaire
+L'utilisateur clique sur le bouton "Valider"
+Le compte de l'utilisateur est créé
+L'utilisateur est redirigé vers la page d'accueil
+
+image::wireframes/Wireframe11.PNG[]
+L'utilisateur accède à la page d'Accueil
+L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
 === Diagramme de classe
 
-image::diagramme_classe.png[]
+image::diagrammes/classe/diagramme_classe.png[]
 
 === Description de l'API
 
@@ -138,41 +180,63 @@ image::diagramme_classe.png[]
 |Définition |Description
 
 |GET
-/objets
-|La réponse retourne un tableau d'objets.
+/objets/:longitude/:latitude/:rayon
+|La réponse retourne un tableau d'objets triés selon leur distance par rapport à l'utilisateur.
 |POST
 /localisation
 |La requête envoie la localisation de l'utilisateur
 |GET
 /objets/:longitude/:latitude
-|La réponse retourne un tableau d'objets trié selon leur distance par rapport à l'utilisateur
+|La réponse retourne un tableau d'objets perdus triés selon leur distance par rapport à l'utilisateur
 |POST
 /ajoutObjetTrouve
-|La requête envoie les informations d'un objet trouvé
+|La requête envoie les informations d'un objet trouvé saisies par l'utilisateur
+|POST
+/ajoutObjetPerdu
+|La requête envoie les informations d'un objet perdu saisies par l'utilisateur
+|GET
+/chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude
+|La réponse retourne une collection d'objets trouvés correspondant à des critères
+
 |===
 
 === Diagramme de séquence
 
 Feature "Localiser l'utilisateur"
 
-image::DS_localisation_user.png[]
+image::diagrammes/séquences/DS_localisation_user.png[width=600,height=400]
 
 Feature "Afficher les objets les plus proches"
 
-image::DS_objets_plus_proches.png[]
+image::diagrammes/séquences/DS_objets_plus_proches.png[width=600,height=400]
 
 Feature "Voir les points fusionnés"
 
-image::DS_points_collapses.png[]
+image::diagrammes/séquences/DS_points_collapses.png[]
 
 Feature "Voir Informations d'un Item"
 
-image::DS_informations_item.PNG[]
+image::diagrammes/séquences/DS_informations_item.PNG[width=400,height=300]
 
 Feature "Declarer un Objet Trouvé"
 
-image::DS_ajout_objet_trouve.PNG[]
+image::diagrammes/séquences/DS_ajout_objet_trouve.PNG[]
 
+Feature "Declarer un Objet Perdu"
+
+image::diagrammes/séquences/DS_ajout_objet_perdu.png[]
+
+Feature "Rechercher un Objet Perdu"
+
+image::diagrammes/séquences/DS_recherche_items.PNG[]
+
+Feature "Choisir le rayon des objets"
+
+image::diagrammes/séquences/DS_choisir_rayon_items.png[]
+
+Feature "Consulter les suggestions d'objets perdus"
+
+image::diagrammes/séquences/DS_suggestion_items_perdus.PNG[]
 
 
 

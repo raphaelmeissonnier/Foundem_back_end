@@ -54,8 +54,8 @@ function creationObjet(){
     return [ObjetPerdu1, ObjetPerdu2, ObjetPerdu3, ObjetPerdu4, ObjetPerdu5, ObjetTrouve1, ObjetTrouve2, ObjetTrouve3, ObjetTrouve4, ObjetTrouve5]
 }
 
-function affichageObjetProche(longitudeUser,latitudeUser, rayon){
-    var mapObjets=creationObjet();
+function affichageObjetProche(longitudeUser,latitudeUser, rayon, mapObjets){
+    //var mapObjets=creationObjet();
     var localisationUser = createPositionUser(longitudeUser, latitudeUser);
     var mapObjetsDistance = new Map();
 
@@ -122,7 +122,3 @@ function differenceDate(date1,date2)
 }
 
 module.exports = {createPositionUser,affichageObjetProche, ajoutObjetTrouve, differenceDate, creationObjet, suggestionObjetPerdu}
-
-
-
-

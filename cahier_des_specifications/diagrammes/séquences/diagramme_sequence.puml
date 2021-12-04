@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User
+User --> Front: choisit un rayon
+Front --> Back: fetch(/objets/:longitude/:latitude/:rayon)
+Back --> Back: affichageObjetProche(longitude, latitude, rayon)
+Back --> Front: return Items[]
+Front --> Front: Affichage Items 
+
+@enduml
