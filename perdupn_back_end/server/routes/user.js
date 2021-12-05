@@ -6,7 +6,8 @@ const {
     getUserById,
     updateUser,
     createUser,
-    deleteUser
+    deleteUser,
+    loginUser
  } = require("../controllers/user.controller");
 
   // Init express router
@@ -21,5 +22,7 @@ router.post('/users', createUser);
 router.put('/users/:id',updateUser);
 
 router.delete('/users/:id', deleteUser);
+
+router.post('/users/loginUser',loginUser);
 
 module.exports = router;

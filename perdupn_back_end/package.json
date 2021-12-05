@@ -18,11 +18,13 @@
     "haversine-distance": "^1.2.1",
     "http-errors": "~1.6.3",
     "jest": "^27.2.5",
+    "jsonwebtoken": "^8.5.1",
     "lab": "^18.0.2",
     "ls": "^0.2.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "pug": "2.0.0-beta11",
+    "react-jwt": "^1.1.4",
     "sanitize-html": "^2.5.3",
     "scanf": "^1.1.2",
     "sequelize": "^3.30.4"
