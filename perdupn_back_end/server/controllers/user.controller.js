@@ -1,11 +1,10 @@
-
+const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
 //const User = require("../models/user.model");
 const User = require("../models/tables.model");
 
 const bcrypt = require("bcrypt");
-
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -87,38 +86,44 @@ const deleteUser = async (req, res) => {
     }
 }
 // Login User
-const LoginUser = async (req, res) => {
+const loginUser = async (req, res) => {
     try {
         console.log(req.body);
+        //On récupère l'utilisateur
         const user = await User.findOne({
             where: {
-            username: req.body.username
+                username: req.body.username
             }
-        };
-        if (user) {
-
-            if(password == user.password){
-               const Token = jwt.sign({ user.id }, process.env.TOKEN_SECRET, {
-                   expiresIn: maxAge,
-               res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
-                     res.status(200).json({ user: user.id });
-               });
+        });
+        //Si l'utilisateur existe et que le mot de passe est bon
+        if(user){
+            console.log("L'utlisateur existe !")
+            if(req.body.password == user.password){
+                console.log("Le mdp est correct !")
+                const id = user.id;
+                const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
+                res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
+                res.status(200).json({ user: user.id });
             }
-
+            else
+            {
+                console.log("Les mdp ne correspondent pas !");
+            }
         }
 
-    if (!user){
-    return res.status(400).json({
-     msg: "L'utilisateur n'existe pas"
-    });
+        //Si l'utlisateur n'existe pas - Renvoyer une erreur
+        else{
+            return res.status(400).json({
+                msg: "L'utilisateur n'existe pas"
+            });
+        }
     }
-    } catch (err) {
+    catch (err) {
         console.log(err);
-
     }
 
-    router.get("/", validateToken, (req, res) => {
-      res.json(req.user);
-    });
+    /*router.get("/", validateToken, (req, res) => {
+      res.json(req.user);*/
+};
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUse, loginUser, createToken, maxAge}
+module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser}
