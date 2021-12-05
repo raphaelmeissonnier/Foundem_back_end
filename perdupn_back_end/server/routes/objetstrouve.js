@@ -6,7 +6,8 @@ const {
     getObjetsTrouves,
     updateObjetTrouve,
     createObjetTrouve,
-    deleteObjetTrouve
+    deleteObjetTrouve,
+    rechercheObjetTrouve
  } = require("../controllers/objettrouve.controller");
 
   // Init express router
@@ -17,6 +18,8 @@ router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);
 router.get('/objetstrouves/:id',getObjetTrouveById);
 
 router.post('/objetstrouves', createObjetTrouve);
+
+router.post('/objetstrouves/recherche', rechercheObjetTrouve)
 
 router.put('/objetstrouves/:id',updateObjetTrouve);
 

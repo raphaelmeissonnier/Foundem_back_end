@@ -55,7 +55,7 @@ const User = db.define('user', {
     timestamps: false,
 });
 
-const ObjetTrouve = db.define('objettrouve', {
+const ObjetTrouveModel = db.define('objettrouve', {
     // Define attributes
     //idObjet: DataTypes.INTEGER,
     intitule: DataTypes.STRING,
@@ -64,13 +64,13 @@ const ObjetTrouve = db.define('objettrouve', {
     date: DataTypes.DATE,
     longitude: DataTypes.DOUBLE,
     latitude: DataTypes.DOUBLE,
-    user_id: {
+    /*user_id: {
         type: Sequelize.INTEGER,
         references: {
             model: 'user', // 'user' refers to table name
             key: 'id', // 'id' refers to column name in user table
         }
-    },
+    },*/
 },{
     // Freeze Table Name
     freezeTableName: true,
@@ -79,4 +79,4 @@ const ObjetTrouve = db.define('objettrouve', {
     timestamps: false,
 });
 
-module.exports = User, ObjetTrouve, ObjetPerdu;
+module.exports = {User, ObjetTrouveModel, ObjetPerdu};
