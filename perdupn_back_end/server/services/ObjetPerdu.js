@@ -3,9 +3,9 @@ const Calculateur = require("./Calculateur");
 
 class ObjetPerdu extends Objet
 {
-    constructor(categorie, localisation, description, intitule, date, adresseMail)
+    constructor(id, categorie, localisation, description, intitule, date, adresseMail)
     {
-        super(categorie, localisation, description, intitule, date, adresseMail);
+        super(id, categorie, localisation, description, intitule, date, adresseMail);
         this.calculateur = new Calculateur();
     }
 

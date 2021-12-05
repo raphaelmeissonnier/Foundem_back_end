@@ -95,7 +95,8 @@ const rechercheObjetTrouve = async (req, res) => {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
         objetstrouves = await ObjetTrouveModel.findAll();
         //console.log("Objet trouves",objetstrouves)
-        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
+        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
+        console.log("MapObjets", mapObjets);
         const match=new IMatcher();
         const monRes = match.matching(mapObjets,req.body.intitule, req.body.categorie,req.body.date, req.body.longitude, req.body.latitude);
         console.log("Mon Res", monRes);
