@@ -88,4 +88,18 @@ const deleteObjetPerdu = async (req, res) => {
     }
 }
 
-module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu,getObjetPerduById,getObjetsPerdus}
+// Get objet perdu by id
+const getObjetPerduByIdUser = async (req, res) => {
+    try {
+        const objetperdu = await ObjetPerduModel.findAll({
+            where: {
+                user_id: req.params.id
+            }
+        });
+        res.send(objetperdu);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu,getObjetPerduById,getObjetsPerdus, getObjetPerduByIdUser}
