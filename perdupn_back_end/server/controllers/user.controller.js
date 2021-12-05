@@ -1,5 +1,9 @@
-const User = require("../models/user.model");
+
 const jwt = require("jsonwebtoken");
+
+//const User = require("../models/user.model");
+const User = require("../models/tables.model");
+
 const bcrypt = require("bcrypt");
 
 
@@ -82,8 +86,6 @@ const deleteUser = async (req, res) => {
         console.log(err);
     }
 }
-
-
 // Login User
 const LoginUser = async (req, res) => {
     try {
@@ -118,7 +120,5 @@ const LoginUser = async (req, res) => {
     router.get("/", validateToken, (req, res) => {
       res.json(req.user);
     });
-
-
 
 module.exports = {getUserById,getUsers,deleteUser,createUser,updateUse, loginUser, createToken, maxAge}
