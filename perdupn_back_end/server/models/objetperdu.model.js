@@ -27,7 +27,7 @@ const ObjetPerdu = db.define('objetperdu', {
   timestamps: false,
 });
  
-ObjetPerdu.hasOne(User)
+//ObjetPerdu.hasOne(User)
 
 // Export model Product
-module.exports= ObjetPerdu;
+module.exports = { ObjetPerdu };
