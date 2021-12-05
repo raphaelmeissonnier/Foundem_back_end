@@ -79,4 +79,28 @@ const ObjetTrouveModel = db.define('objettrouve', {
     timestamps: false,
 });
 
-module.exports = {User, ObjetTrouveModel, ObjetPerdu};
+const ObjetMatche = db.define('objetmatche', {
+    // Define attributes
+    objettrouve_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'objettrouve', // 'user' refers to table name
+            key: 'id', // 'id' refers to column name in user table
+        }
+    },
+    objetperdu_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'objetperdu', // 'user' refers to table name
+            key: 'id', // 'id' refers to column name in user table
+        }
+    },
+},{
+    // Freeze Table Name
+    freezeTableName: true,
+    createdAt : false,
+    updatedAt: false,
+    timestamps: false,
+});
+
+module.exports = {User, ObjetTrouveModel, ObjetPerdu, ObjetMatche};

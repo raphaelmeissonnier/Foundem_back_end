@@ -19,7 +19,7 @@ router.get('/objetstrouves/:id',getObjetTrouveById);
 
 router.post('/objetstrouves', createObjetTrouve);
 
-router.post('/objetstrouves/recherche', rechercheObjetTrouve)
+router.post('/objetstrouves/recherche', rechercheObjetTrouve);
 
 router.put('/objetstrouves/:id',updateObjetTrouve);
 
