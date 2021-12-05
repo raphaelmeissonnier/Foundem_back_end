@@ -1,4 +1,5 @@
-const User = require("../models/user.model");
+//const User = require("../models/user.model");
+const User = require("../models/tables.model");
 const bcrypt = require("bcrypt");
 
 const saltRounds=10
@@ -81,7 +82,7 @@ const deleteUser = async (req, res) => {
 
 
 // Login User
-const LoginUser = async (req, res) => {
+/*const LoginUser = async (req, res) => {
     try {
         console.log(req.params);
         await User.findOne({
@@ -110,6 +111,6 @@ const LoginUser = async (req, res) => {
     });
 
 
-}
+}*/
 
 module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser}
