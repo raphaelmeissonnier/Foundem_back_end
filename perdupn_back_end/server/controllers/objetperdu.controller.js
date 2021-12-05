@@ -1,4 +1,5 @@
-const ObjetPerduModel = require("../models/objetperdu.model");
+//const ObjetPerduModel = require("../models/objetperdu.model");
+const ObjetPerduModel = require("../models/tables.model");
 const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
 const ObjetPerdu = require("../services/ObjetPerdu")
