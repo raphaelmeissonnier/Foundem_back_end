@@ -79,4 +79,37 @@ const deleteUser = async (req, res) => {
     }
 }
 
+
+// Login User
+const LoginUser = async (req, res) => {
+    try {
+        console.log(req.params);
+        await User.findOne({
+            where: {
+                username: req.params.username
+            }
+        });
+          if (!users) res.json({ error: "User Doesn't Exist" });
+         bcrypt.compare(password, user.password).then(async (match) => {
+            if (!match) res.json({ error: "Wrong Username And Password Combination" });
+
+             const accessToken = sign(
+                  { username: users.username, id: users.id },
+                  "importantsecret"
+                );
+                res.json({ token: accessToken, username: username, id: users.id });
+              });
+            });
+
+    } catch (err) {
+        console.log(err);
+    }
+
+    router.get("/", validateToken, (req, res) => {
+      res.json(req.user);
+    });
+
+
+}
+
 module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser}
