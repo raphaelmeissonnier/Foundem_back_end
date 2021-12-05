@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 var Main = require ("./Main")
+=======
+var Main = require ("../src/Main")
+>>>>>>> Stashed changes
 const IMatcher = require('./IMatcher');
 
 
