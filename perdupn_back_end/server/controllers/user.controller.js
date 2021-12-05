@@ -107,13 +107,15 @@ const loginUser = async (req, res) => {
             }
             else
             {
-                console.log("Les mdp ne correspondent pas !");
+                return res.status(200).json({
+                    msg: "Les mdp ne correspondent pas !"
+                });
             }
         }
 
         //Si l'utlisateur n'existe pas - Renvoyer une erreur
         else{
-            return res.status(400).json({
+            return res.status(200).json({
                 msg: "L'utilisateur n'existe pas"
             });
         }
@@ -121,9 +123,6 @@ const loginUser = async (req, res) => {
     catch (err) {
         console.log(err);
     }
-
-    /*router.get("/", validateToken, (req, res) => {
-      res.json(req.user);*/
 };
 
 module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser}
