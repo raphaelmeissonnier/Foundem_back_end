@@ -16,7 +16,7 @@ class Objet
         }
         else
         {
-            throw 'LES PARAMETRES FOURNIS NE SONT PAS BONS !'
+            throw 'CLASSE OBJET LES PARAMETRES FOURNIS NE SONT PAS BONS !'
         }
     }
 
