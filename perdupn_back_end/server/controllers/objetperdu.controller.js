@@ -11,8 +11,8 @@ const getObjetsPerdus = async (req,res) => {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
         objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
         objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.id, objet.categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
-        console.log("TYPE",typeof(objetsperdus));
-        console.log("Objets Perdus",objetsperdus);
+        //console.log("TYPE",typeof(objetsperdus));
+        //console.log("Objets Perdus",objetsperdus);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
         res.send(monRes);
