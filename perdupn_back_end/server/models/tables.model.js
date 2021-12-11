@@ -31,7 +31,7 @@ const ObjetPerduModel = db.define('objetperdu', {
 });
 
 // Define schema
-const User = db.define('user', {
+const UserModel = db.define('user', {
     // Define attributes
     email: {
         type: DataTypes.STRING,
@@ -79,7 +79,7 @@ const ObjetTrouveModel = db.define('objettrouve', {
     timestamps: false,
 });
 
-const ObjetMatche = db.define('objetmatche', {
+const ObjetMatcheModel = db.define('objetmatche', {
     // Define attributes
     objettrouve_id: {
         type: Sequelize.INTEGER,
@@ -103,4 +103,4 @@ const ObjetMatche = db.define('objetmatche', {
     timestamps: false,
 });
 
-module.exports = {User, ObjetTrouveModel, ObjetPerduModel, ObjetMatche};
+module.exports = {UserModel, ObjetTrouveModel, ObjetPerduModel, ObjetMatcheModel};

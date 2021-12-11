@@ -8,6 +8,6 @@ const {
 // Init express router
 const router = express.Router();
 
-router.post('/objetstrouves', createObjetMatche);
+router.post('/objetsmatche', createObjetMatche);
 
 module.exports = router;
