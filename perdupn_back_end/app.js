@@ -7,6 +7,9 @@ const db = require("./server/config/database.js");
 const RouterObjetPerdu = require("./server/routes/objetsperdu");
 const RouterObjetTrouve = require("./server/routes/objetstrouve");
 const RouterUser = require("./server/routes/user");
+
+//Import Auth parts
+const {chechUser,requireAuth} = require("./server/middleware/authentication")
  
 // Init express
 const app = express();
@@ -14,6 +17,12 @@ const app = express();
 app.use(express.json());
 // use cors
 app.use(cors());
+
+app.use(chechUser)
+app.get('/jwtid', requireAuth, (req, res) => {
+  let id = res.locals.user
+  res.status(200).send(id)
+})
  
 // Testing database connection 
 async function connectionDB(){
