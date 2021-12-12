@@ -31,7 +31,7 @@ const ObjetPerdu = db.define('objetperdu', {
 });
 
 // Define schema
-const User = db.define('user', {
+const UserModel = db.define('user', {
     // Define attributes
     email: {
         type: DataTypes.STRING,
@@ -79,4 +79,4 @@ const ObjetTrouve = db.define('objettrouve', {
     timestamps: false,
 });
 
-module.exports = User, ObjetTrouve, ObjetPerdu;
+module.exports = {UserModel, ObjetTrouve, ObjetPerdu};
