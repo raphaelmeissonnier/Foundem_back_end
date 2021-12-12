@@ -12,7 +12,8 @@ checkUser = (req, res, next) => {
         next();
       } else {
           console.log("DEcodedTOken",decodedToken.id)
-        let user = await UserModel.findByPk(decodedToken.id);
+        let user = await UserModel.findOne({where : { id: decodedToken.id }});
+          //console.log("User: ", user);
         res.locals.user = user;
         next();
       }
@@ -24,6 +25,7 @@ checkUser = (req, res, next) => {
 };
 
 requireAuth = (req, res, next) => {
+  console.log("req.cookies: ", req.cookies.jwt);
   if (req.cookies.jwt) {
     const token = req.cookies.jwt;
 
@@ -35,6 +37,7 @@ requireAuth = (req, res, next) => {
       }
     });
   } else {
+    res.status(200).send("No tokens");
     console.log("No tokens");
   }
 };

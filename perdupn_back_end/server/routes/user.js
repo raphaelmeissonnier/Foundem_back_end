@@ -23,6 +23,6 @@ router.put('/users/:id',updateUser);
 
 router.delete('/users/:id', deleteUser);
 
-router.post('/users/loginUser',loginUser);
+router.post('/users/login',loginUser);
 
 module.exports = router;

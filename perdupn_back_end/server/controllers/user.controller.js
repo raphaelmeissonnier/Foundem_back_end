@@ -2,7 +2,7 @@ const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
 //const User = require("../models/user.model");
-const User = require("../models/tables.model");
+const {UserModel} = require("../models/tables.model");
 
 const bcrypt = require("bcrypt");
 
@@ -14,31 +14,31 @@ const salt = bcrypt.genSalt(saltRounds);
 // Get all Users
 const getUsers = async (req,res) => {
     try {
-        const users = await User.findAll();
+        const users = await UserModel.findAll();
         res.send(users);
     }catch(err){
         console.log(err);
     }
 }
 
-// Get objet perdu by id
+// Get user by id
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findAll({
+        const user = await UserModel.findOne({
             where: {
                 id: req.params.id
             }
         });
-        res.send(user[0]);
+        res.json(user);
     } catch (err) {
         console.log(err);
     }
 }
 
-// Create a new objet perdu
+// Create a new user
 const createUser = async (req, res) => {
     try {
-        await User.create({
+        await UserModel.create({
             email: req.body.email,
             username: req.body.username,
             password: req.body.password, 
@@ -56,7 +56,7 @@ const createUser = async (req, res) => {
 // Update objet perdu by id
 const updateUser= async (req, res) => {
     try {
-        await User.update(req.body, {
+        await UserModel.update(req.body, {
             where: {
                 idUser: req.params.id
             }
@@ -73,7 +73,7 @@ const updateUser= async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         console.log(req.params);
-        await User.destroy({
+        await UserModel.destroy({
             where: {
                 idUser: req.params.id
             }
@@ -90,7 +90,7 @@ const loginUser = async (req, res) => {
     try {
         console.log(req.body);
         //On récupère l'utilisateur
-        const user = await User.findOne({
+        const user = await UserModel.findOne({
             where: {
                 username: req.body.username
             }

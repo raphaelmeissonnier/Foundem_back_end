@@ -7,9 +7,10 @@ const db = require("./server/config/database.js");
 const RouterObjetPerdu = require("./server/routes/objetsperdu");
 const RouterObjetTrouve = require("./server/routes/objetstrouve");
 const RouterUser = require("./server/routes/user");
+const cookieParser = require("cookie-parser");
 
 //Import Auth parts
-const {chechUser,requireAuth} = require("./server/middleware/authentication")
+const {checkUser,requireAuth} = require("./server/middleware/authentication")
  
 // Init express
 const app = express();
@@ -17,9 +18,12 @@ const app = express();
 app.use(express.json());
 // use cors
 app.use(cors());
+//use cookies-parser
+app.use(cookieParser());
 
-app.use(chechUser)
-app.get('/jwtid', requireAuth, (req, res) => {
+app.use(checkUser);
+
+app.get('/authId', requireAuth, (req, res) => {
   let id = res.locals.user
   res.status(200).send(id)
 })
