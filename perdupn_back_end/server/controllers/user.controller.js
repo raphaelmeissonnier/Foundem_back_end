@@ -125,4 +125,11 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser}
+const logoutUser = async (req, res) => {
+    //On deconnecte l'utilisateur   
+    console.log("Cookie de Deco",res.cookie("jwt","Coucou", { httpOnly: true,maxAge: 1 })) 
+    res.cookie("jwt","Coucou", { httpOnly: true,maxAge: 1 });
+    res.status(200).send();
+};
+
+module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser}

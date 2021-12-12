@@ -7,7 +7,8 @@ const {
     updateUser,
     createUser,
     deleteUser,
-    loginUser
+    loginUser,
+    logoutUser
  } = require("../controllers/user.controller");
 
   // Init express router
@@ -15,14 +16,16 @@ const router = express.Router();
 
 router.get('/users',getUsers);
 
-router.get('/users/:id',getUserById);
-
 router.post('/users', createUser);
+
+router.post('/users/login',loginUser);
+
+router.get("/users/logout",logoutUser);
+
+router.get('/users/:id',getUserById);
 
 router.put('/users/:id',updateUser);
 
 router.delete('/users/:id', deleteUser);
-
-router.post('/users/login',loginUser);
 
 module.exports = router;

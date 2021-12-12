@@ -6,7 +6,7 @@ const db = require("../config/database.js");
 const { DataTypes } = Sequelize;
 
 
-const ObjetPerdu = db.define('objetperdu', {
+const ObjetPerduModel = db.define('objetperdu', {
     // Define attributes
     intitule: DataTypes.STRING,
     description: DataTypes.TEXT,
@@ -55,7 +55,7 @@ const UserModel = db.define('user', {
     timestamps: false,
 });
 
-const ObjetTrouve = db.define('objettrouve', {
+const ObjetTrouveModel = db.define('objettrouve', {
     // Define attributes
     //idObjet: DataTypes.INTEGER,
     intitule: DataTypes.STRING,
@@ -79,4 +79,4 @@ const ObjetTrouve = db.define('objettrouve', {
     timestamps: false,
 });
 
-module.exports = {UserModel, ObjetTrouve, ObjetPerdu};
+module.exports = {UserModel, ObjetTrouveModel, ObjetPerduModel};
