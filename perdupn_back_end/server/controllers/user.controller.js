@@ -42,14 +42,18 @@ const createUser = async (req, res) => {
             email: req.body.email,
             username: req.body.username,
             password: req.body.password, 
-
         });
-        
+
         res.json({
+            "result": 1,
             "message": "User Created"
         });
     } catch (err) {
         console.log(err);
+        res.json({
+            "result": 0,
+            "message": err
+        });
     }
 }
 
@@ -109,7 +113,7 @@ const loginUser = async (req, res) => {
             {
                 return res.status(200).json({
                     result: 0,
-                    msg: "Les mdp ne correspondent pas !"
+                    msg: "Veuillez resaisir votre mot de passe !"
                 });
             }
         }
@@ -118,7 +122,7 @@ const loginUser = async (req, res) => {
         else{
             return res.status(200).json({
                 result: 0,
-                msg: "L'utilisateur n'existe pas"
+                msg: "Vous n'avez pas de compte !"
             });
         }
     }
