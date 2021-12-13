@@ -5,14 +5,20 @@ const {ObjetMatcheModel} = require("../models/tables.model");
 const createObjetMatche = async (req, res) => {
     try {
         await ObjetMatcheModel.create({
-            objettrouve_id: req.body.objettrouve,
-            objetperdu_id: req.body.objetperdu,
+            objettrouve_id: req.body.idObjetT,
+            objetperdu_id: req.body.idObjetP,
         });
-        res.json({
-            "message": "Objet Matche Created"
+        console.log("Dans la creation de matche ################################")
+        res.status(200).json({ 
+            result: 1,
+            msg: 'Matche entre objet bien crée !'
         });
     } catch (err) {
         console.log(err);
+        return res.status(200).json({
+            result: 0,
+            msg: "Erreur lors de la creation du Matche !"
+        });
     }
 }
 

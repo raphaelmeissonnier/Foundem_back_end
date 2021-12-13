@@ -6,6 +6,7 @@ const db = require("./server/config/database.js");
 // Import router
 const RouterObjetPerdu = require("./server/routes/objetsperdu");
 const RouterObjetTrouve = require("./server/routes/objetstrouve");
+const RouterObjetMatche = require("./server/routes/objetmatche");
 const RouterUser = require("./server/routes/user");
 const cookieParser = require("cookie-parser");
 
@@ -50,7 +51,8 @@ synchroDB_Model();
 app.use(RouterUser);
 app.use(RouterObjetPerdu);
 app.use(RouterObjetTrouve);
- 
+app.use(RouterObjetMatche);
+
 // listen on port
 //app.listen(3001, () => console.log('Server running at http://localhost:3001'));
 

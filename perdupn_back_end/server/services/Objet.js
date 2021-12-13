@@ -2,7 +2,7 @@ const Localisation = require('./Localisation');
 
 class Objet
 {
-    constructor(id, categorie, localisation, description, intitule, date, adresseMail)
+    constructor(id, categorie, localisation, description, intitule, date, userId)
     {
         if(typeof categorie === 'string' && localisation instanceof Localisation)
         {
@@ -12,7 +12,7 @@ class Objet
             this.description = description;
             this.intitule = intitule;
             this.date = date;
-            this.adresseMail = adresseMail;
+            this.userId = userId;
         }
         else
         {
