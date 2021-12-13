@@ -64,13 +64,13 @@ const ObjetTrouveModel = db.define('objettrouve', {
     date: DataTypes.DATE,
     longitude: DataTypes.DOUBLE,
     latitude: DataTypes.DOUBLE,
-    /*user_id: {
+    user_id: {
         type: Sequelize.INTEGER,
         references: {
             model: 'user', // 'user' refers to table name
             key: 'id', // 'id' refers to column name in user table
         }
-    },*/
+    },
 },{
     // Freeze Table Name
     freezeTableName: true,
