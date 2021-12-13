@@ -8,15 +8,34 @@ const { DataTypes } = Sequelize;
 
 const ObjetPerduModel = db.define('objetperdu', {
     // Define attributes
-    intitule: DataTypes.STRING,
+    intitule:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     description: DataTypes.TEXT,
-    categorie: DataTypes.STRING,
-    date: DataTypes.DATE,
-    longitude: DataTypes.DOUBLE,
-    latitude: DataTypes.DOUBLE,
-    rayon: DataTypes.INTEGER,
+    categorie: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+    },
+    longitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+    latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+    rayon: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     user_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
             model: 'user', // 'user' refers to table name
             key: 'id', // 'id' refers to column name in user table
