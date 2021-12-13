@@ -26,9 +26,11 @@ checkUser = (req, res, next) => {
 
 requireAuth = (req, res, next) => {
   console.log("req.cookies: ", req.cookies.jwt);
-  if (req.cookies.jwt) {
+  //Si l'utilisateur est connecté (existence d'un cookie de session jwt)
+  if (req.cookies.jwt)
+  {
     const token = req.cookies.jwt;
-
+    //On vérifie que le token du cookie est bien celui de l'utilisateur connecté
     jwt.verify(token, config.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err);
@@ -36,8 +38,11 @@ requireAuth = (req, res, next) => {
         next();
       }
     });
-  } else {
-    res.status(200).send("No tokens");
+  }
+  //Si l'utilisateur n'est pas connecté (pas de cookie de session)
+  else
+  {
+    res.status(200).json("No tokens");
     console.log("No tokens");
   }
 };
