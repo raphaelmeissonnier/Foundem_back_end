@@ -107,3 +107,5 @@ dist
 .tern-port
 
 ./perdupn_back_end/server/config/config.js
+./perdupn_back_end/server/config/database.js
+
