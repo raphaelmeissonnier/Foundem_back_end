@@ -103,11 +103,12 @@ const loginUser = async (req, res) => {
                 const id = user.id;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
                 res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
-                res.status(200).json({ user: user.id });
+                res.status(200).json({ result: 1, user: user.id });
             }
             else
             {
                 return res.status(200).json({
+                    result: 0,
                     msg: "Les mdp ne correspondent pas !"
                 });
             }
@@ -116,6 +117,7 @@ const loginUser = async (req, res) => {
         //Si l'utlisateur n'existe pas - Renvoyer une erreur
         else{
             return res.status(200).json({
+                result: 0,
                 msg: "L'utilisateur n'existe pas"
             });
         }
