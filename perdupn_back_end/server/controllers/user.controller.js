@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const {UserModel} = require("../models/tables.model");
 
 const bcrypt = require("bcrypt");
+const {Sequelize} = require("sequelize");
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -46,14 +47,28 @@ const createUser = async (req, res) => {
 
         res.json({
             "result": 1,
-            "message": "User Created"
+            "msg": "Votre compte a bien été créé"
         });
     } catch (err) {
         console.log(err);
-        res.json({
-            "result": 0,
-            "message": err
-        });
+        switch(err)
+        {
+            case Sequelize.UniqueConstraintError:
+                res.json({
+                    "result": 0,
+                    "msg": "Email/Username existant"
+                });
+            case Sequelize.ValidationError:
+                res.json({
+                    "result": 0,
+                    "msg": "L'email saisi est invalide"
+                });
+            default:
+                res.json({
+                    "result": 0,
+                    "msg": err
+                });
+        }
     }
 }
 
