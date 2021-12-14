@@ -2,7 +2,9 @@
 Il nous est à tous arrivé de perdre un objet, se dire que ce serait génial qu’une personne le trouve et nous contacte pour nous le rendre, ou même de trouver un objet et de vouloir le rendre au propriétaire avec un moyen simple. 
 Nous avons donc mis en place ce projet pour répondre à cette problématique. L’objectif est de créer une plateforme qui va permettre aux utilisateurs de gagner du temps et de l’argent dans leurs démarches à propos d’un objet perdu ou trouvé.
 
-Vous pouvez retrouver notre application sur GitHub: le front-end est [ici](https://github.com/raphaelmeissonnier/Foundem_front_end) et le back-end [ici](https://github.com/raphaelmeissonnier/Foundem_back_end).
+Vous pouvez retrouver notre application sur GitHub: 
+* le front-end est [ici](https://github.com/raphaelmeissonnier/Foundem_front_end).
+* le back-end est [ici](https://github.com/raphaelmeissonnier/Foundem_back_end).
 
 ## Les fonctionnalités qu'on vous propose: 
 Avec l'application Found'em, vous pouvez: 
