@@ -1,4 +1,3 @@
-//const ObjetPerduModel = require("../models/objetperdu.model");
 const {ObjetPerduModel, UserModel} = require("../models/tables.model");
 const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
@@ -10,7 +9,7 @@ const {Sequelize} = require("sequelize");
 const getObjetsPerdus = async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
+        let objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
         objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
         console.log("Objets Perdus",objetsperdus);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
@@ -67,7 +66,7 @@ const createObjetPerdu = async (req, res) => {
         {
             res.json({
                 "result": 0,
-                "message": "User not existing"
+                "message": "L'utilisateur n'existe pas"
             });
         }
     } catch (err) {
@@ -79,11 +78,13 @@ const createObjetPerdu = async (req, res) => {
                     "result": 0,
                     "message": "Paramètres manquants"
                 });
+                break;
             default:
                 res.json({
                     "result": 0,
                     "message": err
                 });
+                break;
         }
     }
 }

@@ -76,19 +76,36 @@ const UserModel = db.define('user', {
 
 const ObjetTrouveModel = db.define('objettrouve', {
     // Define attributes
-    //idObjet: DataTypes.INTEGER,
-    intitule: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    categorie: DataTypes.STRING,
-    date: DataTypes.DATE,
-    longitude: DataTypes.DOUBLE,
-    latitude: DataTypes.DOUBLE,
+    intitule: {
+        type: DataTypes.STRING,
+        allowNull:false
+    },
+    description: {
+        type: DataTypes.TEXT
+    },
+    categorie: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    longitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+    latitude: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
     user_id: {
         type: Sequelize.INTEGER,
         references: {
             model: 'user', // 'user' refers to table name
             key: 'id', // 'id' refers to column name in user table
-        }
+        },
+        allowNull: false
     },
 },{
     // Freeze Table Name
