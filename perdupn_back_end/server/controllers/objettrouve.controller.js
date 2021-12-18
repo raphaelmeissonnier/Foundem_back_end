@@ -1,5 +1,4 @@
-//const ObjetTrouveModel = require("../models/objettrouve.model");
-const {ObjetTrouveModel} = require("../models/tables.model");
+const {ObjetTrouveModel, UserModel} = require("../models/tables.model");
 const LocalisationPrecise = require("../services/LocalisationPrecise");
 const Main = require("../services/Main");
 const Position = require("../services/Position");
@@ -90,17 +89,62 @@ const deleteObjetTrouve = async (req, res) => {
 }
 
 // Delete objet trouve by id
+//ATTENTION A CE QUE LES IF NE BLOQUENT PAS
 const rechercheObjetTrouve = async (req, res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        objetstrouves = await ObjetTrouveModel.findAll();
-        //console.log("Objet trouves",objetstrouves)
-        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
-        console.log("MapObjets", mapObjets);
-        const match=new IMatcher();
-        const monRes = match.matching(mapObjets,req.body.intitule, req.body.categorie,req.body.date, req.body.longitude, req.body.latitude);
-        console.log("Mon Res", monRes);
-        res.send(monRes)
+        //On vérifie que l'utilisateur existe bien
+        const user = await UserModel.findOne({
+            where:{
+                id: req.body.user_id
+            }
+        })
+        //Si l'utlisateur existe, on lance la recherche d'objets
+        if(user) {
+            //On récupère l'ensemble des objets trouvés
+            let objetstrouves = await ObjetTrouveModel.findAll({
+                where: {
+                    user_id: {
+                        $not: req.body.user_id
+                    }
+                }
+            });
+            console.log("let objetstrouves", objetstrouves);
+
+            //CE IF NE MARCHE PAS
+            //Si il existe dans la base de données des objets trouvés alors on lance la recherche
+            if(objetstrouves) {
+                //console.log("Objet trouves",objetstrouves)
+                objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude, objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
+                console.log("MapObjets", mapObjets);
+                const match = new IMatcher();
+                const monRes = match.matching(mapObjets, req.body.intitule, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude);
+                console.log("Mon Res", monRes);
+                res.send(monRes);
+                /*res.send({
+                    "result": 1,
+                    "message": (monRes) ? monRes: "Pas d'objets trouvés correspodant à votre requête"
+                })*/
+                /*res.json({
+                    "result": 1,
+                    "message": monRes
+                })*/
+            }
+            else
+            {
+                res.json({
+                    "result": 1,
+                    "message": "La base de données est vide !"
+                })
+            }
+        }
+        else
+        {
+            res.json({
+                "result": 0,
+                "message": "L'utlisateur n'existe pas !"
+            })
+        }
     } catch (err) {
         console.log(err);
     }
