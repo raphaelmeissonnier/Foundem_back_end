@@ -17,7 +17,7 @@ class IMatcher{
         //On récupère la collection d'objets
         var mapObjets=tabObjet;
 
-        var mapObjetsTrouve= new Map();
+        var mapObjetsTrouve= new Array();
         var intitule_reg=new RegExp(intitule,"gmi")
         var cptVal=0;
 
@@ -59,7 +59,7 @@ class IMatcher{
             l'objet trouvé est suceptible d'être celui recherché par l'utilisateur
             */
             if(cptVal>=6){
-                mapObjetsTrouve.set(mapObjets[i]);
+                mapObjetsTrouve.push(mapObjets[i]);
             }
             cptVal=0;
         }
