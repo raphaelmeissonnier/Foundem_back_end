@@ -3,14 +3,13 @@ const LocalisationPrecise = require("../services/LocalisationPrecise");
 const Main = require("../services/Main");
 const Position = require("../services/Position");
 const ObjetTrouve = require("../services/ObjetTrouve");
-const Matcher = require("../services/Matcher");
 const IMatcher = require("../services/IMatcher");
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        objetstrouves = await ObjetTrouveModel.findAll(); // Requete SQL pour recup tous les objets de la BD
+        let objetstrouves = await ObjetTrouveModel.findAll(); // Requete SQL pour recup tous les objets de la BD
         objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.adresseMail))) //Transformation des objets BD en type ObjetPerdu
         //console.log("TYPE",typeof(objetstrouves));
         //console.log("Objets Trouve",objetstrouves);
@@ -113,27 +112,29 @@ const rechercheObjetTrouve = async (req, res) => {
 
             //CE IF NE MARCHE PAS
             //Si il existe dans la base de données des objets trouvés alors on lance la recherche
-            if(objetstrouves) {
+            if(objetstrouves.length) {
                 //console.log("Objet trouves",objetstrouves)
                 objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude, objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
                 console.log("MapObjets", mapObjets);
                 const match = new IMatcher();
                 const monRes = match.matching(mapObjets, req.body.intitule, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude);
                 console.log("Mon Res", monRes);
-                res.send(monRes);
-                /*res.send({
-                    "result": 1,
-                    "message": (monRes) ? monRes: "Pas d'objets trouvés correspodant à votre requête"
-                })*/
-                /*res.json({
-                    "result": 1,
-                    "message": monRes
-                })*/
+                if(monRes.length)
+                {
+                    res.send(monRes);
+                }
+                else
+                {
+                    res.json({
+                        "result": 1,
+                        "message": "Aucun objet trouvé correspondant à votre recherche"
+                    })
+                }
             }
             else
             {
                 res.json({
-                    "result": 1,
+                    "result": 0,
                     "message": "La base de données est vide !"
                 })
             }
@@ -147,6 +148,10 @@ const rechercheObjetTrouve = async (req, res) => {
         }
     } catch (err) {
         console.log(err);
+        res.json({
+            "result": 0,
+            "message": err
+        });
     }
 }
 
