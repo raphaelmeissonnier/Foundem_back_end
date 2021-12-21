@@ -22,6 +22,10 @@ const ObjetPerduModel = db.define('objetperdu', {
             key: 'id', // 'id' refers to column name in user table
         }
     },
+    etat:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+    }
 },{
     // Freeze Table Name
     freezeTableName: true,
@@ -71,6 +75,10 @@ const ObjetTrouveModel = db.define('objettrouve', {
             key: 'id', // 'id' refers to column name in user table
         }
     },
+    etat:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+    }
 },{
     // Freeze Table Name
     freezeTableName: true,
