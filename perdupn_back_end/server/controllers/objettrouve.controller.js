@@ -1,4 +1,4 @@
-const {ObjetTrouveModel, UserModel} = require("../models/tables.model");
+const {ObjetTrouveModel, UserModel, ObjetPerduModel} = require("../models/tables.model");
 const LocalisationPrecise = require("../services/LocalisationPrecise");
 const Main = require("../services/Main");
 const Position = require("../services/Position");
@@ -155,4 +155,19 @@ const rechercheObjetTrouve = async (req, res) => {
     }
 }
 
-module.exports = {getObjetTrouveById,getObjetsTrouves,deleteObjetTrouve,updateObjetTrouve,createObjetTrouve, rechercheObjetTrouve}
+// Get objet trouvé by user id
+const getObjetTrouveByIdUser = async (req, res) => {
+    try {
+        const objettrouve = await ObjetTrouveModel.findAll({
+            where: {
+                user_id: req.params.id
+            }
+        });
+        res.send(objettrouve);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+module.exports = {getObjetTrouveById,getObjetsTrouves,deleteObjetTrouve,updateObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}

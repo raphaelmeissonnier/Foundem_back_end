@@ -1,4 +1,3 @@
-//const ObjetPerduModel = require("../models/objetperdu.model");
 const {ObjetPerduModel} = require("../models/tables.model");
 const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
@@ -10,7 +9,7 @@ const { Op } = require("sequelize");
 const getObjetsPerdus = async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
+        let objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
         objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.id, objet.categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
         //console.log("TYPE",typeof(objetsperdus));
         //console.log("Objets Perdus",objetsperdus);
@@ -91,7 +90,7 @@ const deleteObjetPerdu = async (req, res) => {
     }
 }
 
-// Get objet perdu by id
+// Get objet perdu by user id
 const getObjetPerduByIdUser = async (req, res) => {
     try {
         const objetperdu = await ObjetPerduModel.findAll({

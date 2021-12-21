@@ -1,4 +1,4 @@
-const {ObjetMatcheModel} = require("../models/tables.model");
+const {ObjetMatcheModel, ObjetPerduModel, ObjetTrouveModel} = require("../models/tables.model");
 
 
 // Create a new objet trouve
@@ -8,8 +8,17 @@ const createObjetMatche = async (req, res) => {
             objettrouve_id: req.body.idObjetT,
             objetperdu_id: req.body.idObjetP,
         });
-        console.log("Dans la creation de matche ################################")
-        res.status(200).json({ 
+        await ObjetPerduModel.update(
+            {etat : 2},
+            { where:{id: req.body.idObjetP} }
+        )
+        await ObjetTrouveModel.update(
+            {etat : 2},
+            {where:{
+                id: req.body.idObjetT
+            }}
+        )
+        res.status(200).json({
             result: 1,
             msg: 'Matche entre objet bien crée !'
         });
