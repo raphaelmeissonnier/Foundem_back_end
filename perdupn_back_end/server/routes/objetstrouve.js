@@ -7,8 +7,10 @@ const {
     updateObjetTrouve,
     createObjetTrouve,
     deleteObjetTrouve,
-    rechercheObjetTrouve
+    rechercheObjetTrouve,
+    getObjetTrouveByIdUser
  } = require("../controllers/objettrouve.controller");
+const {getObjetPerduByIdUser} = require("../controllers/objetperdu.controller");
 
   // Init express router
 const router = express.Router();
@@ -24,5 +26,8 @@ router.post('/objetstrouves/recherche', rechercheObjetTrouve);
 router.put('/objetstrouves/:id',updateObjetTrouve);
 
 router.delete('/objetstrouves/:id', deleteObjetTrouve);
+
+router.get('/objetstrouves/user/:id', getObjetTrouveByIdUser);
+
 
 module.exports = router;
