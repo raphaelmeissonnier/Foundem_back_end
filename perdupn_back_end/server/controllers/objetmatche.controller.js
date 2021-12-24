@@ -31,4 +31,52 @@ const createObjetMatche = async (req, res) => {
     }
 }
 
-module.exports = {createObjetMatche}
+const getObjetMatche = async (req, res) => {
+    try{
+        const objetMatche = await ObjetMatcheModel.findOne({
+            where:
+            {
+                objettrouve_id: req.params.id
+            }
+        })
+        if(objetMatche)
+        {
+            res.send(objetMatche);
+        }
+        else
+        {
+            return res.status(200).json({
+                result: 1,
+                message: "Aucun match trouvé"
+            });
+        }
+    }
+    catch(err)
+    {
+        return res.status(200).json({
+            result: 0,
+            message: "Erreur lors de récupération des objets matchés"
+        });
+    }
+}
+
+const deleteObjetMatche = async (req, res) => {
+    try {
+        await ObjetMatcheModel.destroy({
+            where: {
+                objettrouve_id: req.params.id
+            }
+        });
+        res.json({
+            "message": "Objet Matche Deleted"
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({
+            message:err
+        });
+    }
+}
+
+
+module.exports = {createObjetMatche, getObjetMatche, deleteObjetMatche}
