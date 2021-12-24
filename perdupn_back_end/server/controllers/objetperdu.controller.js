@@ -3,7 +3,6 @@ const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
 const ObjetPerdu = require("../services/ObjetPerdu")
 const Position =require("../services/Position")
-const { Op } = require("sequelize");
 
 // Get all Objets Perdus
 const getObjetsPerdus = async (req,res) => {
@@ -61,16 +60,22 @@ const createObjetPerdu = async (req, res) => {
 // Update objet perdu by id
 const updateObjetPerdu= async (req, res) => {
     try {
-        await ObjetPerduModel.update(req.body, {
-            where: {
-                id: req.params.id
+        await ObjetPerduModel.update(
+            {etat: req.body.etat},
+            {
+                where: {
+                    id: req.params.id
+                }
             }
-        });
+        );
         res.json({
-            "message": "Objet Perdu Updated"
+            message: "Objet Perdu Updated"
         });
     } catch (err) {
         console.log(err);
+        res.json({
+            message: err
+        });
     }
 }
  
@@ -104,4 +109,32 @@ const getObjetPerduByIdUser = async (req, res) => {
     }
 }
 
-module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu,getObjetPerduById,getObjetsPerdus, getObjetPerduByIdUser}
+const getObjetPerduByIdObjet = async (req, res) => {
+    try{
+        const objetPerdu = await ObjetPerduModel.findOne({
+            where:
+            {
+                id: req.params.id
+            }
+        })
+        if(objetPerdu)
+        {
+            res.send(objetPerdu);
+        }
+        else
+        {
+            res.json({
+                result: 0,
+                message: "Aucun objet trouvé"
+            })
+        }
+    }
+    catch(err){
+        res.json({
+            result : 0,
+            message: err
+        })
+    }
+}
+
+module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu,getObjetPerduById,getObjetsPerdus, getObjetPerduByIdUser, getObjetPerduByIdObjet}

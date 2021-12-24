@@ -1,4 +1,4 @@
-const {ObjetTrouveModel, UserModel, ObjetPerduModel} = require("../models/tables.model");
+const {ObjetTrouveModel, UserModel} = require("../models/tables.model");
 const LocalisationPrecise = require("../services/LocalisationPrecise");
 const Main = require("../services/Main");
 const Position = require("../services/Position");
@@ -58,16 +58,22 @@ const createObjetTrouve = async (req, res) => {
 // Update objet trouve by id
 const updateObjetTrouve= async (req, res) => {
     try {
-        await ObjetTrouveModel.update(req.body, {
-            where: {
-                id: req.params.id
+        await ObjetTrouveModel.update(
+            {etat:req.body.etat},
+            {
+                where: {
+                    id: req.params.id
+                }
             }
-        });
+        );
         res.json({
-            "message": "Objet Trouve Updated"
+            message: "Objet Trouve Updated"
         });
     } catch (err) {
         console.log(err);
+        res.json({
+            message: err
+        });
     }
 }
  
@@ -88,7 +94,6 @@ const deleteObjetTrouve = async (req, res) => {
 }
 
 // Delete objet trouve by id
-//ATTENTION A CE QUE LES IF NE BLOQUENT PAS
 const rechercheObjetTrouve = async (req, res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
@@ -105,7 +110,8 @@ const rechercheObjetTrouve = async (req, res) => {
                 where: {
                     user_id: {
                         $not: req.body.user_id
-                    }
+                    },
+                    etat: 1
                 }
             });
             console.log("let objetstrouves", objetstrouves);

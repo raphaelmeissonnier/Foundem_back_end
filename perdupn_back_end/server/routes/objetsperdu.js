@@ -7,7 +7,8 @@ const {
     updateObjetPerdu,
     createObjetPerdu,
     deleteObjetPerdu,
-    getObjetPerduByIdUser
+    getObjetPerduByIdUser,
+    getObjetPerduByIdObjet
  } = require("../controllers/objetperdu.controller");
 
   // Init express router
@@ -15,7 +16,9 @@ const router = express.Router();
 
 router.get('/objetsperdus/:longitude/:latitude/:rayon',getObjetsPerdus);
 
-router.get('/objetsperdus/:id',getObjetPerduById);
+router.get('/objetsperdus/:id',getObjetPerduByIdObjet);
+
+router.get('/objetsperdus/notUser/:id',getObjetPerduById);
 
 router.post('/objetsperdus', createObjetPerdu);
 
