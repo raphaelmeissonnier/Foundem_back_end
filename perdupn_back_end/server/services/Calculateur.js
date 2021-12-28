@@ -15,7 +15,7 @@ class Calculateur
             var positionUser = localisationUser.getPosition();
             var positionObjet = localisationObjet.getPosition();
             var user = { lat: positionUser.getLatitude(), lng: positionUser.getLongitude() }    ;
-            var objet = { lat: positionObjet.getLatitude(), lng: positionObjet.getLongitude() }   ;
+            var objet = { lat: positionObjet.getLatitude(), lng: positionObjet.getLongitude() }
             return (haversine(user, objet))/1000;
         }
     }

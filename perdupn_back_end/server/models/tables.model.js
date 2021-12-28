@@ -6,7 +6,7 @@ const db = require("../config/database.js");
 const { DataTypes } = Sequelize;
 
 
-const ObjetPerdu = db.define('objetperdu', {
+const ObjetPerduModel = db.define('objetperdu', {
     // Define attributes
     intitule: DataTypes.STRING,
     description: DataTypes.TEXT,
@@ -22,6 +22,10 @@ const ObjetPerdu = db.define('objetperdu', {
             key: 'id', // 'id' refers to column name in user table
         }
     },
+    etat:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+    }
 },{
     // Freeze Table Name
     freezeTableName: true,
@@ -31,7 +35,7 @@ const ObjetPerdu = db.define('objetperdu', {
 });
 
 // Define schema
-const User = db.define('user', {
+const UserModel = db.define('user', {
     // Define attributes
     email: {
         type: DataTypes.STRING,
@@ -55,7 +59,7 @@ const User = db.define('user', {
     timestamps: false,
 });
 
-const ObjetTrouve = db.define('objettrouve', {
+const ObjetTrouveModel = db.define('objettrouve', {
     // Define attributes
     //idObjet: DataTypes.INTEGER,
     intitule: DataTypes.STRING,
@@ -71,6 +75,10 @@ const ObjetTrouve = db.define('objettrouve', {
             key: 'id', // 'id' refers to column name in user table
         }
     },
+    etat:{
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+    }
 },{
     // Freeze Table Name
     freezeTableName: true,
@@ -79,4 +87,28 @@ const ObjetTrouve = db.define('objettrouve', {
     timestamps: false,
 });
 
-module.exports = User, ObjetTrouve, ObjetPerdu;
+const ObjetMatcheModel = db.define('objetmatche', {
+    // Define attributes
+    objettrouve_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'objettrouve', // 'user' refers to table name
+            key: 'id', // 'id' refers to column name in user table
+        }
+    },
+    objetperdu_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'objetperdu', // 'user' refers to table name
+            key: 'id', // 'id' refers to column name in user table
+        }
+    },
+},{
+    // Freeze Table Name
+    freezeTableName: true,
+    createdAt : false,
+    updatedAt: false,
+    timestamps: false,
+});
+
+module.exports = {UserModel, ObjetTrouveModel, ObjetPerduModel, ObjetMatcheModel};

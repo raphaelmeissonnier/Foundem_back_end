@@ -2,9 +2,10 @@ const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
 //const User = require("../models/user.model");
-const User = require("../models/tables.model");
+const {UserModel} = require("../models/tables.model");
 
 const bcrypt = require("bcrypt");
+const {Sequelize} = require("sequelize");
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -14,49 +15,67 @@ const salt = bcrypt.genSalt(saltRounds);
 // Get all Users
 const getUsers = async (req,res) => {
     try {
-        const users = await User.findAll();
+        const users = await UserModel.findAll();
         res.send(users);
     }catch(err){
         console.log(err);
     }
 }
 
-// Get objet perdu by id
+// Get user by id
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findAll({
+        const user = await UserModel.findOne({
             where: {
                 id: req.params.id
             }
         });
-        res.send(user[0]);
+        res.json(user);
     } catch (err) {
         console.log(err);
     }
 }
 
-// Create a new objet perdu
+// Create a new user
 const createUser = async (req, res) => {
     try {
-        await User.create({
+        await UserModel.create({
             email: req.body.email,
             username: req.body.username,
             password: req.body.password, 
-
         });
-        
+
         res.json({
-            "message": "User Created"
+            "result": 1,
+            "msg": "Votre compte a bien été créé"
         });
     } catch (err) {
         console.log(err);
+        switch(err)
+        {
+            case Sequelize.UniqueConstraintError:
+                res.json({
+                    "result": 0,
+                    "msg": "Email/Username existant"
+                });
+            case Sequelize.ValidationError:
+                res.json({
+                    "result": 0,
+                    "msg": "L'email saisi est invalide"
+                });
+            default:
+                res.json({
+                    "result": 0,
+                    "msg": err
+                });
+        }
     }
 }
 
 // Update objet perdu by id
 const updateUser= async (req, res) => {
     try {
-        await User.update(req.body, {
+        await UserModel.update(req.body, {
             where: {
                 idUser: req.params.id
             }
@@ -73,7 +92,7 @@ const updateUser= async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         console.log(req.params);
-        await User.destroy({
+        await UserModel.destroy({
             where: {
                 idUser: req.params.id
             }
@@ -90,7 +109,7 @@ const loginUser = async (req, res) => {
     try {
         console.log(req.body);
         //On récupère l'utilisateur
-        const user = await User.findOne({
+        const user = await UserModel.findOne({
             where: {
                 username: req.body.username
             }
@@ -103,12 +122,13 @@ const loginUser = async (req, res) => {
                 const id = user.id;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
                 res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
-                res.status(200).json({ user: user.id });
+                res.status(200).json({ result: 1, user: user.id });
             }
             else
             {
                 return res.status(200).json({
-                    msg: "Les mdp ne correspondent pas !"
+                    result: 0,
+                    msg: "Veuillez resaisir votre mot de passe !"
                 });
             }
         }
@@ -116,7 +136,8 @@ const loginUser = async (req, res) => {
         //Si l'utlisateur n'existe pas - Renvoyer une erreur
         else{
             return res.status(200).json({
-                msg: "L'utilisateur n'existe pas"
+                result: 0,
+                msg: "Vous n'avez pas de compte !"
             });
         }
     }
@@ -125,4 +146,11 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser}
+const logoutUser = async (req, res) => {
+    //On deconnecte l'utilisateur   
+    console.log("Cookie de Deco",res.cookie("jwt","Coucou", { httpOnly: true,maxAge: 1 })) 
+    res.cookie("jwt","Coucou", { httpOnly: true,maxAge: 1 });
+    res.status(200).send();
+};
+
+module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser}

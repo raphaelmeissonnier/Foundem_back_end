@@ -1,16 +1,11 @@
-<<<<<<< Updated upstream
 var Main = require ("./Main")
-=======
-var Main = require ("../src/Main")
->>>>>>> Stashed changes
 const IMatcher = require('./IMatcher');
 
 
 class Matcher extends IMatcher{
 
-    constructor(evaluation){
+    constructor(){
 
-       super(evaluation)
     }
 
     matching(intitule, categorie, date, longitude, latitude){
