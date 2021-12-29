@@ -5,7 +5,7 @@ const IMatcher = require('./IMatcher');
 class Matcher extends IMatcher{
 
     constructor(){
-
+        super();
     }
 
     matching(intitule, categorie, date, longitude, latitude){
