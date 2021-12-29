@@ -51,7 +51,7 @@ const createUser = async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        switch(err)
+        switch(err.constructor)
         {
             case Sequelize.UniqueConstraintError:
                 res.json({

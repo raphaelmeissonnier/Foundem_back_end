@@ -1,8 +1,9 @@
-const {ObjetPerduModel} = require("../models/tables.model");
+const {ObjetPerduModel, UserModel} = require("../models/tables.model");
 const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
 const ObjetPerdu = require("../services/ObjetPerdu")
 const Position =require("../services/Position")
+const {Sequelize} = require("sequelize");
 
 // Get all Objets Perdus
 const getObjetsPerdus = async (req,res) => {
@@ -27,7 +28,7 @@ const getObjetPerduById = async (req, res) => {
             where: {
                 user_id:{
                     $not: req.params.id
-                }    
+                }
             }
         });
         res.send(objetperdu);
@@ -36,26 +37,61 @@ const getObjetPerduById = async (req, res) => {
     }
 }
 
+
 // Create a new objet perdu
 const createObjetPerdu = async (req, res) => {
     try {
-        await ObjetPerduModel.create({
-            intitule: req.body.intitule,
-            description: req.body.description,
-            categorie: req.body.categorie,
-            date: req.body.date,
-            longitude: parseFloat(req.body.longitude),
-            latitude: parseFloat(req.body.latitude),
-            rayon: parseInt(req.body.rayon),
-            user_id: parseInt(req.body.user_id)
-        });
-        res.json({
-            "message": "Objet Perdu Created"
-        });
+        //On vérifie que l'user existe
+        const user = await UserModel.findOne({
+            where:{
+                id: req.body.user_id
+            }
+        })
+        //Si l'user existe, on ajoute l'objet
+        if(user)
+        {
+            await ObjetPerduModel.create({
+                intitule: req.body.intitule,
+                description: req.body.description,
+                categorie: req.body.categorie,
+                date: req.body.date,
+                longitude: parseFloat(req.body.longitude),
+                latitude: parseFloat(req.body.latitude),
+                rayon: req.body.rayon,
+                user_id: req.body.user_id
+            });
+            res.json({
+                "result": 1,
+                "message": "Votre objet a bien été ajouté"
+            });
+        }
+        else
+        {
+            res.json({
+                "result": 0,
+                "message": "L'utilisateur n'existe pas"
+            });
+        }
     } catch (err) {
         console.log(err);
+        switch (err.constructor)
+        {
+            case Sequelize.ValidationError:
+                res.json({
+                    "result": 0,
+                    "message": "Paramètres manquants"
+                });
+                break;
+            default:
+                res.json({
+                    "result": 0,
+                    "message": err
+                });
+                break;
+        }
     }
 }
+
 
 // Update objet perdu by id
 const updateObjetPerdu= async (req, res) => {

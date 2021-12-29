@@ -4,6 +4,7 @@ const Main = require("../services/Main");
 const Position = require("../services/Position");
 const ObjetTrouve = require("../services/ObjetTrouve");
 const IMatcher = require("../services/IMatcher");
+const {Sequelize} = require("sequelize");
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
@@ -38,20 +39,51 @@ const getObjetTrouveById = async (req, res) => {
 // Create a new objet trouve
 const createObjetTrouve = async (req, res) => {
     try {
-        await ObjetTrouveModel.create({
-            intitule: req.body.intitule,
-            description: req.body.description,
-            categorie: req.body.categorie,
-            adresseMail: req.body.adresseMail,
-            date: req.body.date,
-            longitude: parseFloat(req.body.longitude),
-            latitude: parseFloat(req.body.latitude)
-        });
-        res.json({
-            "message": "Objet Trouve Created"
-        });
+        //On vérifie que l'user existe
+        const user = await UserModel.findOne({
+            where:{
+                id: req.body.user_id
+            }
+        })
+        //Si l'user existe, on ajoute l'objet
+        if(user) {
+            await ObjetTrouveModel.create({
+                intitule: req.body.intitule,
+                description: req.body.description,
+                categorie: req.body.categorie,
+                date: req.body.date,
+                longitude: parseFloat(req.body.longitude),
+                latitude: parseFloat(req.body.latitude),
+                user_id: req.body.user_id
+            });
+            res.json({
+                "result" : 1,
+                "message": "Votre objet a bien été ajouté"
+            });
+        }
+        else {
+            res.json({
+                "result" : 0,
+                "message": "L'utilisateur n'existe pas"
+            });
+        }
     } catch (err) {
         console.log(err);
+        switch (err.constructor)
+        {
+            case Sequelize.ValidationError:
+                res.json({
+                    "result": 0,
+                    "message": "Paramètres manquants"
+                });
+                break;
+            default:
+                res.json({
+                    "result": 0,
+                    "message": err
+                });
+                break
+        }
     }
 }
 
