@@ -1,8 +1,8 @@
 //Import les classes Localisation et Position
-var LocalisationPrecise = require('../src/LocalisationPrecise');
-var Position = require('../src/Position');
-var Calculateur = require('../src/Calculateur');
-var LocalisationFloue = require('../src/LocalisationFloue');
+var LocalisationPrecise = require('../services/LocalisationPrecise');
+var Position = require('../services/Position');
+var Calculateur = require('../services/Calculateur');
+var LocalisationFloue = require('../services/LocalisationFloue');
 
 const calculateur = new Calculateur();
 

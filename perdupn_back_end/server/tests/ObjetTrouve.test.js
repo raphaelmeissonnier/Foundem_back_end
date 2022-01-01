@@ -1,13 +1,13 @@
-var ObjetTrouve = require("../src/ObjetTrouve");
-var LocalisationPrecise = require("../src/LocalisationPrecise");
-var Position = require("../src/Position");
-var Calculateur = require("../src/Calculateur");
+var ObjetTrouve = require("../services/ObjetTrouve");
+var LocalisationPrecise = require("../services/LocalisationPrecise");
+var Position = require("../services/Position");
+var Calculateur = require("../services/Calculateur");
 
 //On mocke la fonction
 const mockCalculateurMethode = jest.fn().mockReturnValue(0.8874227710538172);
 
 // Calculateur est maintenant un constructeur simulé
-jest.mock('../src/Calculateur');
+jest.mock('../services/Calculateur');
 
 //Reset du mock
 beforeEach(()=> {
@@ -15,11 +15,11 @@ beforeEach(()=> {
 })
 
 //On vérifie que qu'un objet Calculateur a été créé dans la classe ObjetTrouve
-describe('../src/ObjetTrouve', () => {
+describe('../services/ObjetTrouve', () => {
     it('On verifie si le constructeur de calculateur est appelé', () => {
         const position = new Position(12,25)
         const localisation = new LocalisationPrecise(position);
-        const objetTrouve = new ObjetTrouve("toto",localisation);
+        const objetTrouve = new ObjetTrouve(1,"VETEMENTS",localisation,"casquette bleu de la marque Puma","casquette",new Date('2021-12-26'),1);
         expect(Calculateur).toHaveBeenCalledTimes(1);
     });
 });
@@ -36,7 +36,7 @@ describe('../src/ObjetTrouve', () => {
         //5. On vérifie que le résultat retourné à 4. est égal au résultat de l'étape 1.
         //6. On vérifie getDistanceLocalisationPrecise a été appelé 1 fois
 
-describe('../src/ObjetTrouve', () => {
+describe('../services/ObjetTrouve', () => {
     it('On verifie que l\'objet appelle la methode getDistance de l\'instance de Calculateur', () => {
         //1.
         expect(Calculateur).not.toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe('../src/ObjetTrouve', () => {
         //2.
         const positionObj = new Position(12,25)
         const localisationObj = new LocalisationPrecise(positionObj);
-        const objetTrouve = new ObjetTrouve("clés",localisationObj);
+        const objetTrouve = new ObjetTrouve(2,"EFFET PERSONNEL",localisationObj,"clé avec porte clé rouge","clé d'appartement",new Date('2021-12-29'),1);
 
         //3.
         expect(Calculateur).toHaveBeenCalledTimes(1);

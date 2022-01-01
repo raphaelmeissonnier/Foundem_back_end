@@ -1,14 +1,14 @@
-var ObjetPerdu = require("../src/ObjetPerdu");
-var LocalisationFloue = require("../src/LocalisationFloue");
-var LocalisationPrecise= require("../src/LocalisationPrecise");
-var Position = require("../src/Position");
-var Calculateur = require("../src/Calculateur");
+var ObjetPerdu = require("../services/ObjetPerdu");
+var LocalisationFloue = require("../services/LocalisationFloue");
+var LocalisationPrecise= require("../services/LocalisationPrecise");
+var Position = require("../services/Position");
+var Calculateur = require("../services/Calculateur");
 
 //On mocke la fonction
 const mockCalculateurMethode = jest.fn().mockReturnValue(3.0990195135927845);
 
 // Calculateur est maintenant un constructeur simulé
-jest.mock('../src/Calculateur');
+jest.mock('../services/Calculateur');
 
 //Reset du mock
 beforeEach(()=> {
@@ -16,11 +16,11 @@ beforeEach(()=> {
 })
 
 //On vérifie que qu'un objet Calculateur a été créé dans la classe ObjetPerdu
-describe('../src/ObjetPerdu', () => {
+describe('../services/ObjetPerdu', () => {
     it('On verifie si le constructeur de calculateur est appelé', () => {
         const position = new Position(12,25)
-        const localisation = new LocalisationFloue(position, 2); //On fixe un rayon de 2
-        const objetPerdu = new ObjetPerdu("toto",localisation);
+        const localisation = new LocalisationFloue(position, 5); //On fixe un rayon de 2
+        const objetPerdu = new ObjetPerdu(2,"VETEMENTS",localisation,"tee shirt rouge de la marque decathlon","tee shirt",new Date('2021-12-22'),1);
 
         expect(Calculateur).toHaveBeenCalledTimes(1);
     });
@@ -38,7 +38,7 @@ describe('../src/ObjetPerdu', () => {
         //5. On vérifie que le résultat retourné à 4. est égal au résultat de l'étape 1.
         //6. On vérifie getDistanceLocalisationPrecise a été appelé 1 fois
 
-describe('../src/ObjetPerdu', () => {
+describe('../services/ObjetPerdu', () => {
     it('On verifie que l\'objet appelle la methode getDistance de l\'instance de Calculateur', () => {
         //1.
         expect(Calculateur).not.toHaveBeenCalled();
@@ -46,7 +46,7 @@ describe('../src/ObjetPerdu', () => {
         //2.
         const positionObj = new Position(12,25)
         const localisationObj = new LocalisationFloue(positionObj,2); //Rayon fixé à 2
-        const objetPerdu = new ObjetPerdu("clés",localisationObj);
+        const objetPerdu = new ObjetPerdu(2,"EFFET PERSONNEL",localisationObj,"clé avec porte clé rouge","clé d'appartement",new Date('2021-12-29'),1);
 
         //3.
         expect(Calculateur).toHaveBeenCalledTimes(1);
