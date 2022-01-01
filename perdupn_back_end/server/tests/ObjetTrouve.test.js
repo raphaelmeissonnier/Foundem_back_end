@@ -71,5 +71,29 @@ describe('../services/ObjetTrouve', () => {
     });
 });
 
+describe('../services/ObjetPerdu', () => {
+    it('On verifie que les getters de la classe ObjetTrouve', () => {
+        //1.
+        expect(Calculateur).not.toHaveBeenCalled();
+
+        //2.
+        const positionObj = new Position(12,25)
+        const localisationObj = new LocalisationPrecise(positionObj);
+        const objetTrouve = new ObjetTrouve(2,"EFFET PERSONNEL",localisationObj,"clé avec porte clé rouge","clé d'appartement",new Date('2021-12-29'),1);
+
+        const categorie = objetTrouve.getCategorie();
+        const loca = objetTrouve.getLocalisation();
+        const intitule = objetTrouve.getIntitule();
+        const date = objetTrouve.getDate();
+
+        //3.
+        expect(categorie).toMatch(/EFFET PERSONNEL/);
+        expect(loca).toEqual(new LocalisationPrecise(positionObj));
+        expect(intitule).toContain('clé');
+        expect(date).toEqual(new Date('2021-12-29'));
+
+    });
+});
+
 
 

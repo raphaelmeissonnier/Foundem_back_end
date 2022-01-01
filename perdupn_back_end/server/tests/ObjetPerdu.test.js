@@ -73,3 +73,27 @@ describe('../services/ObjetPerdu', () => {
     });
 });
 
+describe('../services/ObjetPerdu', () => {
+    it('On verifie que les getters de la classe ObjetPerdu', () => {
+        //1.
+        expect(Calculateur).not.toHaveBeenCalled();
+
+        //2.
+        const positionObj = new Position(12,25)
+        const localisationObj = new LocalisationFloue(positionObj,2); //Rayon fixé à 2
+        const objetPerdu = new ObjetPerdu(2,"EFFET PERSONNEL",localisationObj,"clé avec porte clé rouge","clé d'appartement",new Date('2021-12-29'),1);
+
+        const categorie = objetPerdu.getCategorie();
+        const loca = objetPerdu.getLocalisation();
+        const intitule = objetPerdu.getIntitule();
+        const date = objetPerdu.getDate();
+
+        //3.
+        expect(categorie).toMatch(/EFFET PERSONNEL/);
+        expect(loca).toEqual(new LocalisationFloue(positionObj,2));
+        expect(intitule).toContain('clé');
+        expect(date).toEqual(new Date('2021-12-29'));
+
+    });
+});
+
