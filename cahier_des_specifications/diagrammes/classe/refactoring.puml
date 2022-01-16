@@ -1,131 +1,307 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-enum Categorie
+/' Une dépendance = avoir l'objet en paramètre d'une méthode (trait en pointillé)
+   Une association = avoir l'objet en attribut (trait plein)
+'/
+
+package client
 {
-    ELECTRONIQUE,
-    BAGAGES & SACS,
-    EFFETS PERSONNELS, /' Clés, ...'/
-    PAPIERS & DOCUMENTS OFFICIELS,
-    PORTEFEUILLE & CB,
-    DIVERS,
+    class Application
+    {
+        /' Créeation d'objets '/
+        - utilisateurs : Utilisateur[*]
+        - objets : Objet[*]
+        - contextMatcher : ContextMatcher
+    }
 }
 
-class Position
+package api
 {
-    - double longitude
-    - double latitude
-    + this(longitude : double, latitude : double): Position
+    package api.Localisation
+    {
+        class Position
+        {
+            - double longitude
+            - double latitude
+            + this(longitude : double, latitude : double): Position
+        }
+
+        package api.Localisation.api
+        {
+            interface Localisation
+            {
+            }
+        }
+
+        package api.Localisation.impl
+        {
+            class LocalisationPrecise
+            {
+                +this(position : Position): LocalisationPrecise
+            }
+
+            class LocalisationFloue
+            {
+                +this(position : Position, rayon : double): LocalisationFloue
+            }
+        }
+    }
+
+    package api.Objet
+    {
+        enum Categorie
+        {
+            ELECTRONIQUE,
+            BAGAGES & SACS,
+            EFFETS PERSONNELS, /' Clés, ...'/
+            PAPIERS & DOCUMENTS OFFICIELS,
+            PORTEFEUILLE & CB,
+            DIVERS,
+            /'Faire un switch '/
+            + getPoints(): integer
+        }
+
+        package api.Objet.api
+        {
+            interface Objet
+            {
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: Localisation): double
+            }
+
+            interface BuilderObjet
+            {
+                +setDescription(description: string): void
+                +build(): Objet
+            }
+        }
+
+        package api.Objet.impl
+        {
+            class ObjetTrouve{
+                + this(builder: BuilderObjetTrouve): ObjetTrouve
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationPrecise): double
+            }
+
+            class ObjetPerdu{
+                + this(builder: BuilderObjetPerdu): ObjetPerdu
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
+            }
+
+            class BuilderObjetPerdu{
+                +this(intitule: string, categorie: Categorie, date: Date, localisation: LocalisationFloue, utilisateur: Utilisateur): BuilderObjetPerdu
+                +build(): ObjetPerdu
+            }
+
+            class BuilderObjetTrouve{
+                +this(intitule: string, categorie: Categorie, date: Date, localisation: LocalisationPrecise, utilisateur: Utilisateur): BuilderObjetTrouve
+                +build(): ObjetTrouve
+            }
+        }
+    }
+
+    /'package api.Utilisateur
+    {'/
+        class Utilisateur{
+            -nom: string
+            -prenom: string
+            -email: string
+            -password: string
+            - points: integer
+            +this(nom: string, prenom: string, email: string, password: string): Utilisateur
+        }
+
+        class Recompense
+        {
+            + nom: string
+            + valeur : string
+            + this(nom: string, valeur: integer): Recompense
+            + convertir(solde: integer): void
+        }
+    /'}'/
+
+    package api.Calculateur
+    {
+        package api.Calculateur.api
+        {
+            interface Calculator
+            {
+                +{static} getInstance(): Calculator
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: Localisation): double
+            }
+        }
+
+        package api.Calculateur.impl
+        {
+            class CalculatorPrecis{
+                -{static} instance: CalculatorPrecis
+                -this(): void
+                +{static} getInstance(): CalculatorPrecis
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationPrecise): double
+            }
+
+            class CalculatorFlou{
+                -{static} instance: CalculatorFlou
+                -this(): void
+                +{static} getInstance(): CalculatorFlou
+                +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
+            }
+        }
+    }
+
+    package api.Recherche
+    {
+        package api.Recherche.api
+        {
+            interface Recherche
+            {
+                + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation)
+            }
+        }
+
+        package api.Recherche.impl
+        {
+            class RechercheImpl{
+                /' Constructeur avec un parametre de type ObjetTrouve'/
+                /' Attribut privé = tableau de type ObjetTrouve'/
+                - objetsTrouves: ObjetTrouve[*]
+                + this(objetsTrouves: ObjetTrouve[*]): RechercheImpl
+                + matching(intitule: string, categorie: Categorie, date: Date, localisation: Localisation)
+            }
+        }
+    }
+
+    package api.Matche
+    {
+        package api.Matche.objets
+        {
+            /' Context du patron state '/
+            class ContextMatcher
+            {
+                - matcheState : MatcheState
+                - objetTrouve : ObjetTrouve
+                - objetPerdu : ObjetPerdu
+                + this(objetTrouve: ObjetTrouve, objetPerdu: ObjetPerdu): ContextMatcher
+                + setMatcheState(parState: MatcheState):void
+                + getMatcheState(): MatcheState
+                +possible(): void
+                +pasValide(): void
+                +valide(): void
+            }
+
+            /' State dans le pattern state'/
+            abstract class MatcheState
+            {
+                - matcher: ContextMatcher
+                +this(matcher: ContextMatcher): MatcheState
+                +possible(context: ContextMatcher): void
+                +pasValide(context: ContextMatcher): void
+                +valide(context: ContextMatcher): void
+            }
+
+            /' Peu passer vers PasValide ou Valide '/
+            class Possible{
+                +this(matcher: ContextMatcher): Possible
+                /'Corps vide '/
+                +possible(context: ContextMatcher): void
+                +pasValide(context: ContextMatcher): void
+                +valide(context: ContextMatcher): void
+            }
+
+            /' C'est l'état par défaut '/
+            class PasValide
+            {
+                +this(matcher: Matcher): PasValide
+                +possible(context: ContextMatcher): void
+                /'Corps vide '/
+                +pasValide(context: ContextMatcher): void
+                /'Corps vide '/
+                +valide(context: ContextMatcher): void
+            }
+
+            /' C'est l'état final '/
+            class Valide{
+                +this(matcher: Matcher): Valide
+                /'Corps vide '/
+                +possible(context: ContextMatcher): void
+                /'Corps vide '/
+                +pasValide(context: ContextMatcher): void
+                /'Corps vide '/
+                +valide(context: ContextMatcher): void
+            }
+
+            class ObjetMatche
+            {
+                - contextMatcher: ContextMatcher
+                - contextRdv: ContextRendezVous
+                + this(contextMatcher: ContextMatcher, contextRdv: ContextRendezVous): ObjetMatche
+            }
+        }
+
+        package api.Matche.rdv
+        {
+            class ContextRendezVous
+            {
+                - date: Date
+                - userFirst: Utilisateur
+                - userSecond: Utilisateur
+                - localisation: LocalisationPrecise
+                - rendezVousState : RendezVousState
+                + this(date: Date, userFirst: Utilisateur, userSecond: Utilisateur, localisation: Localisation)
+                + setRendezVousState(parState: RendezVousState):void
+                + getRendezVousState(): RendezVousState
+                + refuser() : void
+                + enCours() : void
+                + accepter() : void
+            }
+
+            abstract class RendezVousState
+            {
+                - context: ContextMatcher
+                + this(context: ContextMatcher): RendezVousState
+                + refuser(context: ContextMatcher): void
+                + enCours(context: ContextMatcher): void
+                + accepter(context: ContextMatcher): void
+            }
+
+            /'Etat par défaut '/
+            class RdvEnCours
+            {
+                + this(context: ContextMatcher): RdvEnCours
+                + refuser(context: ContextMatcher): void
+                /' Méthode vide '/
+                + enCours(context: ContextMatcher): void
+                /' Verser les points à l'utlisateur '/
+                + accepter(context: ContextMatcher): void
+            }
+
+            class RdvRefuse
+            {
+                + this(context: ContextMatcher): RdvRefuse
+                /' Méthode vide '/
+                + refuser(context: ContextMatcher): void
+                + enCours(context: ContextMatcher): void
+                /' Méthode vide '/
+                + accepter(context: ContextMatcher): void
+            }
+
+            class RdvAccepte
+            {
+                + this(context: ContextMatcher): RdvAccepte
+                /' Méthode vide '/
+                + refuser(context: ContextMatcher): void
+                /' Méthode vide '/
+                + enCours(context: ContextMatcher): void
+                /' Méthode vide  '/
+                + accepter(context: ContextMatcher): void
+            }
+        }
+    }
 }
 
-interface Localisation
-{
-}
-
-class LocalisationPrecise
-{
-    +this(position : Position): LocalisationPrecise
-}
-
-class LocalisationFloue
-{
-    +this(position : Position, rayon : double): LocalisationFloue
-}
-
-/' Ajouter un setUser() ????'/
-interface BuilderObjet{
-    +setLocalisation(localisation: Localisation): BuilderObjet
-    +setCategorie(categorie: Categorie): BuilderObjet
-    +setDescription(description: string): BuilderObjet
-    +setIntitule(intitule: string): BuilderObjet
-    +setDate(date: Date):BuilderObjet
-}
-
-class BuilderObjetPerdu{
-    +setLocalisation(localisation: Localisation): BuilderObjet
-    +setCategorie(categorie: Categorie): BuilderObjet
-    +setDescription(description: string): BuilderObjet
-    +setIntitule(intitule: string): BuilderObjet
-    +setDate(date: Date):BuilderObjet
-
-}
-
-class BuilderObjetTrouve{
-    +setLocalisation(localisation: Localisation): BuilderObjet
-    +setCategorie(categorie: Categorie): BuilderObjet
-    +setDescription(description: string): BuilderObjet
-    +setIntitule(intitule: string): BuilderObjet
-    +setDate(date: Date):BuilderObjet
-}
-
-class ObjetTrouve{
-    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationPrecise): double
-}
-
-class ObjetPerdu{
-    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
-}
-
-/' Director de patron builder '/
-/' Client de patron state '/
-/' Client créé un matcher ??? '/
-class Utilisateur{
-    -nom: string
-    -email: string
-    -password: string
-    +this(nom: string, email: string, password: string): Utilisateur
-    +createObjetTrouve(builder: BuilderObjet):
-    +createObjetPerdu(builder: BuilderObjet):
-}
-
-class SCalculatorPrecis{
-    -{static} instance: SCalculatorPrecis
-    -this(): void
-    +{static} getInstance(): SCalculatorPrecis
-    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationPrecise): double
-}
-
-class SCalculatorFlou{
-    -{static} instance: SCalculatorFlou
-    -SCalculatorFlou()
-    +{static} getInstance(): SCalculatorFlou
-    +getDistance(localisationUser: LocalisationPrecise, localisationObjet: LocalisationFloue): double
-}
-
-/' SINGLETON ??? '/
-class SRecherche{
-
-}
-
-/' Context du patron state '/
-class Matcher{
-    +setMatcher(matcher: Matcher): void
-}
-
-/' Interface ou abstract class?? '/
-/' Qu'est ce qu'on fait dans les méthodes on set un boolean ??? '/
-abstract class State{
-    +this(matcher: Matcher): State
-    +possible(valeur: boolean): void
-    /' La méthode valide() supprime les objets perdus et trouvés concernés par le matching '/
-    +valide(valeur: boolean): void
-}
-
-class Possible{
-    +this(matcher: Matcher): Possible
-    +possible(valeur: boolean): void
-    +valide(valeur: boolean): void
-}
-
-class Valide{
-    +this(matcher: Matcher): Valide
-    +possible(valeur: boolean): void
-    +valide(valeur: boolean): void
-}
 
 BuilderObjet <|.. BuilderObjetPerdu
 BuilderObjet <|.. BuilderObjetTrouve
-BuilderObjet <-- Utilisateur
 ObjetTrouve <-- BuilderObjetTrouve
 ObjetPerdu <-- BuilderObjetPerdu
 
@@ -135,23 +311,50 @@ BuilderObjetTrouve ..> Categorie
 BuilderObjetPerdu ..> Localisation
 BuilderObjetTrouve ..> Localisation
 
-ObjetPerdu --> SCalculatorFlou
-ObjetTrouve --> SCalculatorPrecis
+Calculator <|.. CalculatorFlou
+Calculator <|.. CalculatorPrecis
 
-ObjetTrouve <-- SRecherche
+ObjetPerdu --> CalculatorFlou
+ObjetTrouve --> CalculatorPrecis
+
+ObjetTrouve <-- Recherche
 
 Localisation <|.. LocalisationPrecise
 Localisation <|.. LocalisationFloue
 
 Position "1" <-- Localisation
 
-Valide ..|> State
+/'Valide ..|> State
 Possible ..|> State
 Utilisateur ..> Valide
 Utilisateur ..> Possible
 Utilisateur --> Matcher
 Matcher o--> State
 Valide --> Matcher
-Possible --> Matcher
+Possible --> Matcher'/
+
+Valide --|> MatcheState
+Possible --|> MatcheState
+PasValide --|> MatcheState
+ContextMatcher *-- MatcheState
+Application --> ContextMatcher
+ContextMatcher *-- "1" ObjetTrouve
+ContextMatcher *-- "1" ObjetPerdu
+
+Objet <|.. ObjetTrouve
+Objet <|.. ObjetPerdu
+
+Recherche <|.. RechercheImpl
+
+Utilisateur *-- Objet
+
+ContextRendezVous *-- Utilisateur
+ContextRendezVous *-- RendezVousState
+RendezVousState <|-- RdvAccepte
+RendezVousState <|-- RdvRefuse
+RendezVousState <|-- RdvEnCours
+
+ObjetMatche ..> ContextRendezVous
+ObjetMatche ..> ContextMatcher
 
 @enduml
