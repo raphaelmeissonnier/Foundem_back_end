@@ -28,7 +28,8 @@ const getObjetPerduById = async (req, res) => {
             where: {
                 user_id:{
                     $not: req.params.id
-                }
+                },
+                etat:1
             }
         });
         res.send(objetperdu);
