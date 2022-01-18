@@ -10,7 +10,7 @@ const {
     rechercheObjetTrouve,
     getObjetTrouveByIdUser
  } = require("../controllers/objettrouve.controller");
-const {getObjetPerduByIdUser} = require("../controllers/objetperdu.controller");
+//const {getObjetPerduByIdUser} = require("../controllers/objetperdu.controller");
 
   // Init express router
 const router = express.Router();

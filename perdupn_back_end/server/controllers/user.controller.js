@@ -1,11 +1,14 @@
 const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
-//const User = require("../models/user.model");
-const {UserModel} = require("../models/tables.model");
+const Sequelize = require('sequelize');
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var utilisateur = require("../models/utilisateur");
+var UserModel = utilisateur(db,DataTypes);
+
 
 const bcrypt = require("bcrypt");
-const {Sequelize} = require("sequelize");
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -27,7 +30,7 @@ const getUserById = async (req, res) => {
     try {
         const user = await UserModel.findOne({
             where: {
-                id: req.params.id
+                id_utilisateur: req.params.id
             }
         });
         res.json(user);
@@ -42,7 +45,8 @@ const createUser = async (req, res) => {
         await UserModel.create({
             email: req.body.email,
             username: req.body.username,
-            password: req.body.password, 
+            mdp: req.body.password,
+            solde: 0
         });
 
         res.json({
@@ -77,7 +81,7 @@ const updateUser= async (req, res) => {
     try {
         await UserModel.update(req.body, {
             where: {
-                idUser: req.params.id
+                id_utilisateur: req.params.id
             }
         });
         res.json({
@@ -94,7 +98,7 @@ const deleteUser = async (req, res) => {
         console.log(req.params);
         await UserModel.destroy({
             where: {
-                idUser: req.params.id
+                id_utilisateur: req.params.id
             }
         });
         res.json({
@@ -117,12 +121,12 @@ const loginUser = async (req, res) => {
         //Si l'utilisateur existe et que le mot de passe est bon
         if(user){
             console.log("L'utlisateur existe !")
-            if(req.body.password == user.password){
+            if(req.body.password == user.mdp){
                 console.log("Le mdp est correct !")
-                const id = user.id;
+                const id = user.id_utilisateur;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
                 res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
-                res.status(200).json({ result: 1, user: user.id });
+                res.status(200).json({ result: 1, user: user.id_utilisateur });
             }
             else
             {

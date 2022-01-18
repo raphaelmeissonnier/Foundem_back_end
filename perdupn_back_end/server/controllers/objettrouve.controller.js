@@ -1,17 +1,33 @@
-const {ObjetTrouveModel, UserModel} = require("../models/tables.model");
 const LocalisationPrecise = require("../services/LocalisationPrecise");
 const Main = require("../services/Main");
 const Position = require("../services/Position");
 const ObjetTrouve = require("../services/ObjetTrouve");
 const IMatcher = require("../services/IMatcher");
-const {Sequelize} = require("sequelize");
+
+const Sequelize = require('sequelize');
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var utilisateur = require("../models/utilisateur");
+var UserModel = utilisateur(db,DataTypes);
+var objet = require("../models/objet");
+var ObjetTrouveModel = objet(db,DataTypes);
+var categorie = require("../models/categorie");
+var CategorieModel = categorie(db,DataTypes);
+var localisation = require("../models/localisation");
+var LocalisationModel = localisation(db,DataTypes);
+
+
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        let objetstrouves = await ObjetTrouveModel.findAll(); // Requete SQL pour recup tous les objets de la BD
-        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
+        let objetstrouves = await ObjetTrouveModel.findAll({
+            where:{
+                status_objet : "trouvé" //MOYEN QUE CA PLANTE A CAUSE DU ENUM DANS LE MODEL
+            }
+        }); // Requete SQL pour recup tous les objets de la BD
+        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.categorie.intitule, new LocalisationPrecise(new Position(objet.localisation.longitude,objet.localisation.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         //console.log("TYPE",typeof(objetstrouves));
         //console.log("Objets Trouve",objetstrouves);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
@@ -27,6 +43,7 @@ const getObjetTrouveById = async (req, res) => {
     try {
         const objettrouve = await ObjetTrouveModel.findAll({
             where: {
+                status_objet : "trouvé",
                 id: req.params.id
             }
         });
@@ -42,19 +59,31 @@ const createObjetTrouve = async (req, res) => {
         //On vérifie que l'user existe
         const user = await UserModel.findOne({
             where:{
-                id: req.body.user_id
+                id_utilisateur: req.body.user_id
             }
         })
         //Si l'user existe, on ajoute l'objet
         if(user) {
+            //RECUPERER L'ID CATEGORIE AVEC SON INTIULE DANS LE BODY
+            const cate = await CategorieModel.findOne({
+                where : {
+                    intitule : req.body.categorie
+                },
+                attributes: ['id_categorie']
+            });
+            //CREATE LOCALISATION + RECUPERER SON ID
+            const loca = await LocalisationModel.create({
+                longitude: req.body.longitude,
+                latitude: req.body.latitude,
+            });
             await ObjetTrouveModel.create({
+                status_objet:"trouvé",
                 intitule: req.body.intitule,
                 description: req.body.description,
-                categorie: req.body.categorie,
-                date: req.body.date,
-                longitude: parseFloat(req.body.longitude),
-                latitude: parseFloat(req.body.latitude),
-                user_id: req.body.user_id
+                categorie: cate,
+                dates: req.body.date,
+                localisation : loca,
+                utilisateur: req.body.user_id
             });
             res.json({
                 "result" : 1,

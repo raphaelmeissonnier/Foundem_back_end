@@ -1,6 +1,5 @@
 const {ObjetMatcheModel, ObjetPerduModel, ObjetTrouveModel} = require("../models/tables.model");
 
-
 // Create a new objet trouve
 const createObjetMatche = async (req, res) => {
     try {
