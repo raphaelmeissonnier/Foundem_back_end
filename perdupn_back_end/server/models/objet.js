@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     status_objet: {
       type: DataTypes.ENUM('trouvé','perdu'),
-      allowNull: true
+      allowNull: false
     },
     intitule: {
       type: DataTypes.STRING(25),

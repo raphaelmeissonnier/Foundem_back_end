@@ -10,9 +10,9 @@ const {
     rechercheObjetTrouve,
     getObjetTrouveByIdUser
  } = require("../controllers/objettrouve.controller");
-//const {getObjetPerduByIdUser} = require("../controllers/objetperdu.controller");
 
-  // Init express router
+
+// Init express router
 const router = express.Router();
 
 router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);

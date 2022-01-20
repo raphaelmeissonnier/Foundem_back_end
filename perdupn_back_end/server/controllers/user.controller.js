@@ -42,13 +42,22 @@ const getUserById = async (req, res) => {
 // Create a new user
 const createUser = async (req, res) => {
     try {
-        await UserModel.create({
-            email: req.body.email,
-            username: req.body.username,
-            mdp: req.body.password,
-            solde: 0
+        await UserModel.findOrCreate({
+            where: {
+                $or: [
+                    {username: req.body.username},
+                    {email: req.body.email}
+                ]
+            },
+            defaults: {
+                nom: req.body.nom,
+                prenom: req.body.prenom,
+                username: req.body.username,
+                email: req.body.email,
+                mdp: req.body.password,
+                solde: 0
+            }
         });
-
         res.json({
             "result": 1,
             "msg": "Votre compte a bien été créé"

@@ -16,7 +16,8 @@ var CategorieModel = categorie(db,DataTypes);
 var localisation = require("../models/localisation");
 var LocalisationModel = localisation(db,DataTypes);
 
-
+const { createLocalisation } = require("../controllers/localisation.controller");
+const { getCategorie } = require("../controllers/categorie.controller");
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
@@ -54,6 +55,7 @@ const getObjetTrouveById = async (req, res) => {
 }
 
 // Create a new objet trouve
+//DE PREFERENCE FAIRE UEN JOINTURE
 const createObjetTrouve = async (req, res) => {
     try {
         //On vérifie que l'user existe
@@ -65,17 +67,9 @@ const createObjetTrouve = async (req, res) => {
         //Si l'user existe, on ajoute l'objet
         if(user) {
             //RECUPERER L'ID CATEGORIE AVEC SON INTIULE DANS LE BODY
-            const cate = await CategorieModel.findOne({
-                where : {
-                    intitule : req.body.categorie
-                },
-                attributes: ['id_categorie']
-            });
-            //CREATE LOCALISATION + RECUPERER SON ID
-            const loca = await LocalisationModel.create({
-                longitude: req.body.longitude,
-                latitude: req.body.latitude,
-            });
+            const cate = getCategorie(req);
+            //CREATE LOCALISATION + RECUPERER SON ID : MOYEN QUE CA BLOQUE AU CAS OU CA NE RETURN PAS L'ID APRES LA CREATION
+            const loca = createLocalisation(req);
             await ObjetTrouveModel.create({
                 status_objet:"trouvé",
                 intitule: req.body.intitule,
@@ -117,6 +111,7 @@ const createObjetTrouve = async (req, res) => {
 }
 
 // Update objet trouve by id
+//CETTE METHODE EST INUTILE, ON DOIT LA TROUVER DANS ObjetMatcheController ET MODIFER EN PATCH
 const updateObjetTrouve= async (req, res) => {
     try {
         await ObjetTrouveModel.update(
@@ -143,7 +138,7 @@ const deleteObjetTrouve = async (req, res) => {
     try {
         await ObjetTrouveModel.destroy({
             where: {
-                id: req.params.id
+                id_objet: req.params.id
             }
         });
         res.json({
@@ -154,14 +149,16 @@ const deleteObjetTrouve = async (req, res) => {
     }
 }
 
-// Delete objet trouve by id
+// Recherche objet trouve by id
+//On vérifie que l'utilisateur existe bien
+//On récupère tous les objets trouvés qui n'appartiennent pas à l'utilisateur et qui ne sont pas dans un match
 const rechercheObjetTrouve = async (req, res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
         //On vérifie que l'utilisateur existe bien
         const user = await UserModel.findOne({
             where:{
-                id: req.body.user_id
+                id_utilisateur: req.body.user_id
             }
         })
         //Si l'utlisateur existe, on lance la recherche d'objets
@@ -227,7 +224,8 @@ const getObjetTrouveByIdUser = async (req, res) => {
     try {
         const objettrouve = await ObjetTrouveModel.findAll({
             where: {
-                user_id: req.params.id
+                utilisateur: req.params.id,
+                status_objet : "trouvé"
             }
         });
         res.send(objettrouve);

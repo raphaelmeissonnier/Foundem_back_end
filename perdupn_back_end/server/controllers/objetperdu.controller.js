@@ -1,18 +1,34 @@
-const {ObjetPerduModel, UserModel} = require("../models/tables.model");
 const LocalisationFloue = require("../services/LocalisationFloue");
 const Main = require("../services/Main");
 const ObjetPerdu = require("../services/ObjetPerdu")
 const Position =require("../services/Position")
 const {Sequelize} = require("sequelize");
 
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var utilisateur = require("../models/utilisateur");
+var UserModel = utilisateur(db,DataTypes);
+var objet = require("../models/objet");
+var ObjetPerduModel = objet(db,DataTypes);
+var categorie = require("../models/categorie");
+var CategorieModel = categorie(db,DataTypes);
+var localisation = require("../models/localisation");
+var LocalisationModel = localisation(db,DataTypes);
+
+const { createLocalisation } = require("../controllers/localisation.controller");
+const { getCategorie } = require("../controllers/categorie.controller");
+
+
 // Get all Objets Perdus
 const getObjetsPerdus = async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        let objetsperdus = await ObjetPerduModel.findAll(); // Requete SQL pour recup tous les objets de la BD
-        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.id, objet.categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
-        //console.log("TYPE",typeof(objetsperdus));
-        //console.log("Objets Perdus",objetsperdus);
+        let objetsperdus = await ObjetPerduModel.findAll({
+            where:{
+                id_objet: "perdu"
+            }
+        }); // Requete SQL pour recup tous les objets de la BD
+        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.id_objet, objet.categorie.intitule, new LocalisationFloue(new Position(objet.localisation.longitude,objet.localisation.latitude),objet.localisation.rayon), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
         res.send(monRes);
@@ -22,11 +38,12 @@ const getObjetsPerdus = async (req,res) => {
 }
 
 // Get objet perdu by id
+//PARCOURIR LA LISTE DES ObjetsMatche
 const getObjetPerduById = async (req, res) => {
     try {
         const objetperdu = await ObjetPerduModel.findAll({
             where: {
-                user_id:{
+                utilisateur:{
                     $not: req.params.id
                 },
                 etat:1
@@ -45,21 +62,24 @@ const createObjetPerdu = async (req, res) => {
         //On vérifie que l'user existe
         const user = await UserModel.findOne({
             where:{
-                id: req.body.user_id
+                id_utilisateur: req.body.user_id
             }
         })
         //Si l'user existe, on ajoute l'objet
+        //RECUPERER L'ID DE LA CATEGORIE
+        const cate = getCategorie(req);
+        //CREATION D'UNE NOUEVLLE LOCALISATION
+        const loca = createLocalisation(req);
         if(user)
         {
             await ObjetPerduModel.create({
                 intitule: req.body.intitule,
                 description: req.body.description,
-                categorie: req.body.categorie,
-                date: req.body.date,
-                longitude: parseFloat(req.body.longitude),
-                latitude: parseFloat(req.body.latitude),
-                rayon: req.body.rayon,
-                user_id: req.body.user_id
+                categorie: cate,
+                dates: req.body.date,
+                localisation: loca,
+                utilisateur: req.body.user_id,
+                status_objet: "perdu"
             });
             res.json({
                 "result": 1,
@@ -95,6 +115,7 @@ const createObjetPerdu = async (req, res) => {
 
 
 // Update objet perdu by id
+//CETTE METHODE EST INITUE ON DOIT LA RETROUVER DANS objetmatche.controller + PATCH SUR LA ROUTE
 const updateObjetPerdu= async (req, res) => {
     try {
         await ObjetPerduModel.update(
@@ -121,7 +142,7 @@ const deleteObjetPerdu = async (req, res) => {
     try {
         await ObjetPerduModel.destroy({
             where: {
-                id: req.params.id
+                id_objet: req.params.id
             }
         });
         res.json({
@@ -137,7 +158,7 @@ const getObjetPerduByIdUser = async (req, res) => {
     try {
         const objetperdu = await ObjetPerduModel.findAll({
             where: {
-                user_id: req.params.id
+                utilisateur: req.params.id
             }
         });
         res.send(objetperdu);
@@ -151,7 +172,7 @@ const getObjetPerduByIdObjet = async (req, res) => {
         const objetPerdu = await ObjetPerduModel.findOne({
             where:
             {
-                id: req.params.id
+                id_objet: req.params.id
             }
         })
         if(objetPerdu)
