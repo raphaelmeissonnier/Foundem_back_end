@@ -4,12 +4,12 @@ const cors = require("cors");
 // Import connection
 const db = require("./server/config/database.js");
 // Import router
-//const RouterObjetPerdu = require("./server/routes/objetsperdu");
+const RouterObjetPerdu = require("./server/routes/objetsperdu");
 const RouterObjetTrouve = require("./server/routes/objetstrouve");
-//const RouterObjetMatche = require("./server/routes/objetmatche");
+const RouterObjetMatche = require("./server/routes/objetmatche");
 const RouterUser = require("./server/routes/user");
 const cookieParser = require("cookie-parser");
-const {initModels} = require("./server/models/init-models");
+const initModels = require("./server/models/init-models.js");
 
 //Import Auth parts
 //const {checkUser,requireAuth} = require("./server/middleware/authentication")
@@ -51,9 +51,9 @@ synchroDB_Model();
  
 // use router
 app.use(RouterUser);
-//app.use(RouterObjetPerdu);
+app.use(RouterObjetPerdu);
 app.use(RouterObjetTrouve);
-//app.use(RouterObjetMatche);
+app.use(RouterObjetMatche);
 
 // listen on port
 //app.listen(3001, () => console.log('Server running at http://localhost:3001'));

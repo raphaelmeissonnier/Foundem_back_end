@@ -1,4 +1,4 @@
-const {Sequelize} = require("sequelize");
+const {Sequelize, QueryTypes} = require("sequelize");
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
 var objetmatche = require("../models/objetmatche");
@@ -58,38 +58,34 @@ const getObjetMatche = async (req, res) => {
     }
 }
 
-const deleteObjetMatche = async (req, res) => {
-    try {
-        await ObjetMatcheModel.destroy({
-            where: {
-                objet_trouve: req.params.id
-            }
-        });
-        res.json({
-            "message": "Objet Matche Deleted"
-        });
-    } catch (err) {
-        console.log(err);
-        res.json({
-            message:err
-        });
-    }
-}
-
 //CHANGER LE FRONT (BODY + FETCH) + AJOUTER UNE NOUVELLE ROUTE
 const updateObjetMatche= async (req, res) => {
     try {
-        await ObjetMatcheModel.update(
-            {etat: req.body.etat},
-            {
-                where: {
-                    objet_trouve: req.params.id
-                }
-            }
-        );
-        res.json({
-            message: "Objet Matche Updated"
+
+        console.log("PARAMS",req.params)
+        const rec_objettrouve = await db.query("SELECT id_objet FROM objet where status_objet='trouvé' AND id_objet=:par_id",
+        {
+            replacements : {
+                par_id: req.params.id,
+            },
+            type: QueryTypes.SELECT
         });
+
+        console.log("Objet Trouve id", rec_objettrouve[0].id_objet);
+        if(rec_objettrouve){
+            await db.query("UPDATE objetmatche SET etat=:etat WHERE objet_trouve=:objettrouve",
+            {
+                replacements : {
+                    etat: req.body.etat,
+                    objettrouve: rec_objettrouve[0].id_objet
+                },
+                type: QueryTypes.UPDATE
+            });
+            res.json({
+                message: "Objet Matche Updated"
+            });
+        }
+        
     } catch (err) {
         console.log(err);
         res.json({
@@ -99,4 +95,4 @@ const updateObjetMatche= async (req, res) => {
 }
 
 
-module.exports = {createObjetMatche, getObjetMatche, deleteObjetMatche, updateObjetMatche}
+module.exports = {createObjetMatche, getObjetMatche, updateObjetMatche}
