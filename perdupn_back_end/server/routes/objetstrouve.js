@@ -2,9 +2,8 @@
 const express = require("express");
 // Import Product Controller
 const { 
-    getObjetTrouveById,
+    //getObjetTrouveById,
     getObjetsTrouves,
-    updateObjetTrouve,
     createObjetTrouve,
     deleteObjetTrouve,
     rechercheObjetTrouve,
@@ -17,13 +16,11 @@ const router = express.Router();
 
 router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);
 
-router.get('/objetstrouves/:id',getObjetTrouveById);
+//router.get('/objetstrouves/:id',getObjetTrouveById);
 
 router.post('/objetstrouves', createObjetTrouve);
 
 router.post('/objetstrouves/recherche', rechercheObjetTrouve);
-
-router.put('/objetstrouves/:id',updateObjetTrouve);
 
 router.delete('/objetstrouves/:id', deleteObjetTrouve);
 

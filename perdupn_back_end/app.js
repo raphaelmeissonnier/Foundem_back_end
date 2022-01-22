@@ -9,6 +9,7 @@ const RouterObjetTrouve = require("./server/routes/objetstrouve");
 //const RouterObjetMatche = require("./server/routes/objetmatche");
 const RouterUser = require("./server/routes/user");
 const cookieParser = require("cookie-parser");
+const {initModels} = require("./server/models/init-models");
 
 //Import Auth parts
 //const {checkUser,requireAuth} = require("./server/middleware/authentication")
@@ -40,6 +41,7 @@ async function connectionDB(){
 }
 
 async function synchroDB_Model(){
+  initModels(db);
   await db.sync({ alter: true });
   console.log("The table model were just (re)created!");
 }

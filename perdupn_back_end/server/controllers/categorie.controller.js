@@ -5,10 +5,10 @@ var categorie = require("../models/categorie");
 var CategorieModel = categorie(db,DataTypes);
 
 
-const getCategorie = (req) => {
-    const categorie = CategorieModel.findOne({
+const getCategorie = async (req) => {
+    const categorie = await CategorieModel.findOne({
         where:{
-            intitule: req.body.categorie
+            intitule_categorie: req.body.categorie
         },
         attributes:['id_categorie']
     });

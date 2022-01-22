@@ -4,7 +4,7 @@ const Position = require("../services/Position");
 const ObjetTrouve = require("../services/ObjetTrouve");
 const IMatcher = require("../services/IMatcher");
 
-const Sequelize = require('sequelize');
+const {Sequelize, QueryTypes} = require('sequelize');
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
 var utilisateur = require("../models/utilisateur");
@@ -18,18 +18,22 @@ var LocalisationModel = localisation(db,DataTypes);
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");
+const {body} = require("express-validator");
 
 // Get all Objets Trouves
 const getObjetsTrouves= async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
-        let objetstrouves = await ObjetTrouveModel.findAll({
-            where:{
-                status_objet : "trouvé" //MOYEN QUE CA PLANTE A CAUSE DU ENUM DANS LE MODEL
-            }
-        }); // Requete SQL pour recup tous les objets de la BD
-        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.categorie.intitule, new LocalisationPrecise(new Position(objet.localisation.longitude,objet.localisation.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
-        //console.log("TYPE",typeof(objetstrouves));
+        const objetstrouves = await db.query("SELECT * FROM objet as ob, localisation as loca, categorie as cate WHERE ob.localisation=loca.id_localisation AND ob.categorie=cate.id_categorie AND ob.status_objet= :status_objet AND id_objet NOT IN (SELECT objet_trouve FROM objetmatche)",
+            {
+                replacements : {
+                    id: req.params.id,
+                    status_objet: "trouvé"
+                },
+                type: QueryTypes.SELECT
+            });
+        // Requete SQL pour recup tous les objets de la BD
+        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.intitule_categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         //console.log("Objets Trouve",objetstrouves);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
@@ -40,7 +44,7 @@ const getObjetsTrouves= async (req,res) => {
 }
 
 // Get objet trouve by id
-const getObjetTrouveById = async (req, res) => {
+/*const getObjetTrouveById = async (req, res) => {
     try {
         const objettrouve = await ObjetTrouveModel.findAll({
             where: {
@@ -52,10 +56,9 @@ const getObjetTrouveById = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
+}*/
 
 // Create a new objet trouve
-//DE PREFERENCE FAIRE UEN JOINTURE
 const createObjetTrouve = async (req, res) => {
     try {
         //On vérifie que l'user existe
@@ -66,17 +69,16 @@ const createObjetTrouve = async (req, res) => {
         })
         //Si l'user existe, on ajoute l'objet
         if(user) {
-            //RECUPERER L'ID CATEGORIE AVEC SON INTIULE DANS LE BODY
-            const cate = getCategorie(req);
-            //CREATE LOCALISATION + RECUPERER SON ID : MOYEN QUE CA BLOQUE AU CAS OU CA NE RETURN PAS L'ID APRES LA CREATION
-            const loca = createLocalisation(req);
+            const cate = await getCategorie(req);
+            const loca = await createLocalisation(req, [{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: null}]);
+
             await ObjetTrouveModel.create({
                 status_objet:"trouvé",
                 intitule: req.body.intitule,
                 description: req.body.description,
-                categorie: cate,
+                categorie: cate.id_categorie,
                 dates: req.body.date,
-                localisation : loca,
+                localisation : loca[0].id_localisation,
                 utilisateur: req.body.user_id
             });
             res.json({
@@ -110,35 +112,13 @@ const createObjetTrouve = async (req, res) => {
     }
 }
 
-// Update objet trouve by id
-//CETTE METHODE EST INUTILE, ON DOIT LA TROUVER DANS ObjetMatcheController ET MODIFER EN PATCH
-const updateObjetTrouve= async (req, res) => {
-    try {
-        await ObjetTrouveModel.update(
-            {etat:req.body.etat},
-            {
-                where: {
-                    id: req.params.id
-                }
-            }
-        );
-        res.json({
-            message: "Objet Trouve Updated"
-        });
-    } catch (err) {
-        console.log(err);
-        res.json({
-            message: err
-        });
-    }
-}
- 
 // Delete objet trouve by id
 const deleteObjetTrouve = async (req, res) => {
     try {
         await ObjetTrouveModel.destroy({
             where: {
-                id_objet: req.params.id
+                id_objet: req.params.id,
+                status_objet: "trouvé"
             }
         });
         res.json({
@@ -235,4 +215,4 @@ const getObjetTrouveByIdUser = async (req, res) => {
 }
 
 
-module.exports = {getObjetTrouveById,getObjetsTrouves,deleteObjetTrouve,updateObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}
+module.exports = {/*getObjetTrouveById,*/getObjetsTrouves,deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}
