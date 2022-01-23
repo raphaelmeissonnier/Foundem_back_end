@@ -7,10 +7,16 @@ const {
     updateObjetMatche
 } = require("../controllers/objetmatche.controller");
 
+const {
+    createRdv,
+} = require("../controllers/rendezvous.controller");
+
 // Init express router
 const router = express.Router();
 
 router.post('/objetsmatche', createObjetMatche);
+
+router.post('/objetsmatche/rdv', createRdv);
 
 router.get('/objetsmatche/:id', getObjetMatche);
 

@@ -1,7 +1,7 @@
 const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
-const Sequelize = require('sequelize');
+const {Sequelize, QueryTypes} = require('sequelize');
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
 var utilisateur = require("../models/utilisateur");
@@ -34,6 +34,22 @@ const getUserById = async (req, res) => {
             }
         });
         res.json(user);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// Get user by id
+const getRdvByUser = async (req, res) => {
+    try {
+        const rdvs = await db.query('SELECT * FROM rendezvous WHERE first_user=:id_user OR second_user=:id_user',
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+        res.json(rdvs);
     } catch (err) {
         console.log(err);
     }
@@ -166,4 +182,4 @@ const logoutUser = async (req, res) => {
     res.status(200).send();
 };
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser}
+module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}

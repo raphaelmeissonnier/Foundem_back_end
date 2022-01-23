@@ -8,7 +8,8 @@ const {
     createUser,
     deleteUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    getRdvByUser
  } = require("../controllers/user.controller");
 
   // Init express router
@@ -23,6 +24,8 @@ router.post('/users/login',loginUser);
 router.get("/users/logout",logoutUser);
 
 router.get('/users/:id',getUserById);
+
+router.get('/users/:id/rdv', getRdvByUser);
 
 router.put('/users/:id',updateUser);
 
