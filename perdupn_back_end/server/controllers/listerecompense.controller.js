@@ -19,8 +19,8 @@ const createListeRecompense = async (req, res) =>{
         const user = getUserById(req, res);
 
         //Création d'un objet de type ListeRecompense
-        const listeRecompenseobjet = new ListeRecompense(req.body.id, req.)
-        if(convertir(user.solde, recompense.valeur))
+        const listeRecompenseobjet = new ListeRecompense(req.body.id_user, req.body.id_recompense,req.body.date);
+        if(listeRecompenseobjet.verifier(user.solde, recompense.valeur))
         {
             //RESPECTER LES CHAMPS DU BODY => LIAISON AVEC D'AUTRES CONTROLLERS
             const listeRecompense = await ListeRecompenseModel.create({
