@@ -8,7 +8,7 @@ const getRecompenseById = async (req) =>{
     const recompense = RecompenseModel.findOne({
             where:{
                 id_recompense: req.body.recompense_id
-            },
+            }
         });
     return recompense;
 }

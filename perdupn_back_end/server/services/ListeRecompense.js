@@ -38,6 +38,11 @@ class ListeRecompense
         }
         return rtn;
     }
+
+    soustraire(solde_user, valeur_recompese)
+    {
+        return solde_user-valeur_recompese;
+    }
 }
 
 module.exports = ListeRecompense;

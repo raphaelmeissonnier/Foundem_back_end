@@ -7,16 +7,16 @@ var listerecompense = require("../models/listerecompenses");
 var ListeRecompenseModel = listerecompense(db,DataTypes);
 
 const {getRecompenseById} = require("./recompense.controller");
-const {getUserById} = require("./user.controller");
+const {getUserById, updateSoldeUser} = require("./user.controller");
 
 //Vérifier que le solde de l'utilisateur est suffisant
 const createListeRecompense = async (req, res) =>{
     try {
         //On récupère la valeur de la récompense demandée par l'utilisateur
-        const recompense = getRecompenseById(req);
+        const recompense = await getRecompenseById(req);
 
         //On récupère le solde de l'utilisateur
-        const user = getUserById(req, res);
+        const user = await getUserById(req, res);
 
         //Création d'un objet de type ListeRecompense
         const listeRecompenseobjet = new ListeRecompense(req.body.id_user, req.body.id_recompense,req.body.date);
@@ -28,6 +28,11 @@ const createListeRecompense = async (req, res) =>{
                 id_recompense: req.body.recompense_id,
                 date_recompense: req.body.date
             });
+            //RECALCUL DU SOLDE
+            newSolde = listeRecompenseobjet.soustraire(user.solde, recompense.valeur);
+            console.log("newSolde", newSolde);
+            //UPDATE L'UTILISATEUR
+            const updateUser = await updateSoldeUser(req, newSolde);
             res.json({
                 "result": 1,
                 "message": "Created récompense "
@@ -44,7 +49,7 @@ const createListeRecompense = async (req, res) =>{
     {
         res.json({
             "result": 0,
-            "message": e
+            "message": "Erreur"
         })
     }
 }

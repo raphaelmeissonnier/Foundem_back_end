@@ -9,6 +9,7 @@ var UserModel = utilisateur(db,DataTypes);
 
 
 const bcrypt = require("bcrypt");
+const {isEmpty} = require("validator");
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -30,10 +31,20 @@ const getUserById = async (req, res) => {
     try {
         const user = await UserModel.findOne({
             where: {
-                id_utilisateur: req.params.id
+                $or: [
+                    {id_utilisateur: req.params.id},
+                    {id_utilisateur: req.body.id}
+                ]
             }
         });
-        res.json(user);
+        if(!req.params.id)
+        {
+            return user;
+        }
+        else
+        {
+            res.json(user);
+        }
     } catch (err) {
         console.log(err);
     }
@@ -182,4 +193,22 @@ const logoutUser = async (req, res) => {
     res.status(200).send();
 };
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}
+const updateSoldeUser = async(req, field) =>{
+    try
+    {
+        await UserModel.update(
+            {solde: field},
+            {
+                where:
+                {
+                    id_utilisateur: req.body.id
+                }
+            }
+        );
+    }
+    catch (e)
+    {
+        return e;
+    }
+}
+module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}
