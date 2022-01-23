@@ -119,7 +119,8 @@ const deleteObjetTrouve = async (req, res) => {
             where: {
                 id_objet: req.params.id,
                 status_objet: "trouvé"
-            }
+            },
+            cascade:true
         });
         res.json({
             "message": "Objet Trouve Deleted"
