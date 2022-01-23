@@ -1,0 +1,52 @@
+const ListeRecompense = require('../services/ListeRecompense');
+
+const {Sequelize} = require('sequelize');
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var listerecompense = require("../models/listerecompenses");
+var ListeRecompenseModel = listerecompense(db,DataTypes);
+
+const {getRecompenseById} = require("./recompense.controller");
+const {getUserById} = require("./user.controller");
+
+//Vérifier que le solde de l'utilisateur est suffisant
+const createListeRecompense = async (req, res) =>{
+    try {
+        //On récupère la valeur de la récompense demandée par l'utilisateur
+        const recompense = getRecompenseById(req);
+
+        //On récupère le solde de l'utilisateur
+        const user = getUserById(req, res);
+
+        //Création d'un objet de type ListeRecompense
+        const listeRecompenseobjet = new ListeRecompense(req.body.id, req.)
+        if(convertir(user.solde, recompense.valeur))
+        {
+            //RESPECTER LES CHAMPS DU BODY => LIAISON AVEC D'AUTRES CONTROLLERS
+            const listeRecompense = await ListeRecompenseModel.create({
+                id_utilisateur: req.body.id,
+                id_recompense: req.body.recompense_id,
+                date_recompense: req.body.date
+            });
+            res.json({
+                "result": 1,
+                "message": "Created récompense "
+            })
+        }
+        else
+        {
+            res.json({
+                "result": 0,
+                "message": "Votre solde de points est insuffisant pour débloquer cette récompense !"
+            });
+        }
+    }catch (e)
+    {
+        res.json({
+            "result": 0,
+            "message": e
+        })
+    }
+}
+
+module.exports = {createListeRecompense};
