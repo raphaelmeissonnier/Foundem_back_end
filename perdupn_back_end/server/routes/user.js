@@ -12,6 +12,10 @@ const {
     getRdvByUser
  } = require("../controllers/user.controller");
 
+const { 
+  updateRdv
+} = require("../controllers/rendezvous.controller");
+
   // Init express router
 const router = express.Router();
 
@@ -22,6 +26,8 @@ router.post('/users', createUser);
 router.post('/users/login',loginUser);
 
 router.get("/users/logout",logoutUser);
+
+router.patch('/users/:id/rdv/:idrdv', updateRdv);
 
 router.get('/users/:id',getUserById);
 
