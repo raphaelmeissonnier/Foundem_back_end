@@ -6,7 +6,7 @@ var RendezVousModel = rendezvous(db,DataTypes);
 const { createLocalisation } = require("../controllers/localisation.controller");
 
 
-// Create a new objet trouve
+// Create a new Rendez Vous between 2 users
 const createRdv = async (req, res) => {
     try {
 
@@ -17,7 +17,8 @@ const createRdv = async (req, res) => {
             etat : "en cours",
             localisation: loca[0].id_localisation,
             first_user: req.body.user_perdu,
-            second_user: req.body.user_trouve
+            second_user: req.body.user_trouve,
+            objet_matche: req.body.objet_matche
         });
         res.status(200).json({
             result: 1,
@@ -32,4 +33,32 @@ const createRdv = async (req, res) => {
     }
 }
 
-module.exports = {createRdv}
+// Update Rendez Vous between 2 users (Change the date and localisation)
+const updateRdv = async (req, res) => {
+    try {
+
+        const loca = await createLocalisation(req,[{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: null}])
+
+        await db.query("UPDATE rendezvous SET date_rdv=:date_rdv, localisation=:loca_rdv WHERE id_rdv=:id_rdv",
+        {
+            replacements : {
+                date_rdv: req.body.date,
+                loca_rdv: loca[0].id_localisation,
+                id_rdv: req.params.idrdv
+            },
+            type: QueryTypes.UPDATE
+        });
+        res.status(200).json({
+            result: 1,
+            msg: 'Rendez Vous bien modifié !'
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(200).json({
+            result: 0,
+            msg: "Erreur lors de la modification du Rendez Vous !"
+        });
+    }
+}
+
+module.exports = {createRdv,updateRdv}
