@@ -106,5 +106,5 @@ dist
 # TernJS port file
 .tern-port
 
-server/config/config.js
-server/config/database.js
+# Config Repo
+config
