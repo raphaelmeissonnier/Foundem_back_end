@@ -11,10 +11,6 @@ var utilisateur = require("../models/utilisateur");
 var UserModel = utilisateur(db,DataTypes);
 var objet = require("../models/objet");
 var ObjetTrouveModel = objet(db,DataTypes);
-var categorie = require("../models/categorie");
-var CategorieModel = categorie(db,DataTypes);
-var localisation = require("../models/localisation");
-var LocalisationModel = localisation(db,DataTypes);
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");
@@ -24,15 +20,14 @@ const {body} = require("express-validator");
 const getObjetsTrouves= async (req,res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
+        // Requete SQL pour recup tous les objets de la BD
         const objetstrouves = await db.query("SELECT * FROM objet as ob, localisation as loca, categorie as cate WHERE ob.localisation=loca.id_localisation AND ob.categorie=cate.id_categorie AND ob.status_objet= :status_objet AND id_objet NOT IN (SELECT objet_trouve FROM objetmatche)",
             {
                 replacements : {
-                    id: req.params.id,
                     status_objet: "trouvé"
                 },
                 type: QueryTypes.SELECT
             });
-        // Requete SQL pour recup tous les objets de la BD
         objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.intitule_categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         //console.log("Objets Trouve",objetstrouves);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
@@ -42,21 +37,6 @@ const getObjetsTrouves= async (req,res) => {
         console.log(err);
     }
 }
-
-// Get objet trouve by id
-/*const getObjetTrouveById = async (req, res) => {
-    try {
-        const objettrouve = await ObjetTrouveModel.findAll({
-            where: {
-                status_objet : "trouvé",
-                id: req.params.id
-            }
-        });
-        res.send(objettrouve[0]);
-    } catch (err) {
-        console.log(err);
-    }
-}*/
 
 // Create a new objet trouve
 const createObjetTrouve = async (req, res) => {
@@ -120,7 +100,6 @@ const deleteObjetTrouve = async (req, res) => {
                 id_objet: req.params.id,
                 status_objet: "trouvé"
             },
-            cascade:true
         });
         res.json({
             "message": "Objet Trouve Deleted"
@@ -131,8 +110,6 @@ const deleteObjetTrouve = async (req, res) => {
 }
 
 // Recherche objet trouve by id
-//On vérifie que l'utilisateur existe bien
-//On récupère tous les objets trouvés qui n'appartiennent pas à l'utilisateur et qui ne sont pas dans un match
 const rechercheObjetTrouve = async (req, res) => {
     try {
         const mapObjets = []; //Tableau ou on  stocke les objets Recup de la BD
@@ -144,22 +121,21 @@ const rechercheObjetTrouve = async (req, res) => {
         })
         //Si l'utlisateur existe, on lance la recherche d'objets
         if(user) {
-            //On récupère l'ensemble des objets trouvés
-            let objetstrouves = await ObjetTrouveModel.findAll({
-                where: {
-                    user_id: {
-                        $not: req.body.user_id
+            //On récupère l'ensemble des objets trouvés qui n'appartiennent pas à l'utilisateur et qui ne sont pas dans un match
+            const objetstrouves = await db.query("SELECT * FROM objet, categorie, localisation WHERE id_categorie=categorie AND id_localisation=localisation AND utilisateur!= :id_user AND status_objet= :status_objet AND id_objet NOT IN (SELECT objet_trouve FROM objetmatche)",
+                {
+                    replacements : {
+                        id_user: req.body.user_id,
+                        status_objet: "trouvé"
                     },
-                    etat: 1
-                }
-            });
+                    type: QueryTypes.SELECT
+                });
             console.log("let objetstrouves", objetstrouves);
 
-            //CE IF NE MARCHE PAS
             //Si il existe dans la base de données des objets trouvés alors on lance la recherche
             if(objetstrouves.length) {
                 //console.log("Objet trouves",objetstrouves)
-                objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id, objet.categorie, new LocalisationPrecise(new Position(objet.longitude, objet.latitude)), objet.description, objet.intitule, new Date(objet.date), objet.user_id))) //Transformation des objets BD en type ObjetPerdu
+                objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.intitule_categorie, new LocalisationPrecise(new Position(objet.longitude, objet.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
                 console.log("MapObjets", mapObjets);
                 const match = new IMatcher();
                 const monRes = match.matching(mapObjets, req.body.intitule, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude);
@@ -216,4 +192,4 @@ const getObjetTrouveByIdUser = async (req, res) => {
 }
 
 
-module.exports = {/*getObjetTrouveById,*/getObjetsTrouves,deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}
+module.exports = {getObjetsTrouves,deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}

@@ -22,18 +22,22 @@ function initModels(sequelize) {
 
   objet.belongsTo(categorie, { as: "categorie_categorie", foreignKey: "categorie"});
   categorie.hasMany(objet, { as: "objets", foreignKey: "categorie"});
+  historique.belongsTo(listerecompenses, { as: "liste_recompense_listerecompense", foreignKey: "liste_recompense"});
+  listerecompenses.hasMany(historique, { as: "historiques", foreignKey: "liste_recompense"});
   objet.belongsTo(localisation, { as: "localisation_localisation", foreignKey: "localisation"});
   localisation.hasMany(objet, { as: "objets", foreignKey: "localisation"});
   rendezvous.belongsTo(localisation, { as: "localisation_localisation", foreignKey: "localisation"});
   localisation.hasMany(rendezvous, { as: "rendezvous", foreignKey: "localisation"});
-  historique.belongsTo(objet, { as: "id_objet_trouve_objet", foreignKey: "id_objet_trouve"});
-  objet.hasMany(historique, { as: "historiques", foreignKey: "id_objet_trouve"});
   objetmatche.belongsTo(objet, { as: "objet_trouve_objet", foreignKey: "objet_trouve"});
   objet.hasMany(objetmatche, { as: "objetmatches", foreignKey: "objet_trouve"});
   objetmatche.belongsTo(objet, { as: "objet_perdu_objet", foreignKey: "objet_perdu"});
   objet.hasMany(objetmatche, { as: "objet_perdu_objetmatches", foreignKey: "objet_perdu"});
+  rendezvous.belongsTo(objetmatche, { as: "objet_matche_objetmatche", foreignKey: "objet_matche"});
+  objetmatche.hasMany(rendezvous, { as: "rendezvous", foreignKey: "objet_matche"});
   listerecompenses.belongsTo(recompense, { as: "id_recompense_recompense", foreignKey: "id_recompense"});
   recompense.hasMany(listerecompenses, { as: "listerecompenses", foreignKey: "id_recompense"});
+  historique.belongsTo(rendezvous, { as: "rdv_rendezvou", foreignKey: "rdv"});
+  rendezvous.hasMany(historique, { as: "historiques", foreignKey: "rdv"});
   historique.belongsTo(utilisateur, { as: "id_utilisateur_trouveur_utilisateur", foreignKey: "id_utilisateur_trouveur"});
   utilisateur.hasMany(historique, { as: "historiques", foreignKey: "id_utilisateur_trouveur"});
   listerecompenses.belongsTo(utilisateur, { as: "id_utilisateur_utilisateur", foreignKey: "id_utilisateur"});

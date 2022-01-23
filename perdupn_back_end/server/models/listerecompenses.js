@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'recompense',
         key: 'id_recompense'
       }
+    },
+    date_recompense: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
     }
   }, {
     sequelize,

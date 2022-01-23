@@ -10,12 +10,6 @@ var utilisateur = require("../models/utilisateur");
 var UserModel = utilisateur(db,DataTypes);
 var objet = require("../models/objet");
 var ObjetPerduModel = objet(db,DataTypes);
-var categorie = require("../models/categorie");
-var CategorieModel = categorie(db,DataTypes);
-var localisation = require("../models/localisation");
-var LocalisationModel = localisation(db,DataTypes);
-var objetMatche = require("../models/objetmatche");
-var ObjetMatcheModel = objetMatche(db,DataTypes);
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");

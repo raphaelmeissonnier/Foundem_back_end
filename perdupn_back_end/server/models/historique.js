@@ -7,24 +7,28 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    date_transaction: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    id_objet_trouve: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'objet',
-        key: 'id_objet'
-      }
-    },
     id_utilisateur_trouveur: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'utilisateur',
         key: 'id_utilisateur'
+      }
+    },
+    liste_recompense: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'listerecompenses',
+        key: 'id'
+      }
+    },
+    rdv: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'rendezvous',
+        key: 'id_rdv'
       }
     }
   }, {
@@ -41,17 +45,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_objet",
-        using: "BTREE",
-        fields: [
-          { name: "id_objet_trouve" },
-        ]
-      },
-      {
         name: "FK_utilisateur3",
         using: "BTREE",
         fields: [
           { name: "id_utilisateur_trouveur" },
+        ]
+      },
+      {
+        name: "historique_ibfk_3",
+        using: "BTREE",
+        fields: [
+          { name: "liste_recompense" },
+        ]
+      },
+      {
+        name: "historique_ibfk_4",
+        using: "BTREE",
+        fields: [
+          { name: "rdv" },
         ]
       },
     ]

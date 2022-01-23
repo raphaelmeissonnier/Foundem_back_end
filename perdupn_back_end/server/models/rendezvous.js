@@ -38,6 +38,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'utilisateur',
         key: 'id_utilisateur'
       }
+    },
+    objet_matche: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'objetmatche',
+        key: 'id_objet_matche'
+      }
     }
   }, {
     sequelize,
@@ -71,6 +79,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "second_user" },
+        ]
+      },
+      {
+        name: "rendezvous_ibfk_4",
+        using: "BTREE",
+        fields: [
+          { name: "objet_matche" },
         ]
       },
     ]
