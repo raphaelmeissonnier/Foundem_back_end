@@ -27,7 +27,6 @@ const getObjetsTrouves= async (req,res) => {
         const objetstrouves = await db.query("SELECT * FROM objet as ob, localisation as loca, categorie as cate WHERE ob.localisation=loca.id_localisation AND ob.categorie=cate.id_categorie AND ob.status_objet= :status_objet AND id_objet NOT IN (SELECT objet_trouve FROM objetmatche)",
             {
                 replacements : {
-                    id: req.params.id,
                     status_objet: "trouvé"
                 },
                 type: QueryTypes.SELECT

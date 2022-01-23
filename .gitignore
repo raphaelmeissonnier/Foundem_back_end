@@ -106,5 +106,5 @@ dist
 # TernJS port file
 .tern-port
 
-./perdupn_back_end/server/config/config.js
-./perdupn_back_end/server/config/database.js
+server/config/config.js
+server/config/database.js
