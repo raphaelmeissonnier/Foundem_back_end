@@ -13,7 +13,7 @@ const cookieParser = require("cookie-parser");
 const initModels = require("./server/models/init-models.js");
 
 //Import Auth parts
-//const {checkUser,requireAuth} = require("./server/middleware/authentication")
+const {checkUser,requireAuth} = require("./server/middleware/authentication")
  
 // Init express
 const app = express();
@@ -24,12 +24,12 @@ app.use(cors());
 //use cookies-parser
 app.use(cookieParser());
 
-//app.use(checkUser);
+app.use(checkUser);
 
-/*app.get('/authId', requireAuth, (req, res) => {
+app.get('/authId', requireAuth, (req, res) => {
   let id = res.locals.user
   res.status(200).send(id)
-})*/
+})
  
 // Testing database connection 
 async function connectionDB(){
