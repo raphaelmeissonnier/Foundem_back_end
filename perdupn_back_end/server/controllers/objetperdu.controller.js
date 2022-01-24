@@ -40,7 +40,7 @@ const getObjetsPerdus = async (req,res) => {
 //PARCOURIR LA LISTE DES ObjetsMatche
 const getObjetPerduById = async (req, res) => {
     try {
-        const objetperdu = await db.query("SELECT distinct * FROM objet WHERE utilisateur!= :id AND status_objet= :status_objet AND id_objet NOT IN(SELECT objet_perdu FROM objetmatche)",
+        const objetperdu = await db.query("SELECT distinct * FROM objet, localisation, categorie WHERE localisation=id_localisation AND categorie= id_categorie AND utilisateur!= :id AND status_objet= :status_objet AND id_objet NOT IN(SELECT objet_perdu FROM objetmatche)",
         {
             replacements : {
                 id: req.params.id,
