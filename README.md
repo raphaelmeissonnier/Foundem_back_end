@@ -18,6 +18,11 @@ Avec l'application Found'em, vous pouvez:
 - Chercher des objets correspondant à la description d'un objet perdu
 - Choisir un rayon pour l'affichage des objets
 - Afficher une suggestion d'objets perdus dans la page d'accueil selon votre localisation 
+- Consulter ses Objets perdus et trouvés
+- Créer un Match entre un objet perdu et un objet trouvé
+- Créer un Rendez-vous entre les utilisateurs concernés par le match 
+- Saisir un lieu et une date de Rendez-vous
+- Consulter ses Rendez-Vous
 
 
 ## Auteurs 
