@@ -39,12 +39,13 @@ const updateRdv = async (req, res) => {
 
         const loca = await createLocalisation(req,[{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: null}])
 
-        await db.query("UPDATE rendezvous SET date_rdv=:date_rdv, localisation=:loca_rdv WHERE id_rdv=:id_rdv",
+        await db.query("UPDATE rendezvous SET date_rdv=:date_rdv, localisation=:loca_rdv, etat= :etat WHERE id_rdv=:id_rdv",
         {
             replacements : {
                 date_rdv: req.body.date,
                 loca_rdv: loca[0].id_localisation,
-                id_rdv: req.params.idrdv
+                id_rdv: req.params.idrdv,
+                etat: req.body.etat
             },
             type: QueryTypes.UPDATE
         });
