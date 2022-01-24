@@ -173,12 +173,14 @@ const deleteObjetPerdu = async (req, res) => {
 // Get objet perdu by user id
 const getObjetPerduByIdUser = async (req, res) => {
     try {
-        const objetperdu = await ObjetPerduModel.findAll({
-            where: {
-                utilisateur: req.params.id,
-                status_objet:"perdu"
-            }
-        });
+        const objetperdu = await db.query("SELECT * FROM objet, localisation, categorie, objetmatche WHERE categorie=id_categorie AND localisation=id_localisation AND status_objet= :status_objet AND utilisateur= :utilisateur AND id_objet=objet_perdu ",
+            {
+                replacements : {
+                    status_objet:"perdu",
+                    utilisateur: req.params.id
+                },
+                type: QueryTypes.SELECT
+            });
         res.send(objetperdu);
     } catch (err) {
         console.log(err);

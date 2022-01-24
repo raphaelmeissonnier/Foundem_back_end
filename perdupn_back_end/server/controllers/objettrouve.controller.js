@@ -179,12 +179,14 @@ const rechercheObjetTrouve = async (req, res) => {
 // Get objet trouvé by user id
 const getObjetTrouveByIdUser = async (req, res) => {
     try {
-        const objettrouve = await ObjetTrouveModel.findAll({
-            where: {
-                utilisateur: req.params.id,
-                status_objet : "trouvé"
-            }
-        });
+        const objettrouve = await db.query("SELECT * FROM objet, localisation, categorie, objetmatche WHERE categorie=id_categorie AND localisation=id_localisation AND status_objet= :status_objet AND utilisateur= :utilisateur AND id_objet=objet_trouve ",
+            {
+                replacements : {
+                    status_objet:"trouve",
+                    utilisateur: req.params.id
+                },
+                type: QueryTypes.SELECT
+            });
         res.send(objettrouve);
     } catch (err) {
         console.log(err);
