@@ -23,6 +23,8 @@ Avec l'application Found'em, vous pouvez:
 - Créer un Rendez-vous entre les utilisateurs concernés par le match 
 - Saisir un lieu et une date de Rendez-vous
 - Consulter ses Rendez-Vous
+- Consulter son solde
+- Debloquer des recompenses si le solde est suffisant
 
 
 ## Auteurs 
