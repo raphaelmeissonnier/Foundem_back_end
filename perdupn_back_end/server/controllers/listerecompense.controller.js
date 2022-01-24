@@ -19,7 +19,7 @@ const createListeRecompense = async (req, res) =>{
         const user = await getUserById(req, res);
 
         //Création d'un objet de type ListeRecompense
-        const listeRecompenseobjet = new ListeRecompense(req.body.id_user, req.body.id_recompense,req.body.date);
+        const listeRecompenseobjet = new ListeRecompense(req.body.id, req.body.recompense_id,req.body.date);
         if(listeRecompenseobjet.verifier(user.solde, recompense.valeur))
         {
             //RESPECTER LES CHAMPS DU BODY => LIAISON AVEC D'AUTRES CONTROLLERS
@@ -33,9 +33,11 @@ const createListeRecompense = async (req, res) =>{
             console.log("newSolde", newSolde);
             //UPDATE L'UTILISATEUR
             const updateUser = await updateSoldeUser(req, newSolde);
+
+            //FAIRE UNE INSERTION DANS LA TABLE HISTORIQUE FAIRE LA MEME CHOSE QUAND LE RDV EST ACCEPTE
             res.json({
                 "result": 1,
-                "message": "Created récompense "
+                "message": "Vous avez débloqué une récompense !"
             })
         }
         else
@@ -49,7 +51,7 @@ const createListeRecompense = async (req, res) =>{
     {
         res.json({
             "result": 0,
-            "message": "Erreur"
+            "message": e
         })
     }
 }
