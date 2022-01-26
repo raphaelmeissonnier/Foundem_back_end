@@ -1,6 +1,6 @@
 const ListeRecompense = require('../services/ListeRecompense');
 
-const {Sequelize} = require('sequelize');
+const {Sequelize, QueryTypes} = require("sequelize");
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
 var listerecompense = require("../models/listerecompenses");
@@ -33,6 +33,16 @@ const createListeRecompense = async (req, res) =>{
             console.log("newSolde", newSolde);
             //UPDATE L'UTILISATEUR
             const updateUser = await updateSoldeUser(req, newSolde);
+
+            //INSERTION dans la table Historique
+            await db.query("INSERT INTO historique (id_utilisateur_trouveur, liste_recompense) VALUES (:id_user, :liste ) ",
+            {
+                replacements : {
+                    id_user: user.id_utilisateur,
+                    liste: listeRecompense.dataValues.id,
+                },
+                type: QueryTypes.INSERT
+            }); 
 
             //FAIRE UNE INSERTION DANS LA TABLE HISTORIQUE FAIRE LA MEME CHOSE QUAND LE RDV EST ACCEPTE
             res.json({
