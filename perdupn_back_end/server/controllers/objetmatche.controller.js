@@ -1,23 +1,21 @@
-const {ObjetMatcheModel, ObjetPerduModel, ObjetTrouveModel} = require("../models/tables.model");
+const {Sequelize, QueryTypes} = require("sequelize");
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var objetmatche = require("../models/objetmatche");
+var ObjetMatcheModel = objetmatche(db,DataTypes);
+var objet = require("../models/objet");
+var ObjetPerduModel = objet(db,DataTypes);
+var ObjetTrouveModel = objet(db,DataTypes);
 
 
 // Create a new objet trouve
 const createObjetMatche = async (req, res) => {
     try {
         await ObjetMatcheModel.create({
-            objettrouve_id: req.body.idObjetT,
-            objetperdu_id: req.body.idObjetP,
+            objet_trouve: req.body.idObjetT,
+            objet_perdu: req.body.idObjetP,
+            etat : "en cours"
         });
-        await ObjetPerduModel.update(
-            {etat : 2},
-            { where:{id: req.body.idObjetP} }
-        )
-        await ObjetTrouveModel.update(
-            {etat : 2},
-            {where:{
-                id: req.body.idObjetT
-            }}
-        )
         res.status(200).json({
             result: 1,
             msg: 'Matche entre objet bien crée !'
@@ -36,9 +34,9 @@ const getObjetMatche = async (req, res) => {
         const objetMatche = await ObjetMatcheModel.findOne({
             where:
             {
-                objettrouve_id: req.params.id
+                objet_trouve: req.params.id
             }
-        })
+        });
         if(objetMatche)
         {
             res.send(objetMatche);
@@ -60,23 +58,41 @@ const getObjetMatche = async (req, res) => {
     }
 }
 
-const deleteObjetMatche = async (req, res) => {
+//CHANGER LE FRONT (BODY + FETCH) + AJOUTER UNE NOUVELLE ROUTE
+const updateObjetMatche= async (req, res) => {
     try {
-        await ObjetMatcheModel.destroy({
-            where: {
-                objettrouve_id: req.params.id
-            }
+
+        console.log("PARAMS",req.params)
+        const rec_objettrouve = await db.query("SELECT id_objet FROM objet where status_objet='trouvé' AND id_objet=:par_id",
+        {
+            replacements : {
+                par_id: req.params.id,
+            },
+            type: QueryTypes.SELECT
         });
-        res.json({
-            "message": "Objet Matche Deleted"
-        });
+
+        console.log("Objet Trouve id", rec_objettrouve[0].id_objet);
+        if(rec_objettrouve){
+            await db.query("UPDATE objetmatche SET etat=:etat WHERE objet_trouve=:objettrouve",
+            {
+                replacements : {
+                    etat: req.body.etat,
+                    objettrouve: rec_objettrouve[0].id_objet
+                },
+                type: QueryTypes.UPDATE
+            });
+            res.json({
+                message: "Objet Matche Updated"
+            });
+        }
+        
     } catch (err) {
         console.log(err);
         res.json({
-            message:err
+            message: err
         });
     }
 }
 
 
-module.exports = {createObjetMatche, getObjetMatche, deleteObjetMatche}
+module.exports = {createObjetMatche, getObjetMatche, updateObjetMatche}

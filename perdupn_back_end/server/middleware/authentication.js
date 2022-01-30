@@ -1,6 +1,12 @@
 const jwt = require("jsonwebtoken");
-const {UserModel} = require("../models/tables.model")
 const {config} = require("../config/config");
+const db = require('../config/database');
+
+const {Sequelize} = require('sequelize');
+var DataTypes = Sequelize.DataTypes;
+var user = require("../models/utilisateur");
+var UserModel = user(db,DataTypes);
+
 
 checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -11,8 +17,8 @@ checkUser = (req, res, next) => {
         res.cookie("jwt", "", { maxAge: 1 });
         next();
       } else {
-          console.log("DEcodedTOken",decodedToken.id)
-        let user = await UserModel.findOne({where : { id: decodedToken.id }});
+          console.log("DecodedToken",decodedToken.id)
+        let user = await UserModel.findOne({where : { id_utilisateur: decodedToken.id }});
           //console.log("User: ", user);
         res.locals.user = user;
         next();

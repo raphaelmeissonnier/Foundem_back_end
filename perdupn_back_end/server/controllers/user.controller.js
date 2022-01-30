@@ -1,11 +1,15 @@
 const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
 
-//const User = require("../models/user.model");
-const {UserModel} = require("../models/tables.model");
+const {Sequelize, QueryTypes} = require('sequelize');
+const db = require('../config/database');
+var DataTypes = Sequelize.DataTypes;
+var utilisateur = require("../models/utilisateur");
+var UserModel = utilisateur(db,DataTypes);
+
 
 const bcrypt = require("bcrypt");
-const {Sequelize} = require("sequelize");
+const {isEmpty} = require("validator");
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -27,10 +31,36 @@ const getUserById = async (req, res) => {
     try {
         const user = await UserModel.findOne({
             where: {
-                id: req.params.id
+                $or: [
+                    {id_utilisateur: req.params.id},
+                    {id_utilisateur: req.body.id}
+                ]
             }
         });
-        res.json(user);
+        if(!req.params.id)
+        {
+            return user;
+        }
+        else
+        {
+            res.json(user);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// Get user by id
+const getRdvByUser = async (req, res) => {
+    try {
+        const rdvs = await db.query('SELECT * FROM rendezvous, localisation WHERE localisation = id_localisation AND (first_user=:id_user OR second_user=:id_user)',
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+        res.json(rdvs);
     } catch (err) {
         console.log(err);
     }
@@ -39,12 +69,22 @@ const getUserById = async (req, res) => {
 // Create a new user
 const createUser = async (req, res) => {
     try {
-        await UserModel.create({
-            email: req.body.email,
-            username: req.body.username,
-            password: req.body.password, 
+        await UserModel.findOrCreate({
+            where: {
+                $or: [
+                    {username: req.body.username},
+                    {email: req.body.email}
+                ]
+            },
+            defaults: {
+                nom: req.body.nom,
+                prenom: req.body.prenom,
+                username: req.body.username,
+                email: req.body.email,
+                mdp: req.body.password,
+                solde: 0
+            }
         });
-
         res.json({
             "result": 1,
             "msg": "Votre compte a bien été créé"
@@ -77,7 +117,7 @@ const updateUser= async (req, res) => {
     try {
         await UserModel.update(req.body, {
             where: {
-                idUser: req.params.id
+                id_utilisateur: req.params.id
             }
         });
         res.json({
@@ -94,7 +134,7 @@ const deleteUser = async (req, res) => {
         console.log(req.params);
         await UserModel.destroy({
             where: {
-                idUser: req.params.id
+                id_utilisateur: req.params.id
             }
         });
         res.json({
@@ -117,12 +157,12 @@ const loginUser = async (req, res) => {
         //Si l'utilisateur existe et que le mot de passe est bon
         if(user){
             console.log("L'utlisateur existe !")
-            if(req.body.password == user.password){
+            if(req.body.password == user.mdp){
                 console.log("Le mdp est correct !")
-                const id = user.id;
+                const id = user.id_utilisateur;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
                 res.cookie("jwt", Token, { httpOnly: true, maxAge: maxAge });
-                res.status(200).json({ result: 1, user: user.id });
+                res.status(200).json({ result: 1, user: user.id_utilisateur });
             }
             else
             {
@@ -153,4 +193,22 @@ const logoutUser = async (req, res) => {
     res.status(200).send();
 };
 
-module.exports = {getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser}
+const updateSoldeUser = async(req, field) =>{
+    try
+    {
+        await UserModel.update(
+            {solde: field},
+            {
+                where:
+                {
+                    id_utilisateur: req.body.id
+                }
+            }
+        );
+    }
+    catch (e)
+    {
+        return e;
+    }
+}
+module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}
