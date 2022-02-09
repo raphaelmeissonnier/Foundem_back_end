@@ -66,6 +66,47 @@ const getRdvByUser = async (req, res) => {
     }
 }
 
+// Get user by id
+const getHistByUser = async (req, res) => {
+    try {
+        const hist_minus = await db.query('SELECT listerecompenses.date_recompense as date, recompense.valeur as valeur, recompense.intitule as intitule FROM historique, listerecompenses, recompense \
+        WHERE historique.liste_recompense=listerecompenses.id \
+          AND \
+            listerecompenses.id_recompense = recompense.id_recompense \
+          AND  historique.id_utilisateur_trouveur=:id_user ORDER BY listerecompenses.date_recompense;',
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+
+        const hist_posi = await db.query('SELECT rendezvous.date_rdv as date, categorie.valeur as valeur, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  \
+            WHERE historique.rdv = rendezvous.id_rdv \
+                AND \
+                    rendezvous.objet_matche = objetmatche.id_objet_matche \
+                AND \
+                    objetmatche.objet_trouve = objet.id_objet \
+                AND \
+                    objet.categorie = categorie.id_categorie \
+                AND \
+                    historique.id_utilisateur_trouveur=:id_user ORDER BY rendezvous.date_rdv;',
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+
+        var hist = hist_minus.concat(hist_posi)
+        //TRIE SELON LA DATE
+        res.json(hist);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
 // Create a new user
 const createUser = async (req, res) => {
     try {
@@ -211,4 +252,4 @@ const updateSoldeUser = async(req, field) =>{
         return e;
     }
 }
-module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}
+module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser, getHistByUser}
