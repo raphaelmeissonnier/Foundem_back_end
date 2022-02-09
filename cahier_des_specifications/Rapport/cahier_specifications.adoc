@@ -246,6 +246,71 @@ image::newWireframes/v0.6_suggestions_objets_perdus2.png[width=500,height=300]
 
 === Version v0.7
 
+[.lead]
+*Feature : Consulter ses objets perdus et trouvés*
+
+image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+[.lead]
+*Feature : Contacter un utilisateur qui aurait trouvé un objet*
+
+image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+
+=== Version v1.1
+
+[.lead]
+*Feature : Créer un rendez-vous*
+
+image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+[.lead]
+*Feature : Accepter ou refuser un rendez-vous*
+
+image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+=== Version v0.7
+
+[.lead]
+*Feature : Consulter son solde de points*
+
+image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
+image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
+[.lead]
+*Feature : Convertir ses points en récompense*
+
+image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
+image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+
+* L'utilisateur accède à la page d'accueil
+* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+
 
 === Diagramme de classe
 
