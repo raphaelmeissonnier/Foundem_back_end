@@ -1,6 +1,5 @@
 const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
-
 const {Sequelize, QueryTypes} = require('sequelize');
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
@@ -111,48 +110,51 @@ const getHistByUser = async (req, res) => {
 
 // Create a new user
 const createUser = async (req, res) => {
-    try {
-        await UserModel.findOrCreate({
-            where: {
-                $or: [
-                    {username: req.body.username},
-                    {email: req.body.email}
-                ]
-            },
-            defaults: {
-                nom: req.body.nom,
-                prenom: req.body.prenom,
-                username: req.body.username,
-                email: req.body.email,
-                mdp: req.body.password,
-                solde: 0
+    //Hash du mot de passe
+    bcrypt.hash(req.body.password, saltRounds, async function(err, hash) {
+        try {
+            await UserModel.findOrCreate({
+                where: {
+                    $or: [
+                        {username: req.body.username},
+                        {email: req.body.email}
+                    ]
+                },
+                defaults: {
+                    nom: req.body.nom,
+                    prenom: req.body.prenom,
+                    username: req.body.username,
+                    email: req.body.email,
+                    mdp: hash,
+                    solde: 0
+                }
+            });
+            res.json({
+                "result": 1,
+                "msg": "Votre compte a bien été créé"
+            });
+        } catch (e) {
+            console.log(e);
+            switch(e.constructor)
+            {
+                case Sequelize.UniqueConstraintError:
+                    res.json({
+                        "result": 0,
+                        "msg": "Email/Username existant"
+                    });
+                case Sequelize.ValidationError:
+                    res.json({
+                        "result": 0,
+                        "msg": "L'email saisi est invalide"
+                    });
+                default:
+                    res.json({
+                        "result": 0,
+                        "msg": e
+                    });
             }
-        });
-        res.json({
-            "result": 1,
-            "msg": "Votre compte a bien été créé"
-        });
-    } catch (err) {
-        console.log(err);
-        switch(err.constructor)
-        {
-            case Sequelize.UniqueConstraintError:
-                res.json({
-                    "result": 0,
-                    "msg": "Email/Username existant"
-                });
-            case Sequelize.ValidationError:
-                res.json({
-                    "result": 0,
-                    "msg": "L'email saisi est invalide"
-                });
-            default:
-                res.json({
-                    "result": 0,
-                    "msg": err
-                });
         }
-    }
+    });
 }
 
 // Update objet perdu by id
@@ -200,7 +202,10 @@ const loginUser = async (req, res) => {
         //Si l'utilisateur existe et que le mot de passe est bon
         if(user){
             console.log("L'utlisateur existe !")
-            if(req.body.password == user.mdp){
+            const match = await bcrypt.compare(req.body.password, user.mdp);
+            console.log('match: ', match);
+            if(match)
+            {
                 console.log("Le mdp est correct !")
                 const id = user.id_utilisateur;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
