@@ -108,3 +108,4 @@ dist
 
 # Config Repo
 perdupn_back_end/server/config
+perdupn_back_end/server/config/database.js
