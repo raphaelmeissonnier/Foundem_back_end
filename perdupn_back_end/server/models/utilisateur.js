@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     mdp: {
-      type: DataTypes.STRING(25),
+      type: DataTypes.STRING(200),
       allowNull: false
     },
     solde: {
