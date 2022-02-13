@@ -1,6 +1,5 @@
 const {config} = require("../config/config");
 const jwt = require("jsonwebtoken");
-
 const {Sequelize, QueryTypes} = require('sequelize');
 const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
@@ -66,50 +65,96 @@ const getRdvByUser = async (req, res) => {
     }
 }
 
-// Create a new user
-const createUser = async (req, res) => {
+// Get user by id
+const getHistByUser = async (req, res) => {
     try {
-        await UserModel.findOrCreate({
-            where: {
-                $or: [
-                    {username: req.body.username},
-                    {email: req.body.email}
-                ]
+        const hist_minus = await db.query('SELECT listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intitule FROM historique, listerecompenses, recompense \
+        WHERE historique.liste_recompense=listerecompenses.id \
+          AND \
+            listerecompenses.id_recompense = recompense.id_recompense \
+          AND  historique.id_utilisateur_trouveur=:id_user ORDER BY listerecompenses.date_recompense;',
+        {
+            replacements : {
+                id_user: req.params.id
             },
-            defaults: {
-                nom: req.body.nom,
-                prenom: req.body.prenom,
-                username: req.body.username,
-                email: req.body.email,
-                mdp: req.body.password,
-                solde: 0
-            }
-        });
-        res.json({
-            "result": 1,
-            "msg": "Votre compte a bien été créé"
-        });
+            type: QueryTypes.SELECT
+        })
+
+        const hist_posi = await db.query('SELECT rendezvous.date_rdv as date, categorie.valeur as valeur_pos, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  \
+            WHERE historique.rdv = rendezvous.id_rdv \
+                AND \
+                    rendezvous.objet_matche = objetmatche.id_objet_matche \
+                AND \
+                    objetmatche.objet_trouve = objet.id_objet \
+                AND \
+                    objet.categorie = categorie.id_categorie \
+                AND \
+                    historique.id_utilisateur_trouveur=:id_user ORDER BY rendezvous.date_rdv;',
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+
+        var hist = hist_minus.concat(hist_posi)
+        var sort_hist= hist.sort((a,b) => b.date - a.date)
+        console.log("SORT_HIST",sort_hist)
+        //TRIE SELON LA DATE
+        res.json(sort_hist);
     } catch (err) {
         console.log(err);
-        switch(err.constructor)
-        {
-            case Sequelize.UniqueConstraintError:
-                res.json({
-                    "result": 0,
-                    "msg": "Email/Username existant"
-                });
-            case Sequelize.ValidationError:
-                res.json({
-                    "result": 0,
-                    "msg": "L'email saisi est invalide"
-                });
-            default:
-                res.json({
-                    "result": 0,
-                    "msg": err
-                });
-        }
     }
+}
+
+
+// Create a new user
+const createUser = async (req, res) => {
+    //Hash du mot de passe
+    bcrypt.hash(req.body.password, saltRounds, async function(err, hash) {
+        try {
+            await UserModel.findOrCreate({
+                where: {
+                    $or: [
+                        {username: req.body.username},
+                        {email: req.body.email}
+                    ]
+                },
+                defaults: {
+                    nom: req.body.nom,
+                    prenom: req.body.prenom,
+                    username: req.body.username,
+                    email: req.body.email,
+                    mdp: hash,
+                    solde: 0
+                }
+            });
+            res.json({
+                "result": 1,
+                "msg": "Votre compte a bien été créé"
+            });
+        } catch (e) {
+            console.log(e);
+            switch(e.constructor)
+            {
+                case Sequelize.UniqueConstraintError:
+                    res.json({
+                        "result": 0,
+                        "msg": "Email/Username existant"
+                    });
+                case Sequelize.ValidationError:
+                    res.json({
+                        "result": 0,
+                        "msg": "L'email saisi est invalide"
+                    });
+                default:
+                    res.json({
+                        "result": 0,
+                        "msg": e
+                    });
+            }
+        }
+    });
 }
 
 // Update objet perdu by id
@@ -157,7 +202,10 @@ const loginUser = async (req, res) => {
         //Si l'utilisateur existe et que le mot de passe est bon
         if(user){
             console.log("L'utlisateur existe !")
-            if(req.body.password == user.mdp){
+            const match = await bcrypt.compare(req.body.password, user.mdp);
+            console.log('match: ', match);
+            if(match)
+            {
                 console.log("Le mdp est correct !")
                 const id = user.id_utilisateur;
                 const Token = jwt.sign({ id }, config.TOKEN_SECRET , {expiresIn: maxAge});
@@ -211,4 +259,4 @@ const updateSoldeUser = async(req, field) =>{
         return e;
     }
 }
-module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser}
+module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser, getHistByUser}

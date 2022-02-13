@@ -9,7 +9,8 @@ const {
     deleteUser,
     loginUser,
     logoutUser,
-    getRdvByUser
+    getRdvByUser,
+    getHistByUser
  } = require("../controllers/user.controller");
 
 const { 
@@ -32,6 +33,8 @@ router.patch('/users/:id/rdv/:idrdv', updateRdv);
 router.get('/users/:id',getUserById);
 
 router.get('/users/:id/rdv', getRdvByUser);
+
+router.get('/users/:id/historique', getHistByUser);
 
 router.put('/users/:id',updateUser);
 
