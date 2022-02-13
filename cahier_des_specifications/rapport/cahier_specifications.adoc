@@ -142,7 +142,7 @@ Nous pourrons également identifier les objets perdus grâce aux photos.
 [.lead]
 *Feature : Localiser l'utilisateur*
 
-image::newWireframes/v0.2_localiser_utilisateur.PNG[width=500,height=300, align="center"]
+image::../newWireframes/v0.2_localiser_utilisateur.PNG[width=500,height=300, align="center"]
 
 //OU btn:[Centrer]
 * L'utilisateur clique sur le bouton [`Centrer`]
@@ -153,7 +153,7 @@ image::newWireframes/v0.2_localiser_utilisateur.PNG[width=500,height=300, align=
 [.lead]
 *Feature : Les objets les plus proches*
 
-image::newWireframes/v0.3_objets_plus_proches.PNG[width=500,height=300, align="center"]
+image::../newWireframes/v0.3_objets_plus_proches.PNG[width=500,height=300, align="center"]
 
 * L'utilisateur accède à la page d'accueil
 * L'utilisateur clique sur le bouton [`Centrer`]
@@ -163,7 +163,7 @@ image::newWireframes/v0.3_objets_plus_proches.PNG[width=500,height=300, align="c
 [.lead]
 *Feature : Voir les points fusionnés*
 
-image::newWireframes/v0.3_points_fusionnes.PNG[width=500,height=300, align="center"]
+image::../newWireframes/v0.3_points_fusionnes.PNG[width=500,height=300, align="center"]
 
 * L'utilisateur dézoome la carte
 * Les icônes fusionnent
@@ -172,7 +172,7 @@ image::newWireframes/v0.3_points_fusionnes.PNG[width=500,height=300, align="cent
 [.lead]
 *Feature : Consulter les informations d'un point sur la carte*
 
-image::newWireframes/v0.4_consulter_informations_objet.png[width=500,height=300, align="center"]
+image::../newWireframes/v0.4_consulter_informations_objet.png[width=500,height=300, align="center"]
 
 * L'utilisateur accède à la page d'accueil de l'application
 * L'utilisateur consulte la carte
@@ -182,8 +182,8 @@ image::newWireframes/v0.4_consulter_informations_objet.png[width=500,height=300,
 [.lead]
 *Feature : Ajouter un objet trouvé*
 
-image::newWireframes/v0.4_ajouter_objet_trouve_1.png[width=500,height=300]
-image::newWireframes/v0.4_ajouter_objet_trouve_2.png[width=500,height=300]
+image::../newWireframes/v0.4_ajouter_objet_trouve_1.png[width=500,height=300]
+image::../newWireframes/v0.4_ajouter_objet_trouve_2.png[width=500,height=300]
 
 * J'ai trouvé un objet perdu
 * Je signale cet objet sur l'application web Found'Em
@@ -199,8 +199,8 @@ image::newWireframes/v0.4_ajouter_objet_trouve_2.png[width=500,height=300]
 [.lead]
 *Feature : Ajouter un objet perdu*
 
-image::newWireframes/v0.5_ajout_objet_perdu1.png[width=500,height=300]
-image::newWireframes/v0.5_ajout_objet_perdu2.png[width=500,height=300]
+image::../newWireframes/v0.5_ajout_objet_perdu1.png[width=500,height=300]
+image::../newWireframes/v0.5_ajout_objet_perdu2.png[width=500,height=300]
 
 * L'utilisateur accède à la page d'accueil du site
 * L'utilisateur clique sur le bouton [`J'ai perdu un objet`]
@@ -212,7 +212,7 @@ image::newWireframes/v0.5_ajout_objet_perdu2.png[width=500,height=300]
 [.lead]
 *Feature : Saisir une adresse sur le formulaire*
 
-image::newWireframes/v0.5_saisir_adresse_formulaire.png[width=500,height=300, align="center"]
+image::../newWireframes/v0.5_saisir_adresse_formulaire.png[width=500,height=300, align="center"]
 
 * L'utilisateur accède au formulaire permettant de déclarer des objets trouvés
 * Il saisit une adresse dans le champs `Adresse`
@@ -223,8 +223,8 @@ image::newWireframes/v0.5_saisir_adresse_formulaire.png[width=500,height=300, al
 [.lead]
 *Feature : Chercher un objet perdu*
 
-image::newWireframes/v0.5_recherche_objet_perdu1.png[width=500,height=300]
-image::newWireframes/v0.5_recherche_objet_perdu2.png[width=500,height=300]
+image::../newWireframes/v0.5_recherche_objet_perdu1.png[width=500,height=300]
+image::../newWireframes/v0.5_recherche_objet_perdu2.png[width=500,height=300]
 
 * L'utilisateur accède à la page d'accueil du site
 * L'utilisateur clique sur le bouton [`J'ai perdu un objet`]
@@ -238,21 +238,21 @@ image::newWireframes/v0.5_recherche_objet_perdu2.png[width=500,height=300]
 [.lead]
 *Feature : Consulter les suggestions d'objets perdus*
 
-image::newWireframes/v0.6_suggestions_objets_perdus1.png[width=500,height=300]
-image::newWireframes/v0.6_suggestions_objets_perdus2.png[width=500,height=300]
+image::../newWireframes/v0.6_suggestions_objets_perdus1.png[width=500,height=300]
+image::../newWireframes/v0.6_suggestions_objets_perdus2.png[width=500,height=300]
 
 * L'utilisateur accède à la page d'accueil
 * L'utilisateur consulte la liste des objets perdus proches de sa localisation
 
-=== Version v0.7
+=== Version α
 
 [.lead]
 *Feature : Consulter ses objets perdus et trouvés*
 
-image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets1.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets2.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets3.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets4.png[width=500,height=300]
 
 * L'utilisateur accède à la page d'accueil
 * L'utilisateur consulte la liste des objets perdus proches de sa localisation
@@ -260,8 +260,8 @@ image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
 [.lead]
 *Feature : Contacter un utilisateur qui aurait trouvé un objet*
 
-image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+image::../newWireframes/v0_7_marcher_objets1.png[width=500,height=300]
+image::../newWireframes/v0_7_marcher_objets2.png[width=500,height=300]
 
 * L'utilisateur accède à la page d'accueil
 * L'utilisateur consulte la liste des objets perdus proches de sa localisation
@@ -272,112 +272,117 @@ image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
 [.lead]
 *Feature : Créer un rendez-vous*
 
-image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets1.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets2.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets3.png[width=500,height=300]
+image::../newWireframes/v0_7_consulter_ses_objets4.png[width=500,height=300]
 
-* L'utilisateur accède à la page d'accueil
-* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+* Depuis la page "Mes objets", rubrique "Mes objets trouvés", l'utilisateur accepte un match
+* L'utilisateur est redirigé vers une nouvelle page "Mon agenda"
+* L'utilisateur clique sur le calendrier afin de fixer une date de
+* Une pop-up s'ouvre, l'utilisateur décrit son rendez-vous (lieu, date, heure)
+* L'utilisateur valide le rendez-vous
+* Le RDV est en attente de confirmation chez l'utilisateur propriétaire de l'objet
+* Une fois la confirmation du rendez-vous validé, le rendez-vous s'affiche en vert sur l'agenda
 
 [.lead]
 *Feature : Accepter ou refuser un rendez-vous*
 
-image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+image::../newWireframes/v0_7_marcher_objets1.png[width=500,height=300]
+image::../newWireframes/v0_7_marcher_objets2.png[width=500,height=300]
 
-* L'utilisateur accède à la page d'accueil
-* L'utilisateur consulte la liste des objets perdus proches de sa localisation
-
-=== Version v0.7
-
-[.lead]
-*Feature : Consulter son solde de points*
-
-image::newWireframe/v0_7_consulter_ses_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets2.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets3.png[width=500,height=300]
-image::newWireframe/v0_7_consulter_ses_objets4.png[width=500,height=300]
-
-* L'utilisateur accède à la page d'accueil
-* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+* Depuis la page d'accueil, l'utilisateur clique sur l'avatar
+* Un menu s'ouvre, il clique sur la rubrique "Mes rendez-vous"
+* L'utilisateur est redirigé vers une nouvelle page "Mon agenda"
+* L'utilisateur peut consulter son agenda avec ses rendez-vous
+* L'utilisateur peut valider ou refuser le rendez-vous
+* Le rendez-vous est alors confirmé chez l'utilisateur qui a trouvé l'objet
 
 [.lead]
-*Feature : Convertir ses points en récompense*
+*Feature : Convertir ses points en récompenses*
 
-image::newWireframe/v0_7_marcher_objets1.png[width=500,height=300]
-image::newWireframe/v0_7_marcher_objets2.png[width=500,height=300]
+image::../newWireframes/v1_1_transformer_points1.png[width=500,height=300]
+image::../newWireframes/v1_1_transformer_points2.png[width=500,height=300]
 
-* L'utilisateur accède à la page d'accueil
-* L'utilisateur consulte la liste des objets perdus proches de sa localisation
+* Depuis la page d'accueil, l'utilisateur clique sur l'avatar
+* Un menu s'ouvre, il clique sur la rubrique "Mes points"
+* L'utilisateur est redirigé vers une nouvelle page "Mes points"
+* L'utilisateur peut consulter son nombre de points
+* L'utilisateur clique sur le bouton "Obtenir cette récompense"
+* Une pop-up s'ouvre, l'utilisateur récupère sa récompense
+
+
+=== Version v1.2
+[.lead]
+*Feature : Proposer un itinéraire*
+
+image::../newWireframes/v1_2_itinéraire1.png[width=500,height=300]
+image::../newWireframes/v1_2_itinéraire2.png[width=500,height=300]
+
+* L'utilisateur clique sur un objet de la carte
+* Une pop-up s'ouvre avec la description de l'objet et un bouton "Y aller"
+* L'utilisateur clique sur le bouton "Y aller"
+* Sur la carte, l'itinéraire vers l'objet s'affiche
+
+[.lead]
+*Feature : Internationalisation*
+
+image::../newWireframes/v1_2_internationalisation1.png[width=500,height=300]
+image::../newWireframes/v1_2_internationalisation2.png[width=500,height=300]
+
+* L'application s'affichera selon les paramètres du navigateur de l'utilisateur
+
+[.lead]
+*Feature : Consulter l'historique de ses transactions*
+
+image::../newWireframes/v1_1_transformer_points1.png[width=500,height=300]
+image::../newWireframes/v1_2_consulter_transactions.png[width=500,height=300]
+
+* L'utilisateur accède à la page "Mes points" via la rubrique "Mes points"
+* L'utilisateur peut visualiser un tableau à plusieurs lignes. Chaque ligne comprend le nombre de points gagnés ou perdus et la date à laquelle la transaction a eu lieu
 
 
 === Diagramme de classe
 
-image::diagrammes/classe/diagramme_classe.png[]
+image::../diagrammes/classe/refactoring.png
 
-=== Description de l'API
-
-|===
-|Définition |Description
-
-|GET
-/objets/:longitude/:latitude/:rayon
-|La réponse retourne un tableau d'objets triés selon leur distance par rapport à l'utilisateur.
-|POST
-/localisation
-|La requête envoie la localisation de l'utilisateur
-|GET
-/objets/:longitude/:latitude
-|La réponse retourne un tableau d'objets perdus triés selon leur distance par rapport à l'utilisateur
-|POST
-/ajoutObjetTrouve
-|La requête envoie les informations d'un objet trouvé saisies par l'utilisateur
-|POST
-/ajoutObjetPerdu
-|La requête envoie les informations d'un objet perdu saisies par l'utilisateur
-|GET
-/chercherObjetPerdu/:intitule/:categorie/:date/:longitude/:latitude
-|La réponse retourne une collection d'objets trouvés correspondant à des critères
-
-|===
 
 === Diagramme de séquence
 
 Feature "Localiser l'utilisateur"
 
-image::diagrammes/séquences/DS_localisation_user.png[width=600,height=400]
+image::../diagrammes/séquences/DS_localisation_user.png[width=600,height=400]
 
 Feature "Afficher les objets les plus proches"
 
-image::diagrammes/séquences/DS_objets_plus_proches.png[width=600,height=400]
+image::../diagrammes/séquences/DS_objets_plus_proches.png[width=600,height=400]
 
 Feature "Voir les points fusionnés"
 
-image::diagrammes/séquences/DS_points_collapses.png[]
+image::../diagrammes/séquences/DS_points_collapses.png[]
 
 Feature "Voir Informations d'un Item"
 
-image::diagrammes/séquences/DS_informations_item.PNG[width=400,height=300]
+image::../diagrammes/séquences/DS_informations_item.PNG[width=400,height=300]
 
 Feature "Declarer un Objet Trouvé"
 
-image::diagrammes/séquences/DS_ajout_objet_trouve.PNG[]
+image::../diagrammes/séquences/DS_ajout_objet_trouve.PNG[]
 
 Feature "Declarer un Objet Perdu"
 
-image::diagrammes/séquences/DS_ajout_objet_perdu.png[]
+image::../diagrammes/séquences/DS_ajout_objet_perdu.png[]
 
 Feature "Rechercher un Objet Perdu"
 
-image::diagrammes/séquences/DS_recherche_items.PNG[]
+image::../diagrammes/séquences/DS_recherche_items.PNG[]
 
 Feature "Choisir le rayon des objets"
 
-image::diagrammes/séquences/DS_choisir_rayon_items.png[]
+image::../diagrammes/séquences/DS_choisir_rayon_items.png[]
 
 Feature "Consulter les suggestions d'objets perdus"
 
-image::diagrammes/séquences/DS_suggestion_items_perdus.PNG[]
+image::../diagrammes/séquences/DS_suggestion_items_perdus.PNG[]
 
 <<<
