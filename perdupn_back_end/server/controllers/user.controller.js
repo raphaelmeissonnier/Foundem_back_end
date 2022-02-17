@@ -68,18 +68,19 @@ const getRdvByUser = async (req, res) => {
 // Get user by id
 const getAllRdvByUser = async (req, res) => {
     try {
-        const rdvs = await db.query("SELECT count(*) FROM rendezvous WHERE etat = 'en cours' AND (first_user=:id_user OR second_user=:id_user)",
+        const rdvs = await db.query("SELECT count(*) as nbRdv FROM rendezvous WHERE etat = 'en cours' AND (first_user=:id_user OR second_user=:id_user)",
         {
             replacements : {
                 id_user: req.params.id
             },
             type: QueryTypes.SELECT
-        })
-        res.json(rdvs);
+        });
+        res.json(rdvs[0]);
     } catch (err) {
         console.log(err);
     }
 }
+
 
 // Get user by id
 const getHistByUser = async (req, res) => {

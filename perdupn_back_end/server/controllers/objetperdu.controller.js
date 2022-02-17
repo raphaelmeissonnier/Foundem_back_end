@@ -71,7 +71,7 @@ const createObjetPerdu = async (req, res) => {
         console.log("Categorie",cate)
         //CREATION D'UNE NOUEVLLE LOCALISATION
         const loca = await createLocalisation(req,[{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: req.body.rayon}]);
-        console.log("Localisation",loca[0].id_localisation)
+        console.log("Localisation",loca[0].id_localisation);
 
         if(user)
         {
@@ -173,7 +173,7 @@ const deleteObjetPerdu = async (req, res) => {
 // Get objet perdu by user id
 const getObjetPerduByIdUser = async (req, res) => {
     try {
-        const objetperdu = await db.query("SELECT * FROM objet, localisation, categorie, objetmatche WHERE categorie=id_categorie AND localisation=id_localisation AND status_objet= :status_objet AND utilisateur= :utilisateur AND id_objet=objet_perdu ",
+        const objetperdu = await db.query("SELECT * FROM objet, localisation, categorie, objetmatche WHERE categorie=id_categorie AND localisation=id_localisation AND id_objet=objet_perdu AND status_objet= :status_objet AND utilisateur= :utilisateur ",
             {
                 replacements : {
                     status_objet:"perdu",
@@ -181,6 +181,7 @@ const getObjetPerduByIdUser = async (req, res) => {
                 },
                 type: QueryTypes.SELECT
             });
+        console.log("objetperdu:", objetperdu);
         res.send(objetperdu);
     } catch (err) {
         console.log(err);
