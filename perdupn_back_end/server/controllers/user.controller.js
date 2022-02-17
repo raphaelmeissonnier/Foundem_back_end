@@ -66,6 +66,22 @@ const getRdvByUser = async (req, res) => {
 }
 
 // Get user by id
+const getAllRdvByUser = async (req, res) => {
+    try {
+        const rdvs = await db.query("SELECT count(*) FROM rendezvous WHERE etat = 'en cours' AND (first_user=:id_user OR second_user=:id_user)",
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+        res.json(rdvs);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// Get user by id
 const getHistByUser = async (req, res) => {
     try {
         const hist_minus = await db.query('SELECT listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intitule FROM historique, listerecompenses, recompense \
@@ -259,4 +275,4 @@ const updateSoldeUser = async(req, field) =>{
         return e;
     }
 }
-module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser, getHistByUser}
+module.exports = {updateSoldeUser, getUserById,getUsers,deleteUser,createUser,updateUser, loginUser, logoutUser, getRdvByUser, getAllRdvByUser, getHistByUser}

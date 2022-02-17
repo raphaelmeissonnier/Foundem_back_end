@@ -61,6 +61,7 @@ class IMatcher{
             if(cptVal>=6){
                 mapObjetsTrouve.push(mapObjets[i]);
             }
+            console.log("\n\nSCORE :",cptVal);
             cptVal=0;
         }
         return JSON.stringify([...mapObjetsTrouve]);

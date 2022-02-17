@@ -71,7 +71,7 @@ const createObjetPerdu = async (req, res) => {
         console.log("Categorie",cate)
         //CREATION D'UNE NOUEVLLE LOCALISATION
         const loca = await createLocalisation(req,[{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: req.body.rayon}]);
-        console.log("Localisation",loca)
+        console.log("Localisation",loca[0].id_localisation)
 
         if(user)
         {
@@ -80,7 +80,7 @@ const createObjetPerdu = async (req, res) => {
                 description: req.body.description,
                 categorie: cate.id_categorie,
                 dates: req.body.date,
-                localisation: loca.id_localisation,
+                localisation: loca[0].id_localisation,
                 utilisateur: req.body.user_id,
                 status_objet: "perdu"
             });

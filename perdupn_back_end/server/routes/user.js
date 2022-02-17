@@ -10,6 +10,7 @@ const {
     loginUser,
     logoutUser,
     getRdvByUser,
+    getAllRdvByUser,
     getHistByUser
  } = require("../controllers/user.controller");
 
@@ -33,6 +34,8 @@ router.patch('/users/:id/rdv/:idrdv', updateRdv);
 router.get('/users/:id',getUserById);
 
 router.get('/users/:id/rdv', getRdvByUser);
+
+router.get('/users/:id/rdv/count', getAllRdvByUser);
 
 router.get('/users/:id/historique', getHistByUser);
 
