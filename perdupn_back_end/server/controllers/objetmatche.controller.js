@@ -58,6 +58,22 @@ const getObjetMatche = async (req, res) => {
     }
 }
 
+const getObjetMatchebyUserId = async (req, res) => {
+    try {
+        const objm = await db.query("SELECT * FROM objet,objetmatche,categorie WHERE categorie=id_categorie AND utilisateur=:id_user AND etat='en cours' AND (id_objet=objet_trouve OR id_objet=objet_perdu)",
+        {
+            replacements : {
+                id_user: req.params.id
+            },
+            type: QueryTypes.SELECT
+        })
+        res.json(objm);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
 //CHANGER LE FRONT (BODY + FETCH) + AJOUTER UNE NOUVELLE ROUTE
 const updateObjetMatche= async (req, res) => {
     try {
@@ -95,4 +111,4 @@ const updateObjetMatche= async (req, res) => {
 }
 
 
-module.exports = {createObjetMatche, getObjetMatche, updateObjetMatche}
+module.exports = {createObjetMatche, getObjetMatche, updateObjetMatche, getObjetMatchebyUserId}
