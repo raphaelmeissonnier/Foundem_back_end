@@ -4,7 +4,8 @@ const express = require("express");
 const {
     createObjetMatche,
     getObjetMatche,
-    updateObjetMatche
+    updateObjetMatche,
+    getObjetMatchebyUserId
 } = require("../controllers/objetmatche.controller");
 
 const {
@@ -19,6 +20,8 @@ router.post('/objetsmatche', createObjetMatche);
 router.post('/objetsmatche/rdv', createRdv);
 
 router.get('/objetsmatche/:id', getObjetMatche);
+
+router.get('/objetsmatche/user/:id', getObjetMatchebyUserId);
 
 router.patch('/objetsmatche/:id', updateObjetMatche);
 

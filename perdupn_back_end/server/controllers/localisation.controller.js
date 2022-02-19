@@ -6,7 +6,7 @@ var LocalisationModel = localisation(db,DataTypes);
 
 
 const createLocalisation = async (req, where) => {
-    const localisation = await LocalisationModel.findOrCreate({
+    return LocalisationModel.findOrCreate({
         where: {
             $and: where
         },
@@ -14,9 +14,9 @@ const createLocalisation = async (req, where) => {
             longitude: parseFloat(req.body.longitude),
             latitude: parseFloat(req.body.latitude),
             rayon: req.body.rayon
-        }
+        },
+        attributes: ['id_localisation']
     });
-    return localisation;
 }
 
 module.exports = {createLocalisation};

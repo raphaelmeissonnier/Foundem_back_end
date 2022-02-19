@@ -179,7 +179,7 @@ const rechercheObjetTrouve = async (req, res) => {
 // Get objet trouvé by user id
 const getObjetTrouveByIdUser = async (req, res) => {
     try {
-        const objettrouve = await db.query("SELECT * FROM objet, localisation, categorie, objetmatche WHERE categorie=id_categorie AND localisation=id_localisation AND status_objet= :status_objet AND utilisateur= :utilisateur AND id_objet=objet_trouve ",
+        const objettrouve = await db.query("SELECT * FROM objet, localisation, categorie WHERE categorie=id_categorie AND localisation=id_localisation AND status_objet= :status_objet AND utilisateur= :utilisateur AND id_objet NOT IN (select objet_trouve FROM objetmatche)",
             {
                 replacements : {
                     status_objet:"trouve",
