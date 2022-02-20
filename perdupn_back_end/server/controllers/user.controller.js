@@ -85,7 +85,10 @@ const getAllRdvByUser = async (req, res) => {
 // Get user by id
 const getHistByUser = async (req, res) => {
     try {
-        const hist_minus = await db.query('SELECT listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intitule FROM historique, listerecompenses, recompense \
+        /*0 = historique négatif
+        * 1 = historique positif
+        */
+        const hist_minus = await db.query('SELECT 0 as type_historique, listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intituleRecompense FROM historique, listerecompenses, recompense \
         WHERE historique.liste_recompense=listerecompenses.id \
           AND \
             listerecompenses.id_recompense = recompense.id_recompense \
@@ -97,7 +100,7 @@ const getHistByUser = async (req, res) => {
             type: QueryTypes.SELECT
         })
 
-        const hist_posi = await db.query('SELECT rendezvous.date_rdv as date, categorie.valeur as valeur_pos, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  \
+        const hist_posi = await db.query('SELECT 1 as type_historique, rendezvous.date_rdv as date, categorie.valeur as valeur_pos, categorie.intitule_categorie as categorieNom, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  \
             WHERE historique.rdv = rendezvous.id_rdv \
                 AND \
                     rendezvous.objet_matche = objetmatche.id_objet_matche \
