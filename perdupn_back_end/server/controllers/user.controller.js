@@ -184,10 +184,7 @@ const updateUser= async (req, res) => {
             where: {
                 id_utilisateur: req.params.id
             }
-        });
-        res.json({
-            "message": "User Updated"
-        });
+        }).then(result => res.json({"result": result}))
     } catch (err) {
         console.log(err);
     }

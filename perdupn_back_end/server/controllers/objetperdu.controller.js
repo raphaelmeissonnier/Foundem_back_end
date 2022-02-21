@@ -78,6 +78,7 @@ const createObjetPerdu = async (req, res) => {
             await ObjetPerduModel.create({
                 intitule: req.body.intitule,
                 description: req.body.description,
+                img: req.body.img,
                 categorie: cate.id_categorie,
                 dates: req.body.date,
                 localisation: loca[0].id_localisation,
