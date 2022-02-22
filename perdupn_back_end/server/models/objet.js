@@ -23,6 +23,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
+    img: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
     categorie: {
       type: DataTypes.INTEGER,
       allowNull: false,

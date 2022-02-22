@@ -10,6 +10,8 @@ var utilisateur = require("../models/utilisateur");
 var UserModel = utilisateur(db,DataTypes);
 var objet = require("../models/objet");
 var ObjetPerduModel = objet(db,DataTypes);
+const fs = require('fs')
+const cheminImg = 'public/'
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");
@@ -73,12 +75,24 @@ const createObjetPerdu = async (req, res) => {
         const loca = await createLocalisation(req,[{longitude: req.body.longitude}, {latitude: req.body.latitude}, {rayon: req.body.rayon}]);
         console.log("Localisation",loca[0].id_localisation);
 
+        var img = req.body.img.img
+        var data = img.replace(/^data:image\/\w+;base64,/, "");
+        var buf = Buffer.from(data, 'base64');
+        fs.writeFile(cheminImg+req.body.img.name,buf,function(err) {
+            if (err){
+                console.log(err)
+                throw err;
+            } 
+        })  
+
+        console.log("\nIMAGE RECU \n",req.body.img)
         if(user)
         {
             await ObjetPerduModel.create({
                 intitule: req.body.intitule,
                 description: req.body.description,
                 categorie: cate.id_categorie,
+                img: req.body.img.name,
                 dates: req.body.date,
                 localisation: loca[0].id_localisation,
                 utilisateur: req.body.user_id,
