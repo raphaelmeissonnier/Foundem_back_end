@@ -25,6 +25,13 @@ Avec l'application Found'em, vous pouvez:
 - Consulter ses Rendez-Vous
 - Consulter son solde
 - Debloquer des recompenses si le solde est suffisant
+- Avoir accès aux itinéraires vers les objets signalés sur la carte
+- Afficher le site web selon la langue du navigateur (anglais et français)
+- Consulter l'historique de ses transactions (points gagnés et dépensés)
+- Activer les notifications
+- Modifier son profil
+- Partager un objet sur les réseaux sociaux
+
 
 
 ## Auteurs 
