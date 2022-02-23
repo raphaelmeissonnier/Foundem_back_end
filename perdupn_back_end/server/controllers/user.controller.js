@@ -179,18 +179,19 @@ const createUser = async (req, res) => {
 
 // Update objet perdu by id
 const updateUser= async (req, res) => {
-    try {
-        await UserModel.update(req.body, {
-            where: {
-                id_utilisateur: req.params.id
-            }
-        });
-        res.json({
-            "message": "User Updated"
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    //Hash du mot de passe
+    bcrypt.hash(req.body.mdp, saltRounds, async function(err, hash) {
+        req.body.mdp = hash;
+        try {
+            await UserModel.update(req.body, {
+                where: {
+                    id_utilisateur: req.params.id
+                }
+            }).then(result => res.json({"result": result}))
+        } catch (err) {
+            console.log(err);
+        }
+    })
 }
  
 // Delete objet perdu by id
