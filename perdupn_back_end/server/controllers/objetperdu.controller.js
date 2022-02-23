@@ -11,7 +11,7 @@ var UserModel = utilisateur(db,DataTypes);
 var objet = require("../models/objet");
 var ObjetPerduModel = objet(db,DataTypes);
 const fs = require('fs')
-const cheminImg = 'public/'
+const cheminImg = '../../Foundem_front_end/front-end/public/'
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");
@@ -67,6 +67,10 @@ const createObjetPerdu = async (req, res) => {
                 id_utilisateur: req.body.user_id
             }
         })
+
+        const rq=await db.query('SELECT id_objet FROM objet ORDER BY id_objet DESC LIMIT 1')
+        console.log("OBJET ID", rq[0][0].id_objet+1)
+        const last_id_objet = rq[0][0].id_objet+1;
         //Si l'user existe, on ajoute l'objet
         //RECUPERER L'ID DE LA CATEGORIE
         const cate = await getCategorie(req);
@@ -78,7 +82,7 @@ const createObjetPerdu = async (req, res) => {
         var img = req.body.img.img
         var data = img.replace(/^data:image\/\w+;base64,/, "");
         var buf = Buffer.from(data, 'base64');
-        fs.writeFile(cheminImg+req.body.img.name,buf,function(err) {
+        fs.writeFile(cheminImg+last_id_objet+"_"+req.body.img.name,buf,function(err) {
             if (err){
                 console.log(err)
                 throw err;
@@ -92,7 +96,7 @@ const createObjetPerdu = async (req, res) => {
                 intitule: req.body.intitule,
                 description: req.body.description,
                 categorie: cate.id_categorie,
-                img: req.body.img.name,
+                img: last_id_objet+"_"+req.body.img.name,
                 dates: req.body.date,
                 localisation: loca[0].id_localisation,
                 utilisateur: req.body.user_id,
