@@ -186,7 +186,7 @@ const updateUser= async (req, res) => {
     var img = req.body.img.img
     var data = img.replace(/^data:image\/\w+;base64,/, "");
     var buf = Buffer.from(data, 'base64');
-    fs.writeFile(cheminImg+req.params.id+"_"+req.body.img.name,buf,function(err) {
+    fs.writeFile(cheminImg+req.params.id+"_user_"+req.body.img.name,buf,function(err) {
         if (err){
             console.log(err)
             throw err;
