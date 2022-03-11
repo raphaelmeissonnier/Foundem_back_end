@@ -89,13 +89,11 @@ const createObjetPerdu = async (req, res) => {
             } 
         })  
 
-        console.log("\nIMAGE RECU \n",req.body.img)
         if(user)
         {
             await ObjetPerduModel.create({
                 intitule: req.body.intitule,
                 description: req.body.description,
-                img: req.body.img,
                 categorie: cate.id_categorie,
                 img: last_id_objet+"_"+req.body.img.name,
                 dates: req.body.date,
