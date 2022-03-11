@@ -11,6 +11,8 @@ var utilisateur = require("../models/utilisateur");
 var UserModel = utilisateur(db,DataTypes);
 var objet = require("../models/objet");
 var ObjetTrouveModel = objet(db,DataTypes);
+const fs = require('fs')
+const cheminImg = '../../Foundem_front_end/front-end/public/'
 
 const { createLocalisation } = require("../controllers/localisation.controller");
 const { getCategorie } = require("../controllers/categorie.controller");
@@ -47,6 +49,24 @@ const createObjetTrouve = async (req, res) => {
                 id_utilisateur: req.body.user_id
             }
         })
+
+        //On recupere l'id du dernier objet crée
+        const rq=await db.query('SELECT id_objet FROM objet ORDER BY id_objet DESC LIMIT 1')
+        console.log("OBJET ID", rq[0][0].id_objet+1)
+        const last_id_objet = rq[0][0].id_objet+1;
+        
+        //on formate l'image pour la stocker dans un repertoire
+        var img = req.body.img.img
+        var data = img.replace(/^data:image\/\w+;base64,/, "");
+        var buf = Buffer.from(data, 'base64');
+        fs.writeFile(cheminImg+last_id_objet+"_"+req.body.img.name,buf,function(err) {
+            if (err){
+                console.log(err)
+                throw err;
+            } 
+        })  
+
+        console.log("\nIMAGE RECU \n",req.body.img)
         //Si l'user existe, on ajoute l'objet
         if(user) {
             const cate = await getCategorie(req);
@@ -57,6 +77,7 @@ const createObjetTrouve = async (req, res) => {
                 intitule: req.body.intitule,
                 description: req.body.description,
                 categorie: cate.id_categorie,
+                img: last_id_objet+"_"+req.body.img.name,
                 dates: req.body.date,
                 localisation : loca[0].id_localisation,
                 utilisateur: req.body.user_id
