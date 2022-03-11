@@ -54,7 +54,7 @@ const getUserById = async (req, res) => {
 // Get user by id
 const getRdvByUser = async (req, res) => {
     try {
-        const rdvs = await db.query('SELECT * FROM rendezvous, localisation WHERE localisation = id_localisation AND (first_user=:id_user OR second_user=:id_user)',
+        const rdvs = await db.query('SELECT * FROM rendezvous, localisation, utilisateur WHERE localisation = id_localisation AND (first_user=id_utilisateur OR second_user=id_utilisateur) AND (id_utilisateur!= :id_user) AND (first_user=:id_user OR second_user=:id_user)',
         {
             replacements : {
                 id_user: req.params.id
