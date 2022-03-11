@@ -5,6 +5,8 @@ const db = require('../config/database');
 var DataTypes = Sequelize.DataTypes;
 var utilisateur = require("../models/utilisateur");
 var UserModel = utilisateur(db,DataTypes);
+const fs = require('fs')
+const cheminImg = '../../Foundem_front_end/front-end/public/'
 
 
 const bcrypt = require("bcrypt");
@@ -179,11 +181,31 @@ const createUser = async (req, res) => {
 
 // Update objet perdu by id
 const updateUser= async (req, res) => {
+
+    //on formate l'image pour la stocker dans un repertoire
+    var img = req.body.img.img
+    var data = img.replace(/^data:image\/\w+;base64,/, "");
+    var buf = Buffer.from(data, 'base64');
+    fs.writeFile(cheminImg+req.params.id+"_user_"+req.body.img.name,buf,function(err) {
+        if (err){
+            console.log(err)
+            throw err;
+        } 
+    })  
     //Hash du mot de passe
     bcrypt.hash(req.body.mdp, saltRounds, async function(err, hash) {
         req.body.mdp = hash;
         try {
-            await UserModel.update(req.body, {
+            await UserModel.update({
+                
+                nom: req.body.nom,
+                prenom: req.body.prenom,
+                username: req.body.username,
+                email: req.body.email,
+                mdp: req.body.mdp,
+                img: req.body.img.name
+            },
+            {
                 where: {
                     id_utilisateur: req.params.id
                 }

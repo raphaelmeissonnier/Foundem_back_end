@@ -27,6 +27,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: false
     },
+    img: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
     solde: {
       type: DataTypes.INTEGER,
       allowNull: false
