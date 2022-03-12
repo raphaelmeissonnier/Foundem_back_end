@@ -170,6 +170,22 @@ const updateObjetPerdu= async (req, res) => {
         });
     }
 }
+
+const updateObjetPerdubyId = async (req,res) => {
+    try{
+        await ObjetPerduModel.update(req.body,{
+            where: {
+                id_objet: req.params.id
+            }
+        });
+        res.json({
+            "message": "Objet Perdu by ID Updated"
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
  
 // Delete objet perdu by id
 const deleteObjetPerdu = async (req, res) => {
@@ -222,4 +238,4 @@ const getObjetPerduByIdObjet = async (req, res) => {
     }
 }
 
-module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu,getObjetPerduById,getObjetsPerdus, getObjetPerduByIdUser, getObjetPerduByIdObjet}
+module.exports = {deleteObjetPerdu,createObjetPerdu,updateObjetPerdu, updateObjetPerdubyId, getObjetPerduById,getObjetsPerdus, getObjetPerduByIdUser, getObjetPerduByIdObjet}

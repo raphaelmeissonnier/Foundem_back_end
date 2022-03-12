@@ -5,6 +5,7 @@ const {
     getObjetPerduById,
     getObjetsPerdus,
     updateObjetPerdu,
+    updateObjetPerdubyId,
     createObjetPerdu,
     deleteObjetPerdu,
     getObjetPerduByIdUser,
@@ -23,6 +24,8 @@ router.get('/objetsperdus/suggestions/:id',getObjetPerduById);
 router.post('/objetsperdus', createObjetPerdu);
 
 router.put('/objetsperdus/:id',updateObjetPerdu);
+
+router.patch('/objetperdu/:id',updateObjetPerdubyId)
 
 router.delete('/objetsperdus/:id', deleteObjetPerdu);
 
