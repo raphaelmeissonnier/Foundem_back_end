@@ -130,6 +130,21 @@ const createObjetTrouve = async (req, res) => {
     }
 }
 
+const updateObjetTrouveById = async(req, res) => {
+    try {
+        await ObjetTrouveModel.update(req.body,{
+            where: {
+                id_objet: req.params.id,
+            },
+        });
+        res.json({
+            "message": "Objet Trouve Updated"
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 // Delete objet trouve by id
 const deleteObjetTrouve = async (req, res) => {
     try {
@@ -232,4 +247,4 @@ const getObjetTrouveByIdUser = async (req, res) => {
 }
 
 
-module.exports = {getObjetsTrouves, getObjetTrouveById, deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}
+module.exports = {getObjetsTrouves, getObjetTrouveById, updateObjetTrouveById, deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}

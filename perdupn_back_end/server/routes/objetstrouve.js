@@ -5,6 +5,7 @@ const {
     getObjetTrouveById,
     getObjetsTrouves,
     createObjetTrouve,
+    updateObjetTrouveById,
     deleteObjetTrouve,
     rechercheObjetTrouve,
     getObjetTrouveByIdUser
@@ -21,6 +22,8 @@ router.get('/objetstrouves/:id',getObjetTrouveById);
 router.post('/objetstrouves', createObjetTrouve);
 
 router.post('/objetstrouves/recherche', rechercheObjetTrouve);
+
+router.patch('/objettrouve/:id', updateObjetTrouveById)
 
 router.delete('/objetstrouves/:id', deleteObjetTrouve);
 
