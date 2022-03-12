@@ -138,7 +138,8 @@ const updateObjetTrouveById = async(req, res) => {
             },
         });
         res.json({
-            "message": "Objet Trouve Updated"
+            result: 1,
+            "message": "Objet Trouve by ID Updated"
         });
     } catch (err) {
         console.log(err);

@@ -179,6 +179,7 @@ const updateObjetPerdubyId = async (req,res) => {
             }
         });
         res.json({
+            result: 1,
             "message": "Objet Perdu by ID Updated"
         });
     }
