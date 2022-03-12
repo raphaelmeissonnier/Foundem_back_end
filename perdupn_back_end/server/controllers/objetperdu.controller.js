@@ -206,30 +206,19 @@ const getObjetPerduByIdUser = async (req, res) => {
 }
 
 const getObjetPerduByIdObjet = async (req, res) => {
-    try{
-        const objetPerdu = await ObjetPerduModel.findOne({
-            where:
-            {
-                id_objet: req.params.id
-            }
-        })
-        if(objetPerdu)
+    try {
+        const objetPerdu = await db.query("SELECT distinct * FROM objet, localisation, categorie WHERE localisation=id_localisation AND categorie=id_categorie AND id_objet=:id AND status_objet=:status_objet",
         {
-            res.send(objetPerdu);
-        }
-        else
-        {
-            res.json({
-                result: 0,
-                message: "Aucun objet trouvé"
-            })
-        }
-    }
-    catch(err){
-        res.json({
-            result : 0,
-            message: err
-        })
+            replacements : {
+                id: req.params.id,
+                status_objet: "perdu"
+            },
+            type: QueryTypes.SELECT
+        });
+        res.send(objetPerdu);
+        
+    } catch (err) {
+        console.log(err);
     }
 }
 

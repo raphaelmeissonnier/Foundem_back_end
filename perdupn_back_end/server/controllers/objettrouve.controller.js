@@ -40,6 +40,23 @@ const getObjetsTrouves= async (req,res) => {
     }
 }
 
+const getObjetTrouveById = async (req, res) => {
+    try {
+        const objettrouve = await db.query("SELECT distinct * FROM objet, localisation, categorie WHERE localisation=id_localisation AND categorie=id_categorie AND id_objet=:id AND status_objet=:status_objet",
+        {
+            replacements : {
+                id: req.params.id,
+                status_objet: "trouve"
+            },
+            type: QueryTypes.SELECT
+        });
+        res.send(objettrouve);
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 // Create a new objet trouve
 const createObjetTrouve = async (req, res) => {
     try {
@@ -215,4 +232,4 @@ const getObjetTrouveByIdUser = async (req, res) => {
 }
 
 
-module.exports = {getObjetsTrouves,deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}
+module.exports = {getObjetsTrouves, getObjetTrouveById, deleteObjetTrouve,createObjetTrouve, rechercheObjetTrouve, getObjetTrouveByIdUser}

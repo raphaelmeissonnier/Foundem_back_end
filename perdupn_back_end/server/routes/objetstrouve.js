@@ -2,7 +2,7 @@
 const express = require("express");
 // Import Product Controller
 const { 
-    //getObjetTrouveById,
+    getObjetTrouveById,
     getObjetsTrouves,
     createObjetTrouve,
     deleteObjetTrouve,
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.get('/objetstrouves/:longitude/:latitude/:rayon',getObjetsTrouves);
 
-//router.get('/objetstrouves/:id',getObjetTrouveById);
+router.get('/objetstrouves/:id',getObjetTrouveById);
 
 router.post('/objetstrouves', createObjetTrouve);
 
