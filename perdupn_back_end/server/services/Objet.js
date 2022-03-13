@@ -16,7 +16,7 @@ class Objet
         }
         else
         {
-            throw 'CLASSE OBJET LES PARAMETRES FOURNIS NE SONT PAS BONS !'
+            console.log('CLASSE OBJET LES PARAMETRES FOURNIS NE SONT PAS BONS !');
         }
     }
 

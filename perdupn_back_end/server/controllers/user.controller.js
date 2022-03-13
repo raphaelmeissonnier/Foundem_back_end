@@ -90,11 +90,11 @@ const getHistByUser = async (req, res) => {
         /*0 = historique négatif
         * 1 = historique positif
         */
-        const hist_minus = await db.query('SELECT 0 as type_historique, listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intituleRecompense FROM historique, listerecompenses, recompense \
-        WHERE historique.liste_recompense=listerecompenses.id \
-          AND \
-            listerecompenses.id_recompense = recompense.id_recompense \
-          AND  historique.id_utilisateur_trouveur=:id_user ORDER BY listerecompenses.date_recompense;',
+        const hist_minus = await db.query('SELECT 0 as type_historique, listerecompenses.date_recompense as date, recompense.valeur as valeur_neg, recompense.intitule as intituleRecompense FROM historique, listerecompenses, recompense ' +
+        'WHERE historique.liste_recompense=listerecompenses.id ' +
+          'AND ' +
+            'listerecompenses.id_recompense = recompense.id_recompense ' +
+          'AND  historique.id_utilisateur_trouveur=:id_user ORDER BY listerecompenses.date_recompense;',
         {
             replacements : {
                 id_user: req.params.id
@@ -102,16 +102,16 @@ const getHistByUser = async (req, res) => {
             type: QueryTypes.SELECT
         })
 
-        const hist_posi = await db.query('SELECT 1 as type_historique, rendezvous.date_rdv as date, categorie.valeur as valeur_pos, categorie.intitule_categorie as categorieNom, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  \
-            WHERE historique.rdv = rendezvous.id_rdv \
-                AND \
-                    rendezvous.objet_matche = objetmatche.id_objet_matche \
-                AND \
-                    objetmatche.objet_trouve = objet.id_objet \
-                AND \
-                    objet.categorie = categorie.id_categorie \
-                AND \
-                    historique.id_utilisateur_trouveur=:id_user ORDER BY rendezvous.date_rdv;',
+        const hist_posi = await db.query('SELECT 1 as type_historique, rendezvous.date_rdv as date, categorie.valeur as valeur_pos, categorie.intitule_categorie as categorieNom, objet.intitule as intitule FROM historique, rendezvous, objetmatche, objet, categorie  ' +
+            'WHERE historique.rdv = rendezvous.id_rdv ' +
+                'AND '+
+                    'rendezvous.objet_matche = objetmatche.id_objet_matche ' +
+                'AND ' +
+                    'objetmatche.objet_trouve = objet.id_objet ' +
+                'AND ' +
+                    'objet.categorie = categorie.id_categorie ' +
+                'AND ' +
+                    'historique.id_utilisateur_trouveur=:id_user ORDER BY rendezvous.date_rdv;',
         {
             replacements : {
                 id_user: req.params.id
@@ -164,16 +164,19 @@ const createUser = async (req, res) => {
                         "result": 0,
                         "msg": "Email/Username existant"
                     });
+                    break;
                 case Sequelize.ValidationError:
                     res.json({
                         "result": 0,
                         "msg": "L'email saisi est invalide"
                     });
+                    break
                 default:
                     res.json({
                         "result": 0,
                         "msg": e
                     });
+                    break;
             }
         }
     });
@@ -210,8 +213,8 @@ const updateUser= async (req, res) => {
                     id_utilisateur: req.params.id
                 }
             }).then(result => res.json({"result": result}))
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            console.log(error);
         }
     })
 }

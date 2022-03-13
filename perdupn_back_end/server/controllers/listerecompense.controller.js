@@ -29,10 +29,11 @@ const createListeRecompense = async (req, res) =>{
                 date_recompense: req.body.date
             });
             //RECALCUL DU SOLDE
-            newSolde = listeRecompenseobjet.soustraire(user.solde, recompense.valeur);
+            let newSolde = listeRecompenseobjet.soustraire(user.solde, recompense.valeur);
             console.log("newSolde", newSolde);
+
             //UPDATE L'UTILISATEUR
-            const updateUser = await updateSoldeUser(req, newSolde);
+            await updateSoldeUser(req, newSolde);
 
             //INSERTION dans la table Historique
             await db.query("INSERT INTO historique (id_utilisateur_trouveur, liste_recompense) VALUES (:id_user, :liste ) ",

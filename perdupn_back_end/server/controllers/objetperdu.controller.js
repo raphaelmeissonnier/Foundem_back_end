@@ -29,7 +29,7 @@ const getObjetsPerdus = async (req,res) => {
             type: QueryTypes.SELECT
         });
         console.log("Objet Perdus",objetsperdus)
-        objetsperdus.forEach(objet => mapObjets.push(new ObjetPerdu(objet.id_objet, objet.intitule_categorie, new LocalisationFloue(new Position(objet.longitude,objet.latitude),objet.rayon), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
+        objetsperdus.forEach(object => mapObjets.push(new ObjetPerdu(object.id_objet, object.intitule_categorie, new LocalisationFloue(new Position(object.longitude,object.latitude),object.rayon), object.description, object.intitule, new Date(object.dates), object.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
         res.send(monRes);
@@ -115,20 +115,19 @@ const createObjetPerdu = async (req, res) => {
         }
     } catch (err) {
         console.log(err);
-        switch (err.constructor)
+        if(Sequelize.ValidationError)
         {
-            case Sequelize.ValidationError:
-                res.json({
-                    "result": 0,
-                    "message": "Paramètres manquants"
-                });
-                break;
-            default:
-                res.json({
-                    "result": 0,
-                    "message": err
-                });
-                break;
+            res.json({
+                "result": 0,
+                "message": "Paramètres manquants"
+            });
+        }
+        else
+        {
+            res.json({
+                "result": 0,
+                "message": err
+            });
         }
     }
 }

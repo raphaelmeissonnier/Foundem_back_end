@@ -8,7 +8,8 @@ class ListeRecompense
         }
         catch(err){
             console.log(err);
-            throw 'LES PARAMETRES FOURNIS NE SONT PAS BONS !'
+            console.log('LES PARAMETRES FOURNIS NE SONT PAS BONS !');
+            throw err;
         }
 
     }

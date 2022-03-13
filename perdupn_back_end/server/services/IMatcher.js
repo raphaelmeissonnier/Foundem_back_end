@@ -3,10 +3,6 @@ var Main = require("./Main")
 
 class IMatcher{
 
-    constructor(){
-
-    }
-
     /* Cette fonction permet de faire matcher un objet perdu avec une collection d'objets trouvés.
     Elle renvoie un tableau d'objets trouvés.
     */

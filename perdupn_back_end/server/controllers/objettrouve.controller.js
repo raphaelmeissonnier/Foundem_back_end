@@ -30,7 +30,7 @@ const getObjetsTrouves= async (req,res) => {
                 },
                 type: QueryTypes.SELECT
             });
-        objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.intitule_categorie, new LocalisationPrecise(new Position(objet.longitude,objet.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
+        objetstrouves.forEach(object => mapObjets.push(new ObjetTrouve(object.id_objet, object.intitule_categorie, new LocalisationPrecise(new Position(object.longitude,object.latitude)), object.description, object.intitule, new Date(object.dates), object.utilisateur))) //Transformation des objets BD en type ObjetPerdu
         //console.log("Objets Trouve",objetstrouves);
         const monRes = Main.affichageObjetProche(parseFloat(req.params.longitude),parseFloat(req.params.latitude),parseInt(req.params.rayon),mapObjets); // Appel de la fonction avec les parametre foruni dans la route
         console.log("RES",monRes)
@@ -112,20 +112,18 @@ const createObjetTrouve = async (req, res) => {
         }
     } catch (err) {
         console.log(err);
-        switch (err.constructor)
+        if(Sequelize.ValidationError)
         {
-            case Sequelize.ValidationError:
-                res.json({
-                    "result": 0,
-                    "message": "Paramètres manquants"
-                });
-                break;
-            default:
-                res.json({
-                    "result": 0,
-                    "message": err
-                });
-                break
+            res.json({
+                "result": 0,
+                "message": "Paramètres manquants"
+            });
+        }
+        else {
+            res.json({
+                "result": 0,
+                "message": err
+            });
         }
     }
 }
@@ -189,7 +187,7 @@ const rechercheObjetTrouve = async (req, res) => {
             //Si il existe dans la base de données des objets trouvés alors on lance la recherche
             if(objetstrouves.length) {
                 //console.log("Objet trouves",objetstrouves)
-                objetstrouves.forEach(objet => mapObjets.push(new ObjetTrouve(objet.id_objet, objet.intitule_categorie, new LocalisationPrecise(new Position(objet.longitude, objet.latitude)), objet.description, objet.intitule, new Date(objet.dates), objet.utilisateur))) //Transformation des objets BD en type ObjetPerdu
+                objetstrouves.forEach(object => mapObjets.push(new ObjetTrouve(object.id_objet, object.intitule_categorie, new LocalisationPrecise(new Position(object.longitude, object.latitude)), object.description, object.intitule, new Date(object.dates), object.utilisateur))) //Transformation des objets BD en type ObjetPerdu
                 console.log("MapObjets", mapObjets);
                 const match = new IMatcher();
                 const monRes = match.matching(mapObjets, req.body.intitule, req.body.categorie, req.body.date, req.body.longitude, req.body.latitude);

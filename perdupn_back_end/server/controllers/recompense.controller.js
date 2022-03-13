@@ -5,12 +5,11 @@ var recompenseController = require("../models/recompense");
 var RecompenseModel = recompenseController(db,DataTypes);
 
 const getRecompenseById = async (req) =>{
-    const recompense = RecompenseModel.findOne({
+    return RecompenseModel.findOne({
             where:{
                 id_recompense: req.body.recompense_id
             }
         });
-    return recompense;
 }
 
 module.exports = {getRecompenseById};

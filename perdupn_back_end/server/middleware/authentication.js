@@ -8,7 +8,7 @@ var user = require("../models/utilisateur");
 var UserModel = user(db,DataTypes);
 
 
-checkUser = (req, res, next) => {
+const checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, config.TOKEN_SECRET, async (err, decodedToken) => {
@@ -18,9 +18,8 @@ checkUser = (req, res, next) => {
         next();
       } else {
           console.log("DecodedToken",decodedToken.id)
-        let user = await UserModel.findOne({where : { id_utilisateur: decodedToken.id }});
-          //console.log("User: ", user);
-        res.locals.user = user;
+        let utilisateur = await UserModel.findOne({where : { id_utilisateur: decodedToken.id }});
+        res.locals.user = utilisateur;
         next();
       }
     });
@@ -30,7 +29,7 @@ checkUser = (req, res, next) => {
   }
 };
 
-requireAuth = (req, res, next) => {
+const requireAuth = (req, res, next) => {
   console.log("req.cookies: ", req.cookies.jwt);
   //Si l'utilisateur est connecté (existence d'un cookie de session jwt)
   if (req.cookies.jwt)
