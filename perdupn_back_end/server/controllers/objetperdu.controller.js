@@ -172,6 +172,17 @@ const updateObjetPerdu= async (req, res) => {
 
 const updateObjetPerdubyId = async (req,res) => {
     try{
+
+        var img = req.body.img.img
+        var data = img.replace(/^data:image\/\w+;base64,/, "");
+        var buf = Buffer.from(data, 'base64');
+        fs.writeFile(cheminImg+req.params.id+"_"+req.body.img.name,buf,function(err) {
+            if (err){
+                console.log(err)
+                throw err;
+            } 
+        })
+        req.body.img = req.params.id+"_"+req.body.img.name
         await ObjetPerduModel.update(req.body,{
             where: {
                 id_objet: req.params.id
